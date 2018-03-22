@@ -39,8 +39,6 @@ group :development, :test do
   gem "database_cleaner"
   gem "launchy"
   gem 'shoulda-matchers'
-
-  gem "database_cleaner"
   gem "rspec-rails"
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
