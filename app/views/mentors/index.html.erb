@@ -1,27 +1,28 @@
-<h1>Mentors</h1>
-
 <!-- Mentor Table -->
-<table class='highlight responsive-table'>
-  <thead>
-    <tr>
-      <th>Image</th>
-      <th>Name</th>
-      <th>Company</th>
-      <th>Specialty</th>
-      <th>Email</th>
-      <th>Phone</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% 15.times do %>   <!-- this will be changed once database created -->
+<container>
+  <table class='highlight responsive-table'>
+    <thead>
       <tr>
-        <td><%= image_tag 'user.jpg', class: 'demo-avatar' %></td>
-        <td><%= Faker::Name.name %></td>
-        <td><%= Faker::Company.name %></td>
-        <td><%= Faker::Job.field %></td>
-        <td><%= Faker::Internet.email %></td>
-        <td><%= Faker::PhoneNumber.cell_phone %></td>
+        <th></th>
+        <th>Name</th>
+        <th>Company</th>
+        <th>Specialty</th>
+        <th>Email</th>
+        <th>Phone</th>
       </tr>
-    <% end %> 
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% if @mentors %>
+        <% @mentors.each do |mentor| %>
+          <tr>
+            <td><img src="<%= mentor['avatar'] %>" class="demo-avatar" ></td>
+            <td><%= mentor["name"] %></td>
+            <td><%= mentor["company"] %></td>
+            <td><%= mentor["specialty"] %></td>
+            <td><a href="mailto:<%= mentor['email'] %>"><%= mentor["email"] %></td>
+            <td><%= mentor["phone"] %></td>
+          </tr>
+        <% end %> 
+      <% end %> 
+    </tbody>
+  </table>
