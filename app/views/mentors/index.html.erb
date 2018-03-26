@@ -1,0 +1,27 @@
+<!-- Mentor Table -->
+<table class='highlight responsive-table'>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Company</th>
+      <th>Specialty</th>
+      <th>Email</th>
+      <th>Phone</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @mentors %>
+      <% @mentors.each do |mentor| %>
+        <tr>
+          <td><img src="<%= mentor['avatar'] %>" class="demo-avatar" ></td>
+          <td><%= mentor["name"] %></td>
+          <td><%= mentor["company"] %></td>
+          <td><%= mentor["specialty"] %></td>
+          <td><a href="mailto:<%= mentor['email'] %>"><%= mentor["email"] %></td>
+          <td><%= mentor["phone"] %></td>
+        </tr>
+      <% end %> 
+    <% end %> 
+  </tbody>
+</table>
