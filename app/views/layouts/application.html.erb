@@ -71,9 +71,9 @@
                     </div>
                 </header>
                 <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-                    <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
+                    <a href="<%= root_path %>" class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
                     <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">face</i>Students</a>
-                    <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">report_problem</i>Cant Read</a>
+                    <a href="<%= mentors_path %>" class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">group</i>Mentors</a>
                     <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">group</i>Groups</a>
                     <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">report_problem</i>Cant Read</a>
                     <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">book</i>Resources</a>
@@ -84,7 +84,9 @@
                 </nav>
             </div>
             <main class="mdl-layout__content mdl-color--grey-100">
+              <div class="container">
                 <%= yield %>
+              </div>
                 <div class="footer-container mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
                     <footer class="page-footer">
                         <div class="container">
