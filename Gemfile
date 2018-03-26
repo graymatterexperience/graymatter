@@ -35,7 +35,6 @@ gem 'jbuilder', '~> 2.5'
 
 group :development, :test do
   gem "factory_girl_rails"
-  gem "faker"
   gem "database_cleaner"
   gem "launchy"
   gem 'shoulda-matchers'
@@ -57,6 +56,8 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+# TODO move fake back into test once the database is up and running
+gem "faker"
 gem 'jquery-rails'
 gem 'materialize-sass'
 gem 'pry'
