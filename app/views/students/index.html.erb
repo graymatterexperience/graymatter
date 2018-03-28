@@ -1,0 +1,26 @@
+<div class="row">
+    <% @students.each do |student| %>
+    <div class="col s12 m4">
+        <div class="card">
+            <div class="card-image">
+                <%= image_tag student["information"]["avatar"], class: 'profile-img' %>
+                    <span class="card-title"><%= student["fullName"] %></span>
+                    <div class='row right'>
+                        <% student["information"]["socialMedia"].each do |media| %>
+                            <%= get_social_media(media) %>
+                        <% end %>
+                    </div>
+            </div>
+            <div class="card-content margin-top">
+                <ul>
+                    <li>Group: <%= student["information"]["group"] %></li>
+                    <li>School: <%= student["information"]["school"] %></li>
+                    <li>Grade: <%= student["information"]["grade"] %></li>
+                    <li>Email: <%= student["information"]["email"] %></li>
+                    <li>Phone: <%= student["information"]["phone"] %></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <% end %>
+</div>

@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
-  root to: 'pages#index'
   get '/mentors', to: 'mentors#index'
+
+  get 'students/index'
+
+  get 'students/create'
+
+  get 'students/edit'
+
+  get 'students/update'
+
+  get 'students/delete'
+
+  get 'students/show'
+
+  root to: 'pages#index'
 end
