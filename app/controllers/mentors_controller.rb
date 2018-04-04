@@ -15,7 +15,8 @@ class MentorsController < ApplicationController
         "company": Faker::Company.name,
         "specialty": Faker::Job.field,
         "email": Faker::Internet.email,
-        "phone": Faker::PhoneNumber.cell_phone
+        "phone": Faker::PhoneNumber.cell_phone,
+        "linkedin": "https://www.linkedin.com/company/the-gray-matter-experience/"
       }.as_json
     end
 end

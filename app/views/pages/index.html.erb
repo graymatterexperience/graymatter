@@ -33,7 +33,14 @@
     <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
         <div class="demo-options mdl-card mdl-color--deep-purple-500 mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop">
             <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
-                <h3>Student Todos?</h3>
+
+
+                <div class='row right'>
+                    <% @pages_payload.each do |media| %>
+                        <%= get_social_media(media) %>
+                    <% end %>
+                </div>
+                <!--
                 <ul>
                     <li>
                         <label for="chkbox1" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
@@ -90,6 +97,7 @@
                         </label>
                     </li>
                 </ul>
+                -->
             </div>
         </div>
     </div>
