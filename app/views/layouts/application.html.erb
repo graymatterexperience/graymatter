@@ -36,19 +36,19 @@
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
         <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
             <div class="mdl-layout__header-row">
+                
+           
+                    <div>
+                        <%= link_to "Log out", logout_path, method: :delete %>
+                    </div>
+      
+
                 <span class="mdl-layout-title">
                     <%= @page_title %>
                 </span>
                 <div class="mdl-layout-spacer"></div>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-                    <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
-                        <i class="material-icons">search</i>
-                    </label>
-                    <div class="mdl-textfield__expandable-holder">
-                        <input class="mdl-textfield__input" type="text" id="search">
-                        <label class="mdl-textfield__label" for="search">Enter your query...</label>
-                    </div>
-                </div>
+
+
                 <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
                     <i class="material-icons">more_vert</i>
                 </button>
@@ -77,7 +77,7 @@
                     </div>
             </header>
             <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-                <%= link_to root_path, class: 'mdl-navigation__link' do %>
+                <%= link_to home_path, class: 'mdl-navigation__link' do %>
                     <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
                 <% end %>
                 <%= link_to students_path, class: 'mdl-navigation__link' do %>
@@ -104,7 +104,15 @@
             </nav>
         </div>
         <main class="mdl-layout__content mdl-color--grey-100">
-            <%= yield %>
+
+        <% flash.each do |message_type, message| %>
+            <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+        <% end %>
+
+        <% if logged_in? %>
+            <h1>hi</h1>
+        <% end %>
+        <%= yield %>
         </main>
 
         <a href="http://www.graymatterexperience.com/" target="_blank" id="view-graymatter" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Gray Matter Experience</a>

@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  root to: 'pages#index'
+
+  root to: 'sessions#new'
+  get '/home', to: 'pages#index'
+  get 'users/new', to: 'users#new'
 
   # sessions 
   get    '/login',   to: 'sessions#new'
@@ -8,6 +11,9 @@ Rails.application.routes.draw do
   
   # mentors
   get '/mentors', to: 'mentors#index'
+
+  get  '/signup',  to: 'users#new'
+  post '/signup', to: 'users#create'
 
   # students
   resources :students         ### why do we exactly have a students controller? arent students a type of user?

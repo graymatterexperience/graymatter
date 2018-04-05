@@ -2,16 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
-.login_wrapper {
+.login-wrapper {
   text-align: center;
+  background-color: gray;
+  padding-bottom: 250px;
 }
-.login_form {
+.login-form {
   margin-top: 5%;
   display: inline-block;
 }
 
-.login_header {
-  margin-top: 10%;
-  text-align: center; 
+.login-logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
 }

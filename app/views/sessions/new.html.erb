@@ -1,14 +1,14 @@
 <% provide(:title, "Log in") %>
-<h1 class="login_header">Log in</h1>
 
-<div class="container login_wrapper">
-  <div class="login_form">
+
+
+<div class="container login-wrapper">
+  <img class="login-logo" src="assets/main-logo.png">
+  <div class="login-form">
     <%= form_for(:session, url: login_path) do |f| %>
 
       <%= f.label :email %>
       <%= f.email_field :email, class: 'form-control' %>
-
-      <%= f.label :password %>
       <%= f.password_field :password, class: 'form-control' %>
 
       <%= f.submit "Log in", class: "btn btn-primary" %>
