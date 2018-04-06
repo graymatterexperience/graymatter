@@ -33,32 +33,42 @@
 </head>
 
 <body>
-    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-        <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
-            <div class="mdl-layout__header-row">
-                
-           
-                    <div>
-                        <%= link_to "Log out", logout_path, method: :delete %>
-                    </div>
-      
+    <% if logged_in? %>
+        <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+    <% else %>
+        <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <% end %>
 
-                <span class="mdl-layout-title">
-                    <%= @page_title %>
-                </span>
-                <div class="mdl-layout-spacer"></div>
+        <% if logged_in? %>
+            <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+                <div class="mdl-layout__header-row">
+                    
+                        <% if logged_in? %>
+                            <div>
+                                <%= link_to "Log out", logout_path, method: :delete %>
+                            </div>
+                        <% end %>
+          
+
+                    <span class="mdl-layout-title">
+                        <%= @page_title %>
+                    </span>
+                    <div class="mdl-layout-spacer"></div>
 
 
-                <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
-                    <i class="material-icons">more_vert</i>
-                </button>
-                <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
-                    <li class="mdl-menu__item">Settings</li>
-                    <!-- <li class="mdl-menu__item">Contact</li> -->
-                </ul>
-            </div>
-        </header>
-        <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
+                        <i class="material-icons">more_vert</i>
+                    </button>
+                    <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
+                        <li class="mdl-menu__item">Settings</li>
+                        <!-- <li class="mdl-menu__item">Contact</li> -->
+                    </ul>
+                </div>
+            </header>
+        <% end %> 
+
+
+        <div class=" mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
             <header class="demo-drawer-header">
                 <%= image_tag 'user.jpg', class: 'demo-avatar' %>
                     <div>Student Name</div>
@@ -109,9 +119,6 @@
             <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
         <% end %>
 
-        <% if logged_in? %>
-            <h1>hi</h1>
-        <% end %>
         <%= yield %>
         </main>
 
