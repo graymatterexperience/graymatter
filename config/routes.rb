@@ -1,5 +1,24 @@
 Rails.application.routes.draw do
   root to: 'pages#index'
+  get 'helps/index'
+
+  get 'message_boards/index'
+
+  get 'updates/index'
+
+  get 'resources/index'
+
+  get 'workshops/index'
+
+  get 'groups/index'
+
+  get '/mentors', to: 'mentors#index'
+
+  get 'students/index'
+
+  get 'students/create'
+
+  get 'students/edit'
 
   get '/home', to: 'pages#index'
   get 'users/new', to: 'users#new'
