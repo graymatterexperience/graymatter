@@ -1,5 +1,9 @@
 class PagesController < ApplicationController
   def index
-    @page_title = 'Home'
+    if logged_in?
+      @page_title = 'Home'
+    else
+      redirect_to login_path
+    end
   end
 end
