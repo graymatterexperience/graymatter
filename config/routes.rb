@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'workshops/index'
 
   get 'groups/index'
+  get 'groups/show'
 
   get '/mentors', to: 'mentors#index'
 

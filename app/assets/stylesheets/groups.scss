@@ -1,3 +1,17 @@
+.group-custom-row {
+    display: flex;
+}
+
+.group-custom-col {
+  flex: 1;
+  padding: 1em;
+}
+
+.group-borders {
+  border-right: 1px solid #000;
+  border-left: 1px solid #000;
+}
+
 .demo-card-image.mdl-card {
   width: 256px;
   height: 256px;
@@ -12,4 +26,24 @@
   color: #fff;
   font-size: 14px;
   font-weight: 500;
+}
+
+.group-panel-color {
+  //background-color: cyan;
+  /* border-right: 1px solid #000; */
+  /* border-left: 1px solid #000; */
+  padding: 10px;
+}
+
+.card-action small {
+  color: #fff;
+}
+
+.message-avatar img {
+  width: 60px;
+}
+
+.task-title {
+    font-size: 16px;
+    font-weight: 500;
 }
