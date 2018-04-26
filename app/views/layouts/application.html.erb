@@ -108,11 +108,25 @@
         </div>
         <main class="mdl-layout__content mdl-color--grey-100">
 
-        <% flash.each do |message_type, message| %>
-            <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
-        <% end %>
+            <div id="flash">
+                <% flash.each do |key, value| %>
+                  <div class="alert alert-<%= key %>">
+                    <% if key != "timedout" %>
+                        <%= value %>
+                    <% end %>
+                  </div>
+                <% end %>
+            </div>
 
-        <%= yield %>
+            <%= yield %>
+
+            <script>
+                $(document).ready(function() {
+                    setTimeout(function() {
+                        $('#flash').remove();
+                    }, 5000);
+                })
+            </script>
         </main>
 
         <a href="http://www.graymatterexperience.com/" target="_blank" id="view-graymatter" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Gray Matter Experience</a>

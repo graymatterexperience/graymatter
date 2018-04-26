@@ -3,7 +3,7 @@ class PagesController < ApplicationController
     if logged_in?
       @page_title = 'Home'
     else
-      redirect_to login_path
+      redirect_to login_url
     end
   end
 end

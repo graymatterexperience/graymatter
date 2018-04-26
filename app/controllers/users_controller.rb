@@ -14,7 +14,7 @@ class UsersController < ApplicationController
       flash[:success] = 'Welcome to the sample app!'
       redirect_to home_path 
     else
-      flash[:danger] = "invalid submission"
+      flash[:error] = "invalid submission"
       render 'new'
     end
   end
