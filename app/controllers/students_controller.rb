@@ -3,7 +3,7 @@ class StudentsController < ApplicationController
   before_action :set_images
 
   def index
-    @page_title = 'Student Profiles'
+    @page_title = 'Student Profiles for Group One'
     @students = 8.times.map { |student| student_payload }
   end
 
