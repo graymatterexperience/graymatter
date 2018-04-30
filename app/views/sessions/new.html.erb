@@ -1,24 +1,32 @@
 <% provide(:title, "Log in") %>
-
-
-
 <div class="container login-wrapper">
-  <img class="login-logo" src="assets/main-logo.png">
-  <div class="login-form">
-    <%= form_for(:session, url: login_path) do |f| %>
+    <div id="flash">
+        <% flash.each do |key, value| %>
+            <div id="card-alert" class="card green custom-flash">
+                <div class="card-content white-text">
+                    <% if key != "timedout" %>
+                        <p><%= value %></p>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+    <img class="login-logo" src="assets/main-logo.png">
+    <div class="login-form">
+        <%= form_for(:session, url: login_path) do |f| %>
 
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control login-center-text' %>
+            <%= f.label :email %>
+            <%= f.email_field :email, class: 'form-control login-center-text' %>
 
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control login-center-text' %>
-      <div>
-        <%= link_to "(forgot password)", '#' %>
-      </div>
+            <%= f.label :password %>
+            <%= f.password_field :password, class: 'form-control login-center-text' %>
+            <div>
+                <%= link_to "(forgot password)", '#' %>
+            </div>
 
-      <%= f.submit "Log in", class: "btn btn-primary login-button" %>
-    <% end %>
-  </div>
+            <%= f.submit "Log in", class: "btn btn-primary login-button" %>
+        <% end %>
+    </div>
 </div>
 
 

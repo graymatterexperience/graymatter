@@ -15,9 +15,14 @@
  */
 
 @import "materialize";
-
+@import "font-awesome";
 
 .container {
   width: 95% !important;
 }
-@import "font-awesome";
+
+.custom-flash {
+  width: 50%;
+  text-align: center;
+  margin: 10px auto;
+}

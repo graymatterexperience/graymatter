@@ -38,7 +38,6 @@
     <% else %>
         <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
     <% end %>
-                
         <% if logged_in? %>
             <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
                 <div class="mdl-layout__header-row">
@@ -59,7 +58,7 @@
                     </ul>
                 </div>
             </header>
-        <% end %> 
+        <% end %>
 
         <div class=" mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
             <header class="demo-drawer-header">
@@ -108,23 +107,15 @@
         </div>
         <main class="mdl-layout__content mdl-color--grey-100">
 
-            <div id="flash">
-                <% flash.each do |key, value| %>
-                  <div class="alert alert-<%= key %>">
-                    <% if key != "timedout" %>
-                        <%= value %>
-                    <% end %>
-                  </div>
-                <% end %>
-            </div>
+
 
             <%= yield %>
 
             <script>
                 $(document).ready(function() {
-                    setTimeout(function() {
-                        $('#flash').remove();
-                    }, 5000);
+                setTimeout(function() {
+                $('#flash').remove();
+                }, 5000);
                 })
             </script>
         </main>
