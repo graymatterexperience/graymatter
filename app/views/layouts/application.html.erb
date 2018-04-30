@@ -33,32 +33,34 @@
 </head>
 
 <body>
-    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-        <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
-            <div class="mdl-layout__header-row">
-                <span class="mdl-layout-title">
-                    <%= @page_title %>
-                </span>
-                <div class="mdl-layout-spacer"></div>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-                    <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
-                        <i class="material-icons">search</i>
-                    </label>
-                    <div class="mdl-textfield__expandable-holder">
-                        <input class="mdl-textfield__input" type="text" id="search">
-                        <label class="mdl-textfield__label" for="search">Enter your query...</label>
-                    </div>
+    <% if logged_in? %>
+        <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+    <% else %>
+        <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <% end %>
+        <% if logged_in? %>
+            <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+                <div class="mdl-layout__header-row">
+                    <span class="mdl-layout-title">
+                        <%= @page_title.upcase %>
+                    </span>
+                    <div class="mdl-layout-spacer"></div>
+                    <span class="mdl-layout-title right">
+                        <%= link_to "Log out", logout_path, method: :delete %>
+                    </span>
+
+                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
+                        <i class="material-icons">more_vert</i>
+                    </button>
+
+                    <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
+                        <li class="mdl-menu__item">stuff goes here</li>
+                    </ul>
                 </div>
-                <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
-                    <i class="material-icons">more_vert</i>
-                </button>
-                <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
-                    <li class="mdl-menu__item">Settings</li>
-                    <!-- <li class="mdl-menu__item">Contact</li> -->
-                </ul>
-            </div>
-        </header>
-        <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+            </header>
+        <% end %>
+
+        <div class=" mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
             <header class="demo-drawer-header">
                 <%= image_tag 'user.jpg', class: 'demo-avatar' %>
                     <div>Student Name</div>
@@ -77,10 +79,10 @@
                     </div>
             </header>
             <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-                <%= link_to root_path, class: 'mdl-navigation__link' do %>
+                <%= link_to home_path, class: 'mdl-navigation__link' do %>
                     <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
                 <% end %>
-                <%= link_to students_index_path, class: 'mdl-navigation__link' do %>
+                <%= link_to students_path, class: 'mdl-navigation__link' do %>
                     <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">face</i>Students</a>
                 <% end %>
                 <%= link_to mentors_path, class: 'mdl-navigation__link' do %>
@@ -104,7 +106,18 @@
             </nav>
         </div>
         <main class="mdl-layout__content mdl-color--grey-100">
+
+
+
             <%= yield %>
+
+            <script>
+                $(document).ready(function() {
+                setTimeout(function() {
+                $('#flash').remove();
+                }, 5000);
+                })
+            </script>
         </main>
 
         <a href="http://www.graymatterexperience.com/" target="_blank" id="view-graymatter" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Gray Matter Experience</a>
