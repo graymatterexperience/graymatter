@@ -31,65 +31,19 @@
         </div>
     </div>
     <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
-        <div class="demo-options mdl-card mdl-color--deep-purple-500 mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop">
-            <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
-                <h3>Student Todos?</h3>
-                <ul>
-                    <li>
-                        <label for="chkbox1" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-                            <input type="checkbox" id="chkbox1" class="mdl-checkbox__input">
-                            <span class="mdl-checkbox__label">Student Todo's ONE</span>
+        <div class="demo-options mdl-card blue-grey lighten-4 mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop">
+            <div class="mdl-card__supporting-text mdl-color-text--black-500">
+                <form action="#">
+                    <h6>Things I am assigned to:</h6>
+                    <% @tasks.each do |task| %>
+                    <p>
+                        <label>
+                            <input type="checkbox" />
+                            <span style="color: #000"><%= task["task"] %></span>
                         </label>
-                    </li>
-                    <li>
-                        <label for="chkbox2" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-                            <input type="checkbox" id="chkbox2" class="mdl-checkbox__input">
-                            <span class="mdl-checkbox__label">Student Todo's TWO</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label for="chkbox3" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-                            <input type="checkbox" id="chkbox3" class="mdl-checkbox__input">
-                            <span class="mdl-checkbox__label">Student Todo's</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label for="chkbox4" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-                            <input type="checkbox" id="chkbox4" class="mdl-checkbox__input">
-                            <span class="mdl-checkbox__label">Student Todo's</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label for="chkbox5" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-                            <input type="checkbox" id="chkbox5" class="mdl-checkbox__input">
-                            <span class="mdl-checkbox__label">Student Todo's</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label for="chkbox6" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-                            <input type="checkbox" id="chkbox6" class="mdl-checkbox__input">
-                            <span class="mdl-checkbox__label">Student Todo's</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label for="chkbox7" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-                            <input type="checkbox" id="chkbox7" class="mdl-checkbox__input">
-                            <span class="mdl-checkbox__label">Student Todo's</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label for="chkbox8" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-                            <input type="checkbox" id="chkbox8" class="mdl-checkbox__input">
-                            <span class="mdl-checkbox__label">Student Todo's</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label for="chkbox9" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-                            <input type="checkbox" id="chkbox9" class="mdl-checkbox__input">
-                            <span class="mdl-checkbox__label">Student Todo's</span>
-                        </label>
-                    </li>
-                </ul>
+                    </p>
+                    <% end %>
+                </form>
             </div>
         </div>
     </div>
@@ -122,5 +76,11 @@
         </div>
     </div>
 
+    <div class='row' style="margin-top: 30px">
+        <% @pages_payload.each do |media| %>
+            <%= get_social_media(media) %>
+        <% end %>
+    </div>
 
 </div>
+

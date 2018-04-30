@@ -8,6 +8,7 @@
       <th>Specialty</th>
       <th>Email</th>
       <th>Phone</th>
+      <th>LinkedIn</th>
     </tr>
   </thead>
   <tbody>
@@ -20,8 +21,18 @@
           <td><%= mentor["specialty"] %></td>
           <td><a href="mailto:<%= mentor['email'] %>"><%= mentor["email"] %></td>
           <td><%= mentor["phone"] %></td>
+          <td>
+              <div id="linkedin">
+                  <%= link_to image_tag('linkedin.png', class: 'btn-floating waves-effect waves-light'), mentor["linkedin"], target: '_blank' %>
+              </div>
+          </td>
         </tr>
       <% end %> 
     <% end %> 
   </tbody>
 </table>
+
+
+
+      <%#tag.div(id: socialMedia[0], class: 'col m2 pl right') do%>
+        <%#content_tag(:a, image_tag(social_media_icons[socialMedia[0]], class: socialMedia[0]), href: socialMedia[1] || 'www.FIXTHIS.com', class: 'btn-floating sm-btn-fab waves-effect waves-light', target: '_blank')%>

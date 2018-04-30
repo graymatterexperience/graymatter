@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  root to: 'pages#index'
+  get 'helps/index'
+
+  get 'message_boards/index'
+
+  get 'updates/index'
+
+  get 'resources/index'
+
+  get 'workshops/index'
+
+  get 'groups/index'
+  get 'groups/show'
+
   get '/mentors', to: 'mentors#index'
 
   get 'students/index'
@@ -7,11 +21,20 @@ Rails.application.routes.draw do
 
   get 'students/edit'
 
-  get 'students/update'
+  get '/home', to: 'pages#index'
+  get 'users/new', to: 'users#new'
 
-  get 'students/delete'
+  # sessions 
+  get    '/login',   to: 'sessions#new'
+  post   '/login',   to: 'sessions#create'
+  delete '/logout',  to: 'sessions#destroy'
+  
+  # mentors
+  get '/mentors', to: 'mentors#index'
 
-  get 'students/show'
+  get  '/signup',  to: 'users#new'
+  post '/signup', to: 'users#create'
 
-  root to: 'pages#index'
+  # students
+  resources :students
 end

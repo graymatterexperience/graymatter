@@ -1,0 +1,87 @@
+<div class="row group-custom-row">
+    <div class="col s4 group-custom-col">
+        <h5 style="border-bottom: 1px solid #000">Message Board</h5>
+        <input type="text" id="message" name="message" placeholder="New Message..">
+        <button class="btn waves-effect waves-light right" type="submit" name="action">SUBMIT
+            <i class="material-icons right">send</i>
+        </button>
+        <div class="row">
+            <div class="col s12">
+                <div class="card blue-grey darken-2">
+                    <div class="card-content white-text">
+                        <p>I am a message from one of the members.</p>
+                    </div>
+                    <div class="card-action message-avatar">
+                        <span><%= image_tag 'person.png' %></span>
+                        <small>Tracy Waller | Submitted 5 hours ago |</small>
+                        <small>Reply</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12">
+                <div class="card blue-grey darken-2">
+                    <div class="card-content white-text">
+                        <p>I am a 2nd message from one of the members.</p>
+                    </div>
+                    <div class="card-action message-avatar">
+                        <span><%= image_tag 'person.png' %></span>
+                        <small>Kimmi Ballerbam | Submitted 13 hours ago |</small>
+                        <small>Reply</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s4 group-custom-col group-borders">
+        <!-- TODO make this a compont this will be in at least two spots -->
+        <h5 style="border-bottom: 1px solid #000">Projects</h5>
+        <div class="group-panel-color">
+            <% @tasks.each do |task| %>
+                <div class="divider"></div>
+                <div class="section">
+                    <div class="task-title"><%= task[:task] %></div>
+                    <span style="color: #FCB82C">Assigned:</span> <span style="color: #FCB82C"><%= task[:assigned_to] %></span><br>
+                    <div class="row" style="text-align: center">
+                        <div class="col s12 m6 l4">
+                            <p><u>In Complete</u></p>
+                            <% if task[:in_complete] %>
+                                <span><i class="small material-icons green-text text-darken-4">check</i></span>
+                            <% end %>
+                        </div>
+                        <div class="col s12 m6 l4">
+                            <p><u>In progress</u></p>
+                            <% if task[:in_progress] %>
+                                <span><i class="small material-icons green-text text-darken-4">check</i></span>
+                            <% end %>
+                        </div>
+                        <div class="col s12 m6 l4">
+                            <p><u>Complete</u></p>
+                            <% if task[:completed] %>
+                                <span><i class="small material-icons green-text text-darken-4">check</i></span>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+    <div class="col s4 group-custom-col">
+        <h5 style="border-bottom: 1px solid #000">Members</h5>
+        <% @group_payload.each do |student| %>
+            <ul class="collection">
+                <li class="collection-item avatar">
+                    <%= image_tag student["information"]["avatar"], class: 'circle' %>
+                    <span class="title"><%= "#{student['firstName']} #{student['lastName']}" %></span>
+                    <p>
+                        laslkfja
+                        <%= student["information"]["email"] %>
+                    </p>
+                    <a href="#!" class="secondary-content"><i class="material-icons">person</i></a>
+                </li>
+            </ul>
+        <% end %>
+    </div>
+
+</div>
+
+
