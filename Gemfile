@@ -62,3 +62,4 @@ gem 'jquery-rails'
 gem 'materialize-sass', '~> 1.0.0.beta'
 gem "font-awesome-rails"
 gem 'pry'
+gem "figaro"
