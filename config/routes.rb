@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   root to: 'pages#index'
+
+  get 'calendar/show'
+
   get 'helps/index'
 
   get 'message_boards/index'
@@ -37,4 +40,7 @@ Rails.application.routes.draw do
 
   # students
   resources :students
+  
+  # Calendar
+  #resources :calendar, only: [:show], controller: :calendar
 end

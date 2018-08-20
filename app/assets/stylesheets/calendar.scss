@@ -1,0 +1,67 @@
+$colorOne: #ffba02; //yellow
+$colorTwo: #00b0c1; //cyan
+$colorThree: #c1c1c1; //gray
+$colorFour: #25252f; //black
+$colorFive: #ffffff; //white
+$colorSix: #7b7b7b; //Dark gray
+$danger: #d9534f; //red
+
+
+.calendar {
+  //width: 200px !important;
+}
+
+.month-advance-button {
+  color: red;
+}
+
+.month-advance-text {
+  text-align: center;
+}
+
+.month-advance-container {
+  width: 195px !important;
+}
+
+//.month-advance-row {
+  //margin-bottom: 0 !important;
+  //padding: 0 !important;
+//}
+
+.calendar td {
+  border: 1px solid #ccc !important;
+    /* height: 50px; */
+    /* width: auto; */
+}
+
+.calendar th {
+  border: 1px solid #000 !important;
+  background-color: #00b6d4;
+  padding: 0 !important;
+  text-align: center !important;
+}
+
+.table-bordered {
+  border: 1px solid #ccc;
+}
+.month-arrow {
+  text-align: center;
+}
+
+.today {
+    background-color: $colorOne;
+}
+
+.day-of-month {
+    padding: 3px !important;
+    //width: 50px !important;
+    //height: 50px !important;
+}
+
+.not-month {
+    background-color: $colorThree;
+}
+
+.event {
+    background-color: $colorTwo;
+}
