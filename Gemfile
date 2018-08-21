@@ -63,3 +63,5 @@ gem 'materialize-sass', '~> 1.0.0.beta'
 gem "font-awesome-rails"
 gem 'pry'
 gem "figaro"
+gem 'google-api-client', '~> 0.23.4'
+gem 'google_calendar'
