@@ -8,7 +8,21 @@ $danger: #d9534f; //red
 
 
 .calendar {
+  margin-bottom: 20px;
   //width: 200px !important;
+}
+
+.calendar td {
+  border: 1px solid #ccc;
+    /* height: 50px; */
+    /* width: auto; */
+}
+
+.calendar th {
+  border: 1px solid #000 !important;
+  background-color: #00b6d4;
+  padding: 0 !important;
+  text-align: center !important;
 }
 
 .month-advance-button {
@@ -20,25 +34,7 @@ $danger: #d9534f; //red
 }
 
 .month-advance-container {
-  width: 195px !important;
-}
-
-//.month-advance-row {
-  //margin-bottom: 0 !important;
-  //padding: 0 !important;
-//}
-
-.calendar td {
-  border: 1px solid #ccc !important;
-    /* height: 50px; */
-    /* width: auto; */
-}
-
-.calendar th {
-  border: 1px solid #000 !important;
-  background-color: #00b6d4;
-  padding: 0 !important;
-  text-align: center !important;
+  //width: 195px !important;
 }
 
 .table-bordered {
@@ -53,6 +49,7 @@ $danger: #d9534f; //red
 }
 
 .day-of-month {
+    border-bottom: 1px solid green;
     padding: 3px !important;
     //width: 50px !important;
     //height: 50px !important;
@@ -62,6 +59,18 @@ $danger: #d9534f; //red
     background-color: $colorThree;
 }
 
+.events-container {
+  padding-left: 5vw;
+
+}
+
 .event {
-    background-color: $colorTwo;
+}
+
+.date-title {
+  text-decoration: underline;
+}
+
+.date-description:before {
+  content: "•  ";
 }

@@ -15,8 +15,22 @@
             <div class="">
                 <%= calendar @date do |date| %>
                     <%= date.day %>
+                    <% if @events_by_date[date] %>
+                        <span style="text-align: center; border: 2px solid green">
+
+                            <%#= link_to ("<i class='fa fa-star'></i>").html_safe, events_path(the_date: date, events:  @events_by_date[date.in_time_zone]) %>
+                        </span>
+                    <% end %>
                 <% end %>
             </div>
+        </div>
+    </div>
+    <div class="col m9">
+        <div class='events-container'>
+            <% @events.each do |x| %>
+                <b class='date-title'><%= x.start_time.strftime('%A, %b %d') %></b>
+                <p class='date-description'><%= x.description %></p>
+            <% end %>
         </div>
     </div>
 </div>

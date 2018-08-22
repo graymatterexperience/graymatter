@@ -1,3 +1,8 @@
+@media screen and (min-width: 0px) and (max-width: 400px) {
+  .view-graymatter-button { display: none; }  /* show it on small screens */
+}
+
+
 .dashboard-logo {
   margin: auto;
   width: 50%;
