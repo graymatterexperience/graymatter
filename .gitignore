@@ -20,3 +20,6 @@
 
 # Ignore dev playground folers
 old_files/
+
+# Ignore application configuration
+/config/application.yml
