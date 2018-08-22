@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col m3">
+        <div class="calendar z-depth-2">
+            <div class="month-advance-container">
+                <div class="well month-arrow controls">
+                    <%= link_to updates_index_path(date: @date - 1.month), class: "month-advance-button pull-left align-center"  do %>
+                        <i class="tiny material-icons">arrow_back</i>
+                    <% end %>
+                    <span class="month-advance-text"><%= "#{@date.strftime("%B")} #{@date.year}" %></span>
+                    <%= link_to updates_index_path(date: @date + 1.month), class: "month-advance-button pull-right" do %>
+                        <i class="tiny material-icons">arrow_forward</i>
+                    <% end %>
+                </div>
+            </div>
+            <div class="">
+                <%= calendar @date do |date| %>
+                    <%= date.day %>
+                    <% if @events_by_date[date] %>
+                        <span style="text-align: center; border: 2px solid green">
+
+                            <%#= link_to ("<i class='fa fa-star'></i>").html_safe, events_path(the_date: date, events:  @events_by_date[date.in_time_zone]) %>
+                        </span>
+                    <% end %>
+                <% end %>
+            </div>
+        </div>
+        <div class="row">
+            <%= link_to 'Today', updates_index_path, class: "chip pull-right green" %>
+        </div>
+    </div>
+    <div class="col m9">
+        <div class='events-container'>
+            <% @events.each do |x| %>
+                <b class='date-title'><%= x.start_time.strftime('%A, %b %d') %></b>
+                <p class='date-description'><%= x.description %></p>
+            <% end %>
+        </div>
+    </div>
+</div>
