@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   root to: 'pages#index'
 
-  get 'calendar/show'
 
   get 'helps/index'
 
@@ -40,6 +39,8 @@ Rails.application.routes.draw do
 
   # students
   resources :students
+  resource :calendar, only: [:show], controller: :calendar
+  get 'calendar/show'
   
   # Calendar
   #resources :calendar, only: [:show], controller: :calendar

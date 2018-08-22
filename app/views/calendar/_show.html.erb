@@ -3,11 +3,11 @@
         <div class="calendar z-depth-2">
             <div class="month-advance-container">
                 <div class="well month-arrow controls">
-                    <%= link_to calendar_show_path(date: @date - 1.month), class: "month-advance-button pull-left"  do %>
+                    <%= link_to updates_index_path(date: @date - 1.month), class: "month-advance-button pull-left align-center"  do %>
                         <i class="tiny material-icons">arrow_back</i>
                     <% end %>
                     <span class="month-advance-text"><%= "#{@date.strftime("%B")} #{@date.year}" %></span>
-                    <%= link_to calendar_show_path(date: @date + 1.month), class: "month-advance-button pull-right" do %>
+                    <%= link_to updates_index_path(date: @date + 1.month), class: "month-advance-button pull-right" do %>
                         <i class="tiny material-icons">arrow_forward</i>
                     <% end %>
                 </div>
@@ -23,6 +23,9 @@
                     <% end %>
                 <% end %>
             </div>
+        </div>
+        <div class="row">
+            <%= link_to 'Today', updates_index_path, class: "chip pull-right green" %>
         </div>
     </div>
     <div class="col m9">
