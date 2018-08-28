@@ -2,7 +2,7 @@ feature 'Homepage Features' do
   before { visit root_path }
 
   # it won't run js code but it is fast
-  it do
+  xit do
     expect(page).to have_content 'Home'
   end
 
