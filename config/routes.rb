@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#create'
 
   # students
+  resources :posts
   resources :students
   resource :calendar, only: [:show], controller: :calendar
   get 'calendar/show'
