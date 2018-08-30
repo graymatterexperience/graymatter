@@ -1,25 +1,27 @@
 class PostsController < ApplicationController
   def index
     @page_title = 'Message Board'
+    @page_cohort = 'Cohort One'
+    @post = Post.new
     @posts = Post.all.order('created_at DESC')
   end
 
   def new
+    @page_title = 'posting delete this soon'
     @post = Post.new
   end
 
   def create
-    #TODO can not use first name what if lots of people have the name Kim
-    #how would I tell them apart
     @post = Post.new(post_params)
     @post[:user_tags] = find_user_tags(@post.body)
+    @post[:auther_id] = current_user.id
     
     if @post.save
       flash[:success] = 'Successfully created a question'
       redirect_to posts_path
     else
-      flash[:error] = 'Something went wrong try again'
-      render 'new'
+      flash[:errors] = 'Something went wrong try again'
+      redirect_to posts_path
     end
   end
 

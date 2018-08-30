@@ -48,8 +48,8 @@ RSpec.describe PostsController, type: :controller do
         expect {
           post :create, params: { post: post_params }
         }.to change(user.posts, :count).by(0)
-        expect(subject.request.flash[:error]).to eq('Something went wrong try again')
-        expect(subject).to render_template( :new )
+        expect(subject.request.flash[:errors]).to eq('Something went wrong try again')
+        expect(subject).to redirect_to( posts_path )
       end
 
       it 'finds the user tag in the body' do
