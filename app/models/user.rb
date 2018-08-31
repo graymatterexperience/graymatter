@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :bigint(8)        not null, primary key
+#  first_name      :string
+#  last_name       :string
+#  email           :string
+#  password_digest :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  role            :string
+#  reset_digest    :string
+#  reset_sent_at   :datetime
+#
+
 class User < ApplicationRecord
   attr_accessor :reset_token
   before_save { self.email = email.downcase }
@@ -10,6 +26,12 @@ class User < ApplicationRecord
             uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }
+
+  has_many :posts, class_name: 'Post', foreign_key: :auther_id, primary_key: :id
+
+  def user_tag
+    "@#{self.first_name} #{self.last_name}"
+  end
 
   # Returns a random token
   # def User.new_token
