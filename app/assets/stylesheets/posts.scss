@@ -1,0 +1,74 @@
+.light-text {
+  color: #a3a3a3;
+}
+.count-container {
+
+}
+
+.comment-count {
+  display: inline-block;
+  color: #fff;
+  text-align: center;
+  background: #4a90e2;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+  line-height: 2rem;
+}
+
+.post-question {
+  display: inline-block;
+}
+
+.question-cite {
+  display: inline-block;
+  color: #a3a3a3;
+}
+
+.message-board-cohort-name {
+}
+
+.message-information-bar {
+  position: relative;
+}
+.unread-count-container {
+  position: absolute;
+  right: 0;
+}
+
+.unread-count {
+  display: inline-block;
+  color: #fff;
+  text-align: center;
+  background: #4a90e2;
+  height: 1.2rem;
+  width: 2rem;
+  border-radius: 25%;
+  line-height: 1.2rem;
+
+}
+
+.question-body {
+  font-size: 2rem;
+}
+
+
+/*************
+ * comments styles
+ *************/
+
+.comment-container {
+}
+
+.comment-text {
+  width: 75%;
+  margin: auto;
+  line-height: 1.3rem;
+  font-size: 1.3rem;
+}
+
+.comment-container-body {
+  margin-bottom: 50px;
+}
+
+
