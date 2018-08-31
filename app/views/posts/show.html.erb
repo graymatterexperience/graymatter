@@ -1,0 +1,85 @@
+<div class='message-information-bar'><span class='light-text'>Cohort</span> <span>Cohort One</span>
+    <span class="unread-count-container light-text">Unread <span class='unread-count'>3</span></span>
+</div>
+
+<hr>
+
+<div class="container">
+    <p class='question-body'><%= @post.body %></p>
+
+    <div class='message-information-bar'><span class='light-text'>Started 14 hours ago by <%= link_to 'kim ballpen', students_path %></span>
+        <span class="unread-count-container light-text">You were taged in this message</span>
+    </div>
+
+    <ul class="collapsible popout">
+        <li>
+            <div class="collapsible-header"><i class="material-icons">border_color</i>Leave a Comment</div>
+            <div class="collapsible-body">
+                <input type="text", placeholder='Leave a comment (NOTE: This does not work as of yet)'>
+                <button class="btn btn-success">Post Comment</button>
+            </div>
+            
+        </li>
+    </ul>
+
+    <hr>
+
+    <div class='center light-text'> 1 | Next | Last Page</div>
+    <hr>
+</div>
+
+<div class="comment-container">
+    <div class="comment-container-body">
+        <div class="chip">
+            <%= image_tag 'lady-3.jpg' %>
+            Kim Ballpen
+        </div>
+        <small class='light-text'>Left 1 hour ago</small>
+        <div class="comment-text">
+            There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.
+        </div>
+    </div>
+
+    <div class="comment-container-body">
+        <div class="chip">
+            <%= image_tag 'man-1.jpg' %>
+            Tim Parker
+        </div>
+        <small class='light-text'>Left 1 days ago</small>
+        <div class="comment-text">
+            There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.
+        </div>
+    </div>
+
+
+    <div class="comment-container-body">
+        <div class="chip">
+            <%= image_tag 'lady-1.jpg' %>
+            Kim Ballpen
+        </div>
+        <small class='light-text'>Left 2 days ago</small>
+        <div class="comment-text">
+            There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('.collapsible').collapsible();
+    });
+
+    $('input').on('keyup', function() {
+        /*
+        NOTE: this code will get triggered when the user types a '@' sign 
+        what this funciton should do is when the @ sign is typed. a list of all
+        the names in that cohort should appear, that we can control what is being
+        typed then we can add that to the tags.
+        */
+        var trigger = /@/;
+        if (this.value.match(trigger)) {
+            // do search for this.value here
+        }
+    });
+</script>

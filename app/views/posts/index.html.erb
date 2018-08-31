@@ -47,7 +47,9 @@
         
             </span>
             <span class="post-question">
-                <p><%= truncate(post.body, :length => 100, :omission => '... (more)') %></p>
+                <%= link_to post_path(post.id) do %>
+                    <p><%= truncate(post.body, :length => 100, :omission => '... (more)') %></p>
+                <% end %>
             </span>
             <span class="question-cite">
                 <p>14 hours ago by Kim</p>

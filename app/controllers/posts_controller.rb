@@ -27,6 +27,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @page_title = 'Message'
   end
 
   def update
