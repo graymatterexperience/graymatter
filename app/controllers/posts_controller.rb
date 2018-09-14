@@ -15,7 +15,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post[:user_tags] = find_user_tags(@post.body)
     @post[:auther_id] = current_user.id
-    
+
     if @post.save
       flash[:success] = 'Successfully created a question'
       redirect_to posts_path
