@@ -10,7 +10,6 @@ Rails.application.routes.draw do
 
   get 'resources/index'
 
-  get 'workshops/index'
 
   get 'groups/index'
   get 'groups/show'
@@ -45,4 +44,8 @@ Rails.application.routes.draw do
   
   # Calendar
   #resources :calendar, only: [:show], controller: :calendar
+
+  #workshop
+  get 'workshops/index'
+  get '/workshops/:id', to: 'workshops#show', as: 'workshop'
 end

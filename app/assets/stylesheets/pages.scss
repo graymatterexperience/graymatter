@@ -2,7 +2,6 @@
   .view-graymatter-button { display: none; }  /* show it on small screens */
 }
 
-
 .dashboard-logo {
   margin: auto;
   width: 50%;
@@ -29,4 +28,22 @@
   height: 38px;
   padding: 10px;
   object-fit: cover;
+}
+
+.task-card-title-custom {
+  margin: 0 !important;
+}
+
+.update-item {
+  width: 100%;
+  border-bottom: 1px solid #7B7B7B;
+  display: inline-block;
+}
+
+.custom-link {
+  color: green !important;
+}
+
+.main-page-social-media {
+  width: 100%;
 }
