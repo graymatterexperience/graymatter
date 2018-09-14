@@ -16,4 +16,6 @@ class Post < ApplicationRecord
              class_name: 'User', 
              foreign_key: :auther_id,
              primary_key: :id
+
+  validates :body, presence: true
 end
