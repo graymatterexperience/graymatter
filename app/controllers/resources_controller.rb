@@ -6,11 +6,30 @@ class ResourcesController < ApplicationController
 
   private
 
+
   def resources_payload
-    # I think I can have a key as a string
+    # I have 'card_image' but do not use. I want to control the image
+    # Ask client
     [
       {
-        "Starting a Business" => [
+        "resource" => "Starting a Business",
+        "resource_links" => [
+          {
+            source: 'this is the source',
+            link: 'https://www.google.com'
+          },
+          {
+            source: 'this is the source',
+            link: 'https://www.google.com'
+          },
+          {
+            source: 'this is the source',
+            link: 'https://www.google.com'
+          },
+          {
+            source: 'this is the source',
+            link: 'https://www.google.com'
+          },
           {
             source: 'this is the source',
             link: 'https://www.google.com'
@@ -19,10 +38,14 @@ class ResourcesController < ApplicationController
             source: 'this is the source',
             link: 'https://www.google.com'
           }
-        ]
+        ],
+        "description" => 'This is a breif description. Less than 250 chars. This
+        resource has lots of links scroll down.',
+        "card_image" => 'resources.png'
       },
       {
-        "Market Research" => [
+        "resource" => "Market Research",
+        "resource_links" => [
           {
             source: 'this is the source',
             link: 'https://www.google.com'
@@ -31,10 +54,13 @@ class ResourcesController < ApplicationController
             source: 'this is the source',
             link: 'https://www.google.com'
           }
-        ]
+        ],
+        "description" => 'This is a breif description. Less than 250 chars.',
+        "card_image" => nil
       },
       {
-        "Finance tips/tools" => [
+        "resource" => "Finance tips/tools",
+        "resource_links" => [
           {
             source: 'this is the source',
             link: 'https://www.google.com'
@@ -43,31 +69,29 @@ class ResourcesController < ApplicationController
             source: 'this is the source',
             link: 'https://www.google.com'
           }
-        ]
+        ],
+        "description" => 'This is a breif description. Less than 250 chars.',
+        "card_image" => nil
       },
       {
-        "Marketing" => []
+        "resource" => "Marketing",
+        "resource_links" => [],
+        "card_image" => nil
       },
       {
-        "Web Development" => []
+        "resource" => "Web Development",
+        "resource_links" => [],
+        "card_image" => nil
       },
       {
-        "Web Design" => []
+        "resource" => "Web Design",
+        "resource_links" => [],
+        "card_image" => nil
       },
       {
-        "Project Management" => []
-      },
-      {
-        "Funding Resources" => []
-      },
-      {
-        "Pitch resources" => []
-      },
-      {
-        "Social Media Management" => []
-      },
-      {
-        "Miscellaneous" => []
+        "resource" => "Project Management",
+        "resource_links" => [],
+        "card_image" => nil
       }
     ]
   end

@@ -1,18 +1,32 @@
 <!-- TODO need to look at if this is centered on small devices, my guess would be need -->
+<!-- TODO also for some reason the grid systems is not working I must have over written something -->
+
 <div class="container">
     <div class="row">
         <% @resources.each do |key| %>
-            <% key.each_key do |sub_key| %>
-                <div class="col m4 s12">
-                    <h5><%= sub_key %></h5>
+            <div class="card col m3 s12 zero-padding">
+                <div class="card-image waves-effect waves-block waves-light resource-card-image">
+                    <%= image_tag 'resources.png', class: 'resource-card-image' %>
+                    <span class='resource-card-title-text'><%= key["resource"] %></span>
+                </div>
+                <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">Resources<i class="material-icons right">more_vert</i></span>
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">Resources<i class="material-icons right">close</i></span>
+                    <hr>
+                    <p class='resource-card-description-container'><%= key["description"].nil? ? 'No Resources provided' : key["description"] %></p>
                     <ul>
-                        <% key[sub_key].each do |resource| %>
-                            <li>Source: <%= resource[:source] %></li>
-                            <li>Link: <%= link_to 'Resource Link', resource[:link], target: '_blank' %></li>
+                        <% if key["resource_links"].present? %>
+                            <% key["resource_links"].each do |resource| %>
+                                <li>Source: <%= !resource[:source] %></li>
+                                <li><%= link_to 'Read', resource[:link], target: '_blank' %></li>
+                                <hr style='width: 75%; margin: auto; padding-bottom: 10px'>
+                            <% end %>
                         <% end %>
                     </ul>
                 </div>
-            <% end %>
+            </div>
         <% end %>
     </div>
 </div>
