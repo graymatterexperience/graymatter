@@ -42,12 +42,15 @@
         <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
     <% end %>
         <% if logged_in? %>
-            <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+            <header class="demo-header mdl-layout__header mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
                 <div class="mdl-layout__header-row">
                     <span class="mdl-layout-title">
-                        <%= @page_title.upcase %>
+                        <%= link_to @page_title.upcase %>
                     </span>
-                    <div class="mdl-layout-spacer"></div>
+                    <div class="mdl-layout-spacer center-align">
+                        <%#= image_tag 'main-logo.png', class: 'dashboard-logo' %>
+                        <%= image_tag 'brain_logo.png', class: 'dashboard-logo' %>
+                    </div>
                     <span class="mdl-layout-title right">
                         <%= link_to "Log out", logout_path, method: :delete %>
                     </span>
@@ -65,6 +68,7 @@
 
         <div class=" mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
             <header class="demo-drawer-header">
+                <%= image_tag 'name-logo.png', class: 'name-dashboard-logo' %>
                 <%= image_tag 'user.jpg', class: 'demo-avatar' %>
                     <div>Student Name</div>
                     <div class="demo-avatar-dropdown">
