@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  get 'events/index'
+
+  get 'events/show'
+
+  get 'events/new'
+
+  get 'events/edit'
+
+  get 'events/create'
+
+  get 'events/update'
+
+  get 'events/destroy'
+
   root to: 'pages#index'
 
 

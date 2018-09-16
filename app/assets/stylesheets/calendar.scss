@@ -6,7 +6,33 @@ $colorFive: #ffffff; //white
 $colorSix: #7b7b7b; //Dark gray
 $danger: #d9534f; //red
 
+.upcoming-events-container {
+  border-left: 1px solid #ccc;
+}
 
+.events-title {
+  font-size: 2em;
+  border-bottom: 1px solid #ccc;
+}
+
+.calendar-container {
+  max-width: 40em;
+}
+
+.events-container {
+
+}
+
+.date-title {
+  text-decoration: underline;
+}
+
+.date-description:before {
+  content: "•  ";
+}
+
+//TODO below is all CSS for my old calendar but it seems some stying is
+//working on present calendar
 .calendar {
   margin-bottom: 20px;
   //width: 200px !important;
@@ -59,18 +85,3 @@ $danger: #d9534f; //red
     background-color: $colorThree;
 }
 
-.events-container {
-  padding-left: 5vw;
-
-}
-
-.event {
-}
-
-.date-title {
-  text-decoration: underline;
-}
-
-.date-description:before {
-  content: "•  ";
-}

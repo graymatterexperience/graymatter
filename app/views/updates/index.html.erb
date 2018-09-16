@@ -1,1 +1,18 @@
-<%= render calendar_show_path %>
+<div class="row">
+    <div class="grid-example col s12 m8">
+        <div class="card padding-md">
+            <div class="calendar calendar-container"></div>
+        </div>
+    </div>
+    <div class="col s12 m4">
+        <div class="card padding-md">
+            <p class='events-title'>Upcoming Events</p>
+            <div class='events-container'>
+                <% @events.each do |x| %>
+                    <b class='date-title'><%= x.start.strftime('%A, %b %d') %></b>
+                    <p class='date-description'><%= x.description %></p>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
