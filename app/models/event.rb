@@ -12,10 +12,17 @@
 #  updated_at  :datetime         not null
 #
 
+#TODO this needs to be tested
 class Event < ApplicationRecord
-  validates_presence_of :title
+  validates :title, presence: true
+  attr_accessor :date_range
+
+  def all_day_event?
+    self.start == self.start.midnight && self.end == self.end.midnight ? true : false
+  end
+  #validates_presence_of :title
 
   def the_date
-    Date.parse(start.to_s)
+  Date.parse(start.to_s)
   end
 end

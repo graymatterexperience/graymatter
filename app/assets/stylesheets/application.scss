@@ -30,6 +30,7 @@
 }
 
 .page-container {
+  min-height: -webkit-fill-available;
   margin: 25px auto;
   width: 95% !important;
 }

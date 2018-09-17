@@ -1,17 +1,17 @@
 Rails.application.routes.draw do
-  get 'events/index'
+  #get 'events/index'
 
-  get 'events/show'
+  #get 'events/show'
 
-  get 'events/new'
+  #get 'events/new'
 
-  get 'events/edit'
+  #get 'events/edit'
 
-  get 'events/create'
+  #get 'events/create'
 
-  get 'events/update'
+  #get 'events/update'
 
-  get 'events/destroy'
+  #get 'events/destroy'
 
   root to: 'pages#index'
 
@@ -58,6 +58,7 @@ Rails.application.routes.draw do
   
   # Calendar
   #resources :calendar, only: [:show], controller: :calendar
+  resources :events
 
   #workshop
   get 'workshops/index'

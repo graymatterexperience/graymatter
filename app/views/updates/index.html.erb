@@ -10,9 +10,10 @@
             <div class='events-container'>
                 <% @events.each do |x| %>
                     <b class='date-title'><%= x.start.strftime('%A, %b %d') %></b>
-                    <p class='date-description'><%= x.description %></p>
+                    <p class='date-description'><%= x.title %></p>
                 <% end %>
             </div>
         </div>
     </div>
 </div>
+
