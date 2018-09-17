@@ -67,4 +67,6 @@ gem 'pry'
 gem "figaro"
 gem 'annotate'
 gem 'simple_form'
-gem 'bootstrap-sass'
+
+#TODO this is really messing up my styling this is for the calendar
+#gem 'bootstrap-sass'
