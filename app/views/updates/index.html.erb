@@ -8,7 +8,7 @@
         <div class="card padding-md">
             <p class='events-title'>Upcoming Events</p>
             <div class='events-container'>
-                <% @events.each do |x| %>
+                <% @upcoming_events.each do |x| %>
                     <b class='date-title'><%= x.start.strftime('%A, %b %d') %></b>
                     <p class='date-description'><%= x.title %></p>
                 <% end %>
