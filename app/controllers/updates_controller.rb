@@ -1,8 +1,10 @@
 class UpdatesController < ApplicationController
   def index
     @page_title = 'Updates'
-    @events = Event.all
-    @events_by_date = @events.group_by(&:the_date)
-    @date = params[:date] ? Date.parse(params[:date]) : Date.today
+    @upcoming_events = Event.all.select { |x| x.event_this_month? }
+      .sort_by(&:start)
   end
 end
+
+#@upcoming_events = Event.all.select { |x| x.event_this_month? }
+#.sort_by(&:start)

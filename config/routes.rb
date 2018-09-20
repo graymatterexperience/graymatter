@@ -44,6 +44,7 @@ Rails.application.routes.draw do
   
   # Calendar
   #resources :calendar, only: [:show], controller: :calendar
+  resources :events
 
   #workshop
   get 'workshops/index'

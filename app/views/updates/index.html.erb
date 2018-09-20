@@ -1,2 +1,23 @@
-<div id='calendar'></div>
-<%#= render calendar_show_path %>
+<div class="container">
+    <div class="row">
+        <div class="col s12 m9">
+            <div id='calendar'></div>
+        </div>
+        <div class="col s12 m3">
+            <div class="card padding-md">
+                <p class='events-title'>Upcoming Events</p>
+                <ul class="collection">
+                    <% @upcoming_events.each do |x| %>
+                        <li class="collection-item">
+                            <b class='date-title'><%= x.start.strftime('%A, %b %d') %></b>
+                            <p class='date-description'><%= x.title %></p>
+                        </li>
+                    <% end %>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
