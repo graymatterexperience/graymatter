@@ -31,7 +31,7 @@
     <div class="col m9">
         <div class='events-container'>
             <% @events.each do |x| %>
-                <b class='date-title'><%= x.start_time.strftime('%A, %b %d') %></b>
+                <b class='date-title'><%= x.start.strftime('%A, %b %d') %></b>
                 <p class='date-description'><%= x.description %></p>
             <% end %>
         </div>
