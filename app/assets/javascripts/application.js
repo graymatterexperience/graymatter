@@ -12,5 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require materialize
+//= require moment
+//= require daterangepicker
+//= require fullcalendar
 //= require_tree .

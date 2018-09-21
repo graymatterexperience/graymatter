@@ -1,1 +1,54 @@
-<%= render calendar_show_path %>
+<div class="container">
+    <div class="row">
+        <div class="col s12 m9">
+            <div id='calendar'></div>
+        </div>
+        <div class="col s12 m3">
+            <div class="card padding-md">
+                <p class='events-title'>Upcoming Events</p>
+                <ul class="collection">
+                    <% @upcoming_events.each do |x| %>
+                        <li class="collection-item">
+                            <b class='date-title'><%= x.start.strftime('%A, %b %d') %></b>
+                            <p class='date-description'><%= x.title %></p>
+                        </li>
+                    <% end %>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- From the blog Modal Structure -->
+<!-- http://www.mikesmithdev.com/fullcalendar-jquery-ui-modal/ -->
+
+<div id="eventContent" title="Event Details" style="display:none;">
+    Start: <span id="startTime"></span><br>
+    End: <span id="endTime"></span><br><br>
+    <p id="eventInfo"></p>
+</div>
+
+
+
+<!-- Modal Structure 
+<button data-target="modal1" class="btn modal-trigger">Modal</button>
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Modal Header</h4>
+      <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
+-->
+<script>
+//    document.addEventListener('DOMContentLoaded', function() {
+//        var options;
+//        var elems = document.querySelectorAll('.modal');
+//       var instances = M.Modal.init(elems, options);
+//    });
+
+    // Or with jQuery
+
+</script>
