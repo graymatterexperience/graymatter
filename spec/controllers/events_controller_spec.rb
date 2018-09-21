@@ -1,7 +1,9 @@
 require 'rails_helper'
+include SignIn
 
 RSpec.describe EventsController, type: :controller do
 
+    let (:event) { create(:event) }
   describe "GET #index" do
     it "returns http success" do
       get :index
@@ -18,7 +20,7 @@ RSpec.describe EventsController, type: :controller do
 
   describe "GET #edit" do
     it "returns http success" do
-      get :edit
+      get :edit, params: {id: event.id}
       expect(response).to have_http_status(:success)
     end
   end
@@ -32,14 +34,14 @@ RSpec.describe EventsController, type: :controller do
 
   describe "GET #update" do
     it "returns http success" do
-      get :update
+      get :update, params: {id: event.id}
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET #destroy" do
     it "returns http success" do
-      get :destroy
+      get :destroy, params: {id: event.id}
       expect(response).to have_http_status(:success)
     end
   end
