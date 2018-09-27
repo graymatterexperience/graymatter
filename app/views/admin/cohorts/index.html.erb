@@ -1,0 +1,50 @@
+<!-- Cohort Table -->
+<table class='highlight responsive-table'>
+    <thead>
+        <tr>
+            <th></th>
+            <th>Cohort Name</th>
+            <th>Cohort Color</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% if @cohorts.present? %>
+            <% @cohorts.each do |cohort| %>
+                <tr>
+                    <td>
+                        <% if cohort.settings.try(:[], 'avatar') %>
+                            <%= image_tag cohort.settings["avatar"], alt: 'Cohort Team Image' %>
+                        <% else %>
+                            <%= image_tag 'team2.jpg', alt: 'Cohort Team Image', class: 'cohort-image' %>
+                        <% end %>
+                    </td>
+                    <td>
+                        <%= cohort.name %>
+                    </td>
+                    <% if cohort.settings.try(:[], 'color') %>
+                        <td>
+                            <span style='color: #fff;
+                                background-color: <%= cohort.settings["color"] %>;
+                                padding: 5px;'>
+                                Cohort Color
+                            </span>
+                        </td>
+                    <% end%>
+                    <td>
+                        <%= link_to edit_admin_cohort_path(cohort) do %>
+                            <i class="material-icons green">edit</i>
+                        <% end %>
+                        <%= link_to admin_cohort_path(cohort),
+                            method: :delete,
+                            data: { confirm: 'Are you sure' } do %>
+                            <i class="material-icons red">delete_forever</i>
+                        <% end %>
+                    </td>
+                </tr>
+            <% end %>
+        <% else %>
+            <td colspan="4">Lets add a Cohort</td>
+        <% end %>
+    </tbody>
+</table>

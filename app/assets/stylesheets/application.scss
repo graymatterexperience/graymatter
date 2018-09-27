@@ -13,12 +13,19 @@
  * = require fullcalendar
  * = require daterangepicker
  * = require jquery-ui
+ * = require spectrum
  *= require_tree .
  *= require_self
  */
 
 @import "materialize";
 @import "font-awesome";
+
+html,
+body {
+  min-height: 100%;
+  display: contents;
+}
 
 .container {
   width: 95% !important;
@@ -31,6 +38,7 @@
 }
 
 .page-container {
+  //min-height: 60em;
   margin: 25px auto;
   width: 95% !important;
 }
@@ -43,9 +51,9 @@
 .padding-sm {
   padding: 5px;
 }
- .padding-md {
+.padding-md {
   padding: 10px;
 }
- .padding-lg {
+.padding-lg {
   padding: 20px;
 }

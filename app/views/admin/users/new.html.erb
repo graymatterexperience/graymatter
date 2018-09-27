@@ -1,0 +1,48 @@
+<div class="row">
+    <form class="col s12">
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="last_name" type="text" class="validate">
+                <label for="first_name">First Name</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="last_name" type="text" class="validate">
+                <label for="last_name">Last Name</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="password" type="password" class="validate">
+                <label for="password">Password</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="email" type="email" class="validate">
+                <label for="email">Email</label>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="">
+  <div class="">
+    <%= form_for(@user, url: signup_path) do |f| %>
+
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name, class: '' %>
+
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name, class: '' %>
+
+      <%= f.label :email %>
+      <%= f.email_field :email, class: '' %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password, class: '' %>
+
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation, class: '' %>
+
+      <%= f.submit "Create User", class: "" %>
+    <% end %>
+  </div>
+</div>

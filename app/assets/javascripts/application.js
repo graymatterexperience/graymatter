@@ -17,4 +17,5 @@
 //= require moment
 //= require daterangepicker
 //= require fullcalendar
+//= require spectrum
 //= require_tree .
