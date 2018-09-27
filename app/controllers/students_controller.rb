@@ -7,20 +7,15 @@ class StudentsController < ApplicationController
     @students = 8.times.map { |student| student_payload }
   end
 
-  def create
-  end
+  def create; end
 
-  def edit
-  end
+  def edit; end
 
-  def update
-  end
+  def update; end
 
-  def delete
-  end
+  def delete; end
 
-  def show
-  end
+  def show; end
 
   private
 
@@ -49,7 +44,7 @@ class StudentsController < ApplicationController
 
   def set_images
   # TODO remove below when data base set
-    @@images = %w[man-4 lady-4 man-1 man-2 lady-2 lady-3  man-3 lady-1 ]
+    @@images = %w[man-4 lady-4 man-1 man-2 lady-2 lady-3 man-3 lady-1]
   end
 
   def get_image

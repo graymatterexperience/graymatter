@@ -1,14 +1,11 @@
 class PagesController < ApplicationController
+  before_action :authorize
+
   def index
-    #TODO we want to move this to a before action
-    if logged_in?
-      @page_title = 'Home'
+      @show_buttons = true
       @page_title = 'Home'
       @pages_payload = pages_payload
       @tasks = todos.as_json
-    else
-      redirect_to login_url
-    end
   end
 
   private

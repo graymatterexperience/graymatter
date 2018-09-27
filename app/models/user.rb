@@ -2,35 +2,60 @@
 #
 # Table name: users
 #
-#  id              :bigint(8)        not null, primary key
-#  first_name      :string
-#  last_name       :string
-#  email           :string
-#  password_digest :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  role            :string
-#  reset_digest    :string
-#  reset_sent_at   :datetime
+#  id               :bigint(8)        not null, primary key
+#  first_name       :string
+#  last_name        :string
+#  email            :string
+#  password_digest  :string
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  role             :string
+#  reset_digest     :string
+#  reset_sent_at    :datetime
+#  cohort_id        :integer
+#  user_information :jsonb            not null
 #
 
 class User < ApplicationRecord
+  has_secure_password
   attr_accessor :reset_token
   before_save { self.email = email.downcase }
-
-  validates :first_name, presence: true, length: { maximum: 50 }
-  validates :last_name, presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
-  validates :email, presence: true, length: { maximum: 255 },
-            format: { with: VALID_EMAIL_REGEX },
-            uniqueness: { case_sensitive: false }
-  has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
 
-  has_many :posts, class_name: 'Post', foreign_key: :auther_id, primary_key: :id
+  validates :first_name, presence: true, length: {maximum: 50}
+  validates :last_name, presence: true, length: {maximum: 50}
+  validates :email, presence: true, length: {maximum: 255},
+                    format: {with: VALID_EMAIL_REGEX},
+                    uniqueness: {case_sensitive: false}
+  validates :password, presence: true, length: {minimum: 6}
+  validates :cohort_id, presence: true, if: -> { student? }
+
+  has_many :posts, class_name: "Post", foreign_key: :auther_id, primary_key: :id
+  #NOTES to get the conditional validates working I had to get rid of the cohort
+  #thing. Not sure if this will cause an issue or not
+  #I think this will be an issue when one trys user.cohort
+  #NOTES this is why you do not make ONE model for users. now say.. monetor can only
+  #belong to ONE cohort. admin can only belong to ONE cohort
+  belongs_to :cohort
 
   def user_tag
-    "@#{self.first_name} #{self.last_name}"
+    name.insert(0, '@')
+  end
+
+  def student?
+    role == 'student'
+  end
+
+  def admin?
+    role == 'admin'
+  end
+
+  def mentor?
+    role == 'mentor'
+  end
+
+  def name
+    "#{first_name} #{last_name}"
   end
 
   # Returns a random token
@@ -55,5 +80,3 @@ class User < ApplicationRecord
   #   reset_sent_at < 2.hours.ago
   # end
 end
-
-

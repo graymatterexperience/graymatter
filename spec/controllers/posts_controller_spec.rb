@@ -25,12 +25,13 @@ RSpec.describe PostsController, type: :controller do
     #TODO need to figure out the name thing I can not use first_name... what if there
     #are lots of pople named kim
     describe 'creates a new post' do
+      let(:cohort) { create(:cohort) }
       let(:user) { User.find_by_first_name('test') }
       let(:user2) { User.find_by_first_name('kim') }
 
       before do
-        create(:user)
-        create(:user_two)
+        create(:user, cohort_id: cohort.id)
+        create(:user_two, cohort_id: cohort.id)
         sign_in_user(user)
       end
 

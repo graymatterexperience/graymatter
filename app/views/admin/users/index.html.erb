@@ -1,0 +1,31 @@
+<!-- Student Table -->
+<table class='highlight responsive-table'>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Socail Media</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @students %>
+      <% @students.each do |student| %>
+        <tr>
+          <td><img src="<%= student['avatar'] %>" class="demo-avatar" ></td>
+          <td><%= student.name %></td>
+          <td><a href="mailto:<%= student['email'] %>"><%= student["email"] %></td>
+          <td><%= student["phone"] %></td>
+          <td>
+              <div id="linkedin">
+                  <%= link_to image_tag('linkedin.png',
+                                        class: 'btn-floating waves-effect waves-light'),
+                                        student["linkedin"], target: '_blank' %>
+              </div>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

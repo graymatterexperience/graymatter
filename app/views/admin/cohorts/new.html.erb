@@ -1,0 +1,79 @@
+<!--
+<div class="row">
+    <form class="col s12">
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="last_name" type="text" class="validate">
+                <label for="first_name">First Name</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="last_name" type="text" class="validate">
+                <label for="last_name">Last Name</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="password" type="password" class="validate">
+                <label for="password">Password</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="email" type="email" class="validate">
+                <label for="email">Email</label>
+            </div>
+        </div>
+    </form>
+</div>
+-->
+
+<div class="">
+    <div class="">
+        <%= form_for(@cohort, format: :json, url: admin_cohorts_path) do |f| %>
+
+        <%= f.label :name %>
+        <%= f.text_field :name, class: '' %>
+
+        <%= f.label :color %><br>
+        <%#= f.text_field :color, id: 'colorpicker'%>
+        <%= f.text_field :color, type: 'color', class: 'basic' %>
+
+
+        <div class='row'>
+            <div class='col m12 right-align'>
+                <%= f.submit "Add Cohort", class: 'btn btn-primary' %>
+            </div>
+        </div>
+
+        <% end %>
+    </div>
+</div>
+
+<!--
+        <input type='color' class='basic' value='#f594d0' />
+          <input id='colorpicker' />
+          -->
+<script>
+    $("#colorpicker").spectrum({
+        color: "#f00",
+        showPalette: true
+    });
+    $("#picker").spectrum({
+        color: tinycolor,
+        flat: bool,
+        showInput: bool,
+        showInitial: bool,
+        showAlpha: bool,
+        disabled: bool,
+        localStorageKey: string,
+        showPalette: bool,
+        showPaletteOnly: bool,
+        showSelectionPalette: bool,
+        clickoutFiresChange: bool,
+        cancelText: string,
+        chooseText: string,
+        className: string,
+        preferredFormat: string,
+        maxSelectionSize: int,
+        palette: [[string]],
+        selectionPalette: [string]
+    });
+</script>

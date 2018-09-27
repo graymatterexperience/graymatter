@@ -13,7 +13,7 @@
 
 class Post < ApplicationRecord
   belongs_to :auther,
-             class_name: 'User', 
+             class_name: 'User',
              foreign_key: :auther_id,
              primary_key: :id
 

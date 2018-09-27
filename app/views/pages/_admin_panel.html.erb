@@ -1,0 +1,26 @@
+<div class='admin-container grey lighten-3 z-depth-1'>
+    <span><%= link_to 'Cohorts',
+        admin_cohorts_path,
+        class: 'waves-effect waves-spanght btn blue' %>
+    </span>
+    <span><%= link_to 'Students',
+        admin_users_path,
+        class: 'waves-effect waves-spanght btn blue' %>
+    </span>
+    <span><%= link_to 'Mentors',
+        '#',
+        class: 'waves-effect waves-spanght btn blue' %>
+    </span>
+    <% if current_page?(admin_users_path) %>
+        <span><%= link_to 'Add Student',
+            new_admin_user_path,
+            class: 'waves-effect waves-spanght btn light-green accent-4' %>
+        </span>
+    <% end %>
+    <% if current_page?(admin_cohorts_path) %>
+        <span><%= link_to 'Add Cohort',
+            new_admin_cohort_path,
+            class: 'waves-effect waves-spanght btn light-green accent-4' %>
+        </span>
+    <% end %>
+</div>
