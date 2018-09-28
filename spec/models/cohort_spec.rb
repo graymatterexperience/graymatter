@@ -11,6 +11,6 @@ RSpec.describe Cohort, type: :model do
   end
 
   describe 'Association' do
-    it { should have_many(:users) }
+    it { should have_and_belong_to_many(:users) }
   end
 end

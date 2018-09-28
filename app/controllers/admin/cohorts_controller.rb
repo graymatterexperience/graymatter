@@ -1,10 +1,10 @@
 class Admin::CohortsController < ApplicationController
-  before_action :admin_authorize
+  before_action :admin_authorize,
+                :set_cohort
 
   def index
-    @show_buttons = false
     @page_title = 'Cohorts'
-    @cohorts = Cohort.all
+    @cohorts = Cohort.order(created_at: :desc)
   end
 
   def new
@@ -19,15 +19,37 @@ class Admin::CohortsController < ApplicationController
 
     if cohort.save
       flash[:success] = 'Your cohort has been created'
-      redirect_to home_path
+      redirect_to admin_cohorts_path
     else
       flash[:error] = 'invalid submission'
       render 'new'
     end
   end
 
-  def destroy
+  def edit
+    @page_title = 'Edit Cohort'
+    @cohort
+  end
 
+  def update
+    #TODO this is so ugly... have to fix this.  Has to be a way to pass the right
+    #params structure in rails
+    params[:cohort][:settings] = { color: params[:cohort][:color] }
+
+    if @cohort.update_attributes(cohort_params)
+      flash[:success] = 'Cohort updated'
+      redirect_to admin_cohorts_path
+    else
+      flash[:error] = 'invalid submission'
+      render 'edit'
+    end
+  end
+
+  def destroy
+    cohort = Cohort.find_by_id(params[:id])
+    cohort.destroy
+    flash[:success] = 'Cohort removed'
+    redirect_to admin_cohorts_path
   end
 
   private
@@ -36,6 +58,10 @@ class Admin::CohortsController < ApplicationController
     params.require(:cohort).permit(:name,
                                    settings: [
                                      :color
-                                   ])
+    ])
+  end
+
+  def set_cohort
+    @cohort = Cohort.find_by_id(params[:id])
   end
 end
