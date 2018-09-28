@@ -25,8 +25,7 @@ RSpec.describe Post, type: :model do
     it { should validate_presence_of(:body) }
 
     it 'expect a positive result' do
-      cohort = create(:cohort)
-      user = create(:user, cohort_id: cohort.id)
+      user = create(:user)
       expect(Post.new(title: 'Test title',
                       body: 'this is the test body',
                       user_tags: ['@user1'],

@@ -30,9 +30,9 @@ RSpec.describe PostsController, type: :controller do
       let(:user2) { User.find_by_first_name('kim') }
 
       before do
-        create(:user, cohort_id: cohort.id)
-        create(:user_two, cohort_id: cohort.id)
-        sign_in_user(user)
+        create(:user)
+        create(:user_two)
+        sign_in_user(user2)
       end
 
       it 'adds a post' do
@@ -40,7 +40,7 @@ RSpec.describe PostsController, type: :controller do
 
         expect {
           post :create, params: { post: post_params }
-        }.to change(user.posts, :count).by(1)
+        }.to change(user2.posts, :count).by(1)
         expect(subject.request.flash[:success]).to eq('Successfully created a question')
         expect(subject).to redirect_to( posts_path )
       end
@@ -51,7 +51,7 @@ RSpec.describe PostsController, type: :controller do
 
         expect {
           post :create, params: { post: post_params }
-        }.to change(user.posts, :count).by(0)
+        }.to change(user2.posts, :count).by(0)
         expect(subject.request.flash[:errors]).to eq('Something went wrong try again')
         expect(subject).to redirect_to( posts_path )
       end
@@ -61,7 +61,7 @@ RSpec.describe PostsController, type: :controller do
         post_params[:auther_id] = user.id
 
         post :create, params: { post: post_params }
-        test_user = User.first
+        test_user = User.find_by_first_name('kim')
         expect(test_user.posts.first.user_tags.length).to be(1)
         expect(test_user.posts.first.user_tags.first).to eq(user2.user_tag)
       end
@@ -73,7 +73,7 @@ RSpec.describe PostsController, type: :controller do
         post_params[:auther_id] = user.id
 
         post :create, params: { post: post_params }
-        test_user = User.first
+        test_user = User.find_by_first_name('kim')
         expect(test_user.posts.first.user_tags).to match(expected_result)
       end
 
