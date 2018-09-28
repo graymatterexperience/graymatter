@@ -25,7 +25,6 @@ RSpec.describe User, type: :model do
     it { should have_db_column(:email).of_type(:string) }
     it { should have_db_column(:password_digest).of_type(:string) }
     it { should have_db_column(:role).of_type(:string) }
-    it { should have_db_column(:cohort_id).of_type(:integer) }
     it { should have_db_column(:user_information).of_type(:jsonb) }
   end
 
@@ -33,54 +32,6 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:first_name) }
     it { should validate_presence_of(:last_name) }
     it { should validate_presence_of(:email) }
-    context 'cohort_id Validations based on users role' do
-      it 'expect positive, cohort_id to be preset, user IS student' do
-        create(:cohort)
-        student = User.new(
-          first_name: 'Aaron',
-          last_name: 'Summer',
-          email: 'aaron@email.com',
-          password: 'password',
-          role: 'student',
-          cohort_id: 1
-        )
-        expect(student).to be_valid
-      end
-
-      it 'expect negative result, cohort_id to be preset, user IS student' do
-        create(:cohort)
-        student = User.new(
-          first_name: 'Aaron',
-          last_name: 'Summer',
-          email: 'aaron@email.com',
-          password: 'password',
-          role: 'student'
-        )
-        expect(student).to_not be_valid
-      end
-
-      it 'expect negative, cohort_id to be preset, user NOT admin' do
-        student = User.new(
-          first_name: 'Aaron',
-          last_name: 'Summer',
-          email: 'aaron@email.com',
-          password: 'password',
-          role: 'mentor'
-        )
-        expect(student).to be_valid
-      end
-
-      it 'expect postive, cohort_id not expected, user IS admin' do
-        student = User.new(
-          first_name: 'Aaron',
-          last_name: 'Summer',
-          email: 'aaron@email.com',
-          password: 'password',
-          role: 'admin'
-        )
-        expect(student).to be_valid
-      end
-    end
   end
 
   describe 'Association' do
@@ -89,8 +40,7 @@ RSpec.describe User, type: :model do
   end
 
   describe 'model methods' do
-    let(:cohort) { create(:cohort) }
-    let(:user) { create(:user, cohort_id: cohort.id) }
+    let(:user) { create(:user) }
 
     describe 'return user tag' do
       it 'returns the user tag based on the users full name' do
