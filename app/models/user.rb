@@ -28,15 +28,9 @@ class User < ApplicationRecord
                     format: {with: VALID_EMAIL_REGEX},
                     uniqueness: {case_sensitive: false}
   validates :password, presence: true, length: {minimum: 6}
-  validates :cohort_id, presence: true, if: -> { student? }
 
-  has_many :posts, class_name: "Post", foreign_key: :auther_id, primary_key: :id
-  #NOTES to get the conditional validates working I had to get rid of the cohort
-  #thing. Not sure if this will cause an issue or not
-  #I think this will be an issue when one trys user.cohort
-  #NOTES this is why you do not make ONE model for users. now say.. monetor can only
-  #belong to ONE cohort. admin can only belong to ONE cohort
-  belongs_to :cohort
+  has_many :posts, class_name: 'Post', foreign_key: :auther_id, primary_key: :id
+  has_and_belongs_to_many :cohorts
 
   def user_tag
     name.insert(0, '@')

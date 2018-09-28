@@ -44,7 +44,6 @@ RSpec.describe User, type: :model do
           role: 'student',
           cohort_id: 1
         )
-        binding.pry
         expect(student).to be_valid
       end
 
@@ -86,7 +85,7 @@ RSpec.describe User, type: :model do
 
   describe 'Association' do
     it { should have_many(:posts) }
-    #it { should belong_to(:cohort) } SEE notes in users model
+    it { should have_and_belong_to_many(:cohorts) }
   end
 
   describe 'model methods' do

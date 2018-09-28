@@ -20,11 +20,15 @@
                         <% end %>
                     </td>
                     <td>
-                        <%= cohort.name %>
+                        <h6>
+                            <b>
+                                <%= cohort.name %>
+                            </b>
+                        </h6>
                     </td>
                     <% if cohort.settings.try(:[], 'color') %>
                         <td>
-                            <span style='color: #fff;
+                            <span class='z-depth-1' style='color: #fff;
                                 background-color: <%= cohort.settings["color"] %>;
                                 padding: 5px;'>
                                 Cohort Color
@@ -33,12 +37,12 @@
                     <% end%>
                     <td>
                         <%= link_to edit_admin_cohort_path(cohort) do %>
-                            <i class="material-icons green">edit</i>
+                            <i class="material-icons green z-depth-1 small-button">edit</i>
                         <% end %>
                         <%= link_to admin_cohort_path(cohort),
                             method: :delete,
-                            data: { confirm: 'Are you sure' } do %>
-                            <i class="material-icons red">delete_forever</i>
+                            data: { confirm: "Are you sure about deleting #{cohort.name}" } do %>
+                            <i class="material-icons red z-depth-1 small-button">delete_forever</i>
                         <% end %>
                     </td>
                 </tr>
