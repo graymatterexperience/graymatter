@@ -4,10 +4,12 @@
         <div class="card">
             <div class="card-image">
                 <%= image_tag student["information"]["avatar"], class: 'profile-img' %>
-                    <span class="card-title"><%= student["fullName"] %></span>
-                    <div class='row right'>
+                    <span class="card-title card-title-custom"><%= student["fullName"] %></span>
+                    <div class='row'>
                         <% student["information"]["socialMedia"].each do |media| %>
-                            <%= get_social_media(media) %>
+                            <span class='col student-card-social-media-container'>
+                                <%= get_social_media(media) %>
+                            </span>
                         <% end %>
                     </div>
             </div>

@@ -1,35 +1,6 @@
 Rails.application.routes.draw do
   root to: 'pages#index'
 
-  namespace :admin do
-    get 'users/new'
-  end
-
-  namespace :admin do
-    get 'users/create'
-  end
-
-  namespace :admin do
-    get 'users/edit'
-  end
-
-  namespace :admin do
-    get 'users/update'
-  end
-
-  namespace :admin do
-    get 'users/destroy'
-  end
-
-  namespace :admin do
-    get 'users/index'
-  end
-
-  namespace :admin do
-    get 'users/show'
-  end
-
-
   get 'helps/index'
 
   get 'message_boards/index'
@@ -56,7 +27,11 @@ Rails.application.routes.draw do
   resources :cohorts, :users
 
   namespace :admin do
-    resources :cohorts, :users
+    resources :cohorts
+  end
+
+  namespace :admin do
+    resources :users
   end
 
   # sessions 
@@ -67,8 +42,8 @@ Rails.application.routes.draw do
   # mentors
   get '/mentors', to: 'mentors#index'
 
-  get  '/signup',  to: 'users#new'
-  post '/signup', to: 'users#create'
+  #get  '/signup',  to: 'users#new'
+  #post '/signup', to: 'users#create'
 
   # students
   resources :posts

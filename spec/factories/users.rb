@@ -16,6 +16,19 @@
 #  user_information :jsonb            not null
 #
 
+user_information = {
+  'avatar' => 'fake_image.jpg',
+  'phone' => Faker::PhoneNumber.phone_number,
+  'school' => 'West Highschool',
+  'grade' => '11',
+  'social_media' => {
+    'instagram' => 'https://www.instagram.com/graymatterexp/',
+    'linkedin' => 'https://www.linkedin.com/company/the-gray-matter-experience/',
+    'twitter' => 'https://twitter.com/graymatterexp',
+    'facebook' => 'https://www.facebook.com/GrayMatterExp/'
+  }
+}
+
 FactoryGirl.define do
   factory :user do
     first_name 'test'
@@ -38,5 +51,14 @@ FactoryGirl.define do
     email 'jess@email.com'
     password 'password'
     role 'admin'
+  end
+
+  factory :student_params, class: User do
+    first_name Faker::Name.first_name
+    last_name Faker::Name.last_name
+    email Faker::Internet.email
+    password 'password'
+    role 'student'
+    user_information user_information
   end
 end

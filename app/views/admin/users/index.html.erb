@@ -1,31 +1,46 @@
 <!-- Student Table -->
 <table class='highlight responsive-table'>
-  <thead>
-    <tr>
-      <th></th>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Phone</th>
-      <th>Socail Media</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% if @students %>
-      <% @students.each do |student| %>
+    <thead>
         <tr>
-          <td><img src="<%= student['avatar'] %>" class="demo-avatar" ></td>
-          <td><%= student.name %></td>
-          <td><a href="mailto:<%= student['email'] %>"><%= student["email"] %></td>
-          <td><%= student["phone"] %></td>
-          <td>
-              <div id="linkedin">
-                  <%= link_to image_tag('linkedin.png',
-                                        class: 'btn-floating waves-effect waves-light'),
-                                        student["linkedin"], target: '_blank' %>
-              </div>
-          </td>
+            <th></th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Socail Media</th>
+            <th>Actions</th>
         </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+        <% if @students %>
+            <% @students.each do |student| %>
+                <tr>
+                    <% if student.user_information.try(:[], 'avatar').present? %>
+                        <td><%= image_tag student.user_information['avatar'], class: 'avatar-small z-depth-1' %></td>
+                    <% else %>
+                        <td><%= image_tag 'user.jpg', class: 'avatar-small z-depth-1' %></td>
+                    <% end %>
+                    <td><%= student.name %></td>
+                    <td><a href="mailto:<%= student['email'] %>"><%= student["email"] %></td>
+                        <td><%= student.user_information['phone'] %></td>
+                        <td>
+                            <div id="admin-social-media-container">
+                                <% student.user_information["social_media"].each do |media| %>
+                                    <%= get_social_media(media) %>
+                                <% end %>
+                            </div>
+                        </td>
+                        <td>
+                            <%= link_to edit_admin_user_path(student) do %>
+                                <i class="material-icons green z-depth-1 small-button">edit</i>
+                            <% end %>
+                            <%= link_to admin_user_path(student),
+                                method: :delete,
+                                data: { confirm: "Are you sure about deleting #{student.first_name}" } do %>
+                                <i class="material-icons red z-depth-1 small-button">delete_forever</i>
+                            <% end %>
+                        </td>
+                    </tr>
+                <% end %>
+            <% end %>
+        </tbody>
+    </table>
