@@ -1,53 +1,123 @@
 require 'rails_helper'
+include SignIn
 
 RSpec.describe Admin::UsersController, type: :controller do
-
-  describe "GET #new" do
-    it "returns http success" do
-      get :new
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET #create" do
-    it "returns http success" do
-      get :create
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET #edit" do
-    it "returns http success" do
-      get :edit
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET #update" do
-    it "returns http success" do
-      get :update
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET #destroy" do
-    it "returns http success" do
-      get :destroy
-      expect(response).to have_http_status(:success)
-    end
-  end
+  #TODO generate a password and email to the student
 
   describe "GET #index" do
-    it "returns http success" do
+    it 'returns http success' do
+      user = create(:admin_user)
+      sign_in_user(user)
       get :index
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe "GET #show" do
-    it "returns http success" do
-      get :show
+  describe 'GET #new' do
+    it 'returns http success' do
+      user = create(:admin_user)
+      sign_in_user(user)
+      get :new
       expect(response).to have_http_status(:success)
+    end
+  end
+
+  describe "Get #create" do
+    context 'user not logged in' do
+      it 'should be redirected to log in page' do
+        post :create, params: {}
+        expect(response).to redirect_to login_path
+        expect(subject.request.flash[:alert]).to eq("You must be logged in")
+      end
+    end
+
+    context 'user logged in' do
+      it 'not authorized to make this action' do
+        student = create(:user_two)
+        sign_in_user(student)
+        post :create, params: {}
+        expect(response).to redirect_to root_path
+        expect(subject.request.flash[:alert]).to eq("This operation not allowed")
+      end
+    end
+  end
+
+  describe "GET #create" do
+    before do
+      user = create(:admin_user)
+      sign_in_user(user)
+      @cohort = create(:cohort)
+    end
+    context 'as an authenticated admin' do
+      it "adds a student" do
+        student_params = FactoryGirl.attributes_for(:student_params)
+        student_params['cohort_ids'] = @cohort.id
+
+        expect {
+          post :create, params: { user: student_params }
+        }.to change(User.all, :count).by(1)
+
+        student = User.find_by_first_name(student_params[:first_name])
+        expect(subject.request.flash[:success])
+          .to eq("#{student.name.capitalize} has been added")
+        expect(@cohort.users).to include(student)
+        expect(student.user_information['grade']).to eq('11')
+        expect(student.user_information['social_media']['twitter'])
+          .to eq('https://twitter.com/graymatterexp')
+        expect(subject).to redirect_to(admin_users_path)
+      end
+    end
+  end
+
+  describe "PATCH #update" do
+    before do
+      @user = create(:admin_user)
+      sign_in_user(@user)
+      @cohort_one = create(:cohort)
+      @cohort_two = create(:cohort_two)
+    end
+
+    context 'as an authenticated amdin' do
+      it "updated student" do
+        student_model = create(:student_params)
+        student_model.cohort_ids = @cohort_one.id
+
+        student_params = attributes_for(:student_params)
+        student_params[:first_name] = 'Fake'
+        student_params[:last_name] = 'Name'
+        student_params[:user_information]['phone'] = '312-321-4321'
+        student_params[:user_information]['social_media']['twitter'] = 'www.google.com'
+
+        patch :update, params: { id: student_model.id, user: student_params }
+        student = User.find_by_first_name(student_params[:first_name])
+        expect(@cohort_one.users).to include(student)
+        expect(subject.request.flash[:success])
+          .to eq("#{student.name.capitalize} has been updated")
+        expect(student.first_name).to eq('Fake')
+        expect(student.last_name).to eq('Name')
+        expect(student.user_information['social_media']['twitter'])
+          .to eq('www.google.com')
+        expect(subject).to redirect_to(admin_users_path)
+      end
+    end
+
+    context 'as an authenticated amdin' do
+      it "changes a students cohort" do
+        student_model = create(:student_params)
+        student_model.cohort_ids = @cohort_one.id
+        expect(@cohort_one.users).to include(student_model)
+
+        student_params = attributes_for(:student_params)
+        student_params['cohort_ids'] = @cohort_two.id
+
+        patch :update, params: { id: student_model.id, user: student_params }
+        student = User.find_by_first_name(student_params[:first_name])
+        expect(@cohort_one.users).to_not include(student)
+        expect(@cohort_two.users).to include(student)
+        expect(subject.request.flash[:success])
+          .to eq("#{student.name.capitalize} has been updated")
+        expect(subject).to redirect_to(admin_users_path)
+      end
     end
   end
 

@@ -6,6 +6,19 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 #
+cohort1 = Cohort.create!({
+  name: 'Cohort One',
+  settings: {
+    color: 'red'
+  }
+})
+
+cohort2 = Cohort.create!({
+  name: 'Cohort two',
+  settings: {
+    color: 'Blue'
+  }
+})
 
 User.create!({
   first_name: 'pam',
@@ -14,6 +27,66 @@ User.create!({
   password: 'password',
   role: 'admin'
 })
+
+user1 = User.create!({
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  email: Faker::Internet.email,
+  password: 'password',
+  role: 'student',
+  user_information: {
+    avatar: Faker::Avatar.image("my-own-slug", "50x50"),
+    phone: Faker::PhoneNumber.phone_number,
+    school: 'West Highschool',
+    grade: '11',
+    social_media: {
+      instagram: 'https://www.instagram.com/graymatterexp/',
+      linkedin: 'https://www.linkedin.com/company/the-gray-matter-experience/',
+      twitter: 'https://twitter.com/graymatterexp',
+      facebook: 'https://www.facebook.com/GrayMatterExp/'
+    }
+  }
+})
+user1.cohort_ids = cohort1.id
+
+user2 = User.create!({
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  email: Faker::Internet.email,
+  password: 'password',
+  role: 'student',
+  user_information: {
+    avatar: Faker::Avatar.image("my-own-slug", "50x50"),
+    phone: Faker::PhoneNumber.phone_number,
+    school: 'West Highschool',
+    grade: '11',
+    social_media: {
+      instagram: 'https://www.instagram.com/graymatterexp/',
+      linkedin: 'https://www.linkedin.com/company/the-gray-matter-experience/'
+    }
+  }
+})
+
+user2.cohort_ids = cohort1.id
+
+user3 = User.create!({
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  email: Faker::Internet.email,
+  password: 'password',
+  role: 'student',
+  user_information: {
+    avatar: Faker::Avatar.image("my-own-slug", "50x50"),
+    phone: Faker::PhoneNumber.phone_number,
+    school: 'West Highschool',
+    grade: '11',
+    social_media: {
+      instagram: 'https://www.instagram.com/graymatterexp/',
+    }
+  }
+})
+
+user2.cohort_ids = cohort2.id
 
 20.times do 
   event = Event.new

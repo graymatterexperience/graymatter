@@ -1,4 +1,5 @@
-class Admin::CohortsController < ApplicationController
+class Admin::CohortsController < Admin::ApplicationController
+  include ApplicationHelper
   before_action :admin_authorize,
                 :set_cohort
 
@@ -14,6 +15,7 @@ class Admin::CohortsController < ApplicationController
 
   def create
     # TODO I HATE this below have to figure out how to use a form to get json
+    # I have a fix for this
     cohort = Cohort.new(cohort_params)
     cohort.settings = { color: params[:cohort][:color] }
 

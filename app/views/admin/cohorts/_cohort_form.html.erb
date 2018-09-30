@@ -11,6 +11,10 @@
                         <%#= f.text_field :color, id: 'colorpicker'%>
                         <%= f.text_field :color, type: 'color', class: 'basic' %>
                     </div>
+                    <%= f.fields_for :settings do |p| %>
+                        <%= p.label :color %><br>
+                        <%= p.text_field :color, class: '' %>
+                    <% end %>
                     <div class="card-action">
                         <div class='right-align'>
                             <%= f.submit 'Submit', class: 'btn light-green accent-4' %>

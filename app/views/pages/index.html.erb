@@ -118,10 +118,12 @@
         </div>
     </div>
 
-    <div class='row' style="margin-top: 30px">
+    <div class='row'>
         <% @pages_payload.each do |media| %>
-            <%= get_social_media(media) %>
-                <% end %>
+            <span>
+                <%= get_social_media(media) %>
+            </span>
+        <% end %>
     </div>
 
 </div>

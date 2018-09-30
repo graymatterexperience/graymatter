@@ -81,14 +81,14 @@ RSpec.describe Admin::CohortsController, type: :controller do
       @cohort = create(:cohort)
     end
 
-    it 'as an authorized admin removes a cohort' do
+    it 'as an authorized admin updates a cohort' do
       admin_user = create(:admin_user)
       sign_in_user(admin_user)
       cohort_params = {
         name: 'new cohort name',
         color: 'green'
       }
-      delete :update, params: { id: @cohort.id, cohort: cohort_params }
+      patch :update, params: { id: @cohort.id, cohort: cohort_params }
       updated_cohort = Cohort.find_by_id(@cohort.id)
       expect(updated_cohort.name).to eq('new cohort name')
       expect(updated_cohort.settings['color']).to eq('green')
