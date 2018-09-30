@@ -53,6 +53,10 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def archived?
+    archive == true
+  end
+
   # Returns a random token
   # def User.new_token
   #   SecureRandom.urlsafe_base64

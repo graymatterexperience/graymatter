@@ -53,6 +53,14 @@ RSpec.describe User, type: :model do
         expect(user.name).to eq('test name')
       end
     end
+
+    describe '#archived?' do
+      it 'expect archive to be true' do
+        user.archive = true
+        user.save!
+        expect(user.archived?).to be(true)
+      end
+    end
   end
 
 end

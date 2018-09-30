@@ -7,6 +7,8 @@ RSpec.describe StudentsHelper, type: :helper do
       let(:inValid_arg) { ["myspace", "www.myspace.com"] }
       let(:inValid_arg_two) { [nil, "www.myspace.com"] }
       let(:inValid_arg_three) { ["twitter", nil] }
+      let(:inValid_arg_three) { [nil, nil] }
+      let(:inValid_arg_four) { ["", ""] }
         
       it "expect valid response HTML safe string for facebook" do
         response = get_social_media(valid_arg)
@@ -22,11 +24,18 @@ RSpec.describe StudentsHelper, type: :helper do
         expect(response).to be(nil)
       end
 
-      it "expect to a url to a error partial" do
+      it "expect to recieve a nil" do
         response = get_social_media(inValid_arg_three)
 
         # TODO must rendor a a partial with someting like wrong address check the address
-        expect(response).to match("a href=\"www.FIXTHIS.com\"")
+        expect(response).to be(nil)
+      end
+
+      it "expect to recieve a nil" do
+        response = get_social_media(inValid_arg_four)
+
+        # TODO must rendor a a partial with someting like wrong address check the address
+        expect(response).to be(nil)
       end
     end
   end

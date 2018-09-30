@@ -1,3 +1,4 @@
+# NOTES this method will return nil if nothing can evaulated
 module StudentsHelper
   def get_social_media(socialMedia)
     social_media_icons = {
@@ -12,10 +13,9 @@ module StudentsHelper
       tag.span(id: 'social-media-container', class: 'social-media-icon') do
         content_tag(:a, image_tag(social_media_icons[socialMedia[0]],
                                   class: socialMedia[0]),
-                                  href: socialMedia[1] || 'www.FIXTHIS.com',
+                                  href: socialMedia[1],
                                   target: '_blank')
       end
     end
-
   end
 end
