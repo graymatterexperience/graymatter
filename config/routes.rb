@@ -32,7 +32,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users
+    post '/archive/:id', to: 'users#archive_student', as: 'archive'
   end
+
 
   # sessions 
   get    '/login',   to: 'sessions#new'

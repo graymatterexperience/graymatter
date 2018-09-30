@@ -24,8 +24,10 @@
                         <td><%= student.user_information['phone'] %></td>
                         <td>
                             <div id="admin-social-media-container">
-                                <% student.user_information["social_media"].each do |media| %>
-                                    <%= get_social_media(media) %>
+                                <% if student.user_information.try(:[], 'social_media').present? %>
+                                    <% student.user_information["social_media"].each do |media| %>
+                                        <%= get_social_media(media) %>
+                                    <% end %>
                                 <% end %>
                             </div>
                         </td>
@@ -33,9 +35,9 @@
                             <%= link_to edit_admin_user_path(student) do %>
                                 <i class="material-icons green z-depth-1 small-button">edit</i>
                             <% end %>
-                            <%= link_to admin_user_path(student),
-                                method: :delete,
-                                data: { confirm: "Are you sure about deleting #{student.first_name}" } do %>
+                            <%= link_to admin_archive_path(student),
+                                method: :student_archive,
+                                data: { confirm: "Are you sure about archive #{student.first_name}" } do %>
                                 <i class="material-icons red z-depth-1 small-button">delete_forever</i>
                             <% end %>
                         </td>

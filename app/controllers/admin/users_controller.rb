@@ -5,7 +5,10 @@ class Admin::UsersController < Admin::ApplicationController
 
   def index
     @page_title = 'Students'
-    @students = User.select(&:student?)
+    #@students = User.select(&:student?)
+    students = User.all
+    @students = students.select { |student| student.student? &&
+                                  !student.archived? }
   end
 
   def new
@@ -33,13 +36,11 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def update
-    student = User.find_by_id(params[:id])
-
     #NOTE Currently student can only belong to ONE cohort
-    remove_student_from_cohort(student) if params["user"]["cohort_ids"].present?
+    remove_student_from_cohort(@student) if params["user"]["cohort_ids"].present?
 
-    if student.update_attributes(user_params)
-      flash[:success] = "#{student.name.capitalize} has been updated"
+    if @student.update_attributes(user_params)
+      flash[:success] = "#{@student.name.capitalize} has been updated"
       redirect_to admin_users_path
     else
       flash[:error] = 'Something went wrong'
@@ -48,6 +49,17 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def destroy; end
+
+  def archive_student
+    @student.archive = true
+    if @student.save
+      flash[:success] = "#{@student.name.capitalize} has been Archived"
+      redirect_to admin_users_path
+    else
+      flash[:error] = 'Something went wrong'
+      render 'edit'
+    end
+  end
 
   private
 
