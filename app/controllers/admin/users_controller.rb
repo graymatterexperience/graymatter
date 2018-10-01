@@ -4,11 +4,28 @@ class Admin::UsersController < Admin::ApplicationController
                 :set_user
 
   def index
+    # I need to change this table too has_many through. I think that will solve
+    # my issues with group_by
+    # NOTES can I do all this modifications in serializor
+    # t.name.split(' ').join('_').to_sym
+    #FIXME OMG I want to puke on the below line of code
+    # this is such HACK
     @page_title = 'Students'
-    #@students = User.select(&:student?)
-    students = User.all
-    @students = students.select { |student| student.student? &&
-                                  !student.archived? }
+    # FIXME this is SO ugly.. wow...
+    @cohorts_groups = Cohort.all
+    #students = User.all
+    #@students = students.select { |student| student.student? &&
+                                  #!student.archived? }
+
+    #@cohorts = Cohort.all.map { |x| {x.name => x.users} }.flatten
+    #Cohort.all.group_by { |x| x.collect(&:users) }
+    #@cohorts = @cohorts_groups.group_by { |k| {k.name => k.users} }
+
+    @cohorts = Cohort.all.collect(&:users)
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @cohorts }
+    end
   end
 
   def new
