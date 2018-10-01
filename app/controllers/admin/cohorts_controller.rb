@@ -17,7 +17,7 @@ class Admin::CohortsController < Admin::ApplicationController
     # TODO I HATE this below have to figure out how to use a form to get json
     # I have a fix for this
     cohort = Cohort.new(cohort_params)
-    cohort.settings = { color: params[:cohort][:color] }
+    #cohort.settings = { color: params[:cohort][:color] }
 
     if cohort.save
       flash[:success] = 'Your cohort has been created'

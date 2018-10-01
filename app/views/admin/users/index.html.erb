@@ -13,7 +13,7 @@
 <% @cohorts.each do |cohort| %>
     <table id='<%= cohort.empty? ? 'empty' :
         cohort.first.cohorts[0].name.split(' ').join('-') %>'
-                           class='highlight responsive-table'>
+                           class='highlight responsive-table divider-line'>
         <thead>
             <tr>
                 <!-- FIXME OMG I want to puke on the below line of code -->
@@ -64,5 +64,4 @@
                 <% end %>
             </tbody>
         </table>
-        <div class="mb-l"></div>
     <% end %>
