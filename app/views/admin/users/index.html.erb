@@ -1,23 +1,42 @@
 <!-- Student Table -->
-<table class='highlight responsive-table'>
-    <thead>
-        <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Socail Media</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% if @students %>
-            <% @students.each do |student| %>
+<% @cohorts_groups.each do |cohort| %>
+    <div onclick="toggle_cohort_div('<%= cohort.name.split(' ').join('-') %>');"
+        class='chip z-depth-1'
+        style='background-color: <%= cohort.settings["color"].downcase %>'>
+        <%= cohort.name %>
+        <i class="close material-icons">close</i>
+    </div>
+<% end %>
+
+<div class="mb-m"></div>
+
+<% @cohorts.each do |cohort| %>
+    <table id='<%= cohort.empty? ? 'empty' :
+        cohort.first.cohorts[0].name.split(' ').join('-') %>'
+                           class='highlight responsive-table'>
+        <thead>
+            <tr>
+                <!-- FIXME OMG I want to puke on the below line of code -->
+                <th style='color: <%= cohort.empty? ? '#ccc' :
+                    cohort.first.cohorts[0].settings["color"]
+                    .downcase %>'><%= cohort.empty? ? 'No students' :
+                    cohort.first.cohorts[0].name %></th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Socail Media</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% cohort.each do |student| %>
                 <tr>
                     <% if student.user_information.try(:[], 'avatar').present? %>
-                        <td><%= image_tag student.user_information['avatar'], class: 'avatar-small z-depth-1' %></td>
+                        <td><%= image_tag student.user_information['avatar'],
+                            class: 'avatar-small z-depth-1' %></td>
                     <% else %>
-                        <td><%= image_tag 'user.jpg', class: 'avatar-small z-depth-1' %></td>
+                        <td><%= image_tag 'user.jpg',
+                            class: 'avatar-small z-depth-1' %></td>
                     <% end %>
                     <td><%= student.name %></td>
                     <td><a href="mailto:<%= student['email'] %>"><%= student["email"] %></td>
@@ -43,6 +62,7 @@
                         </td>
                     </tr>
                 <% end %>
-            <% end %>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+        <div class="mb-l"></div>
+    <% end %>
