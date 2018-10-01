@@ -26,7 +26,9 @@ RSpec.describe Admin::CohortsController, type: :controller do
       sign_in_user(user)
       post_params = {
         name: 'red jacks',
-        color: 'red'
+        settings: {
+          color: 'red'
+        }
       }
 
       expect {

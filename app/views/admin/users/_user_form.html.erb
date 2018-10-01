@@ -36,8 +36,10 @@
             <br>
             <div class="row">
                 <div class="input-field col s12 m6">
-                    <%= f.label :cohort_ids, "Cohort" %>
-                    <%= f.text_field :cohort_ids, class: '' %>
+                    <div class="input-field col s12">
+                        <%= f.select :cohort_ids, Cohort.all.map { |p| [ p.name, p.id ] } %>
+                        <label>Cohort Seletcion</label>
+                    </div>
                 </div>
                 <div class="input-field col s12 m6">
                     <%= f.label :role, "Role" %>

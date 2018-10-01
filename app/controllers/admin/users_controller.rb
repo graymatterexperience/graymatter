@@ -10,18 +10,20 @@ class Admin::UsersController < Admin::ApplicationController
     # t.name.split(' ').join('_').to_sym
     #FIXME OMG I want to puke on the below line of code
     # this is such HACK
-    @page_title = 'Students'
-    # FIXME this is SO ugly.. wow...
-    @cohorts_groups = Cohort.all
     #students = User.all
     #@students = students.select { |student| student.student? &&
                                   #!student.archived? }
-
     #@cohorts = Cohort.all.map { |x| {x.name => x.users} }.flatten
     #Cohort.all.group_by { |x| x.collect(&:users) }
     #@cohorts = @cohorts_groups.group_by { |k| {k.name => k.users} }
+    # I want a key with cohort name with the value being the students that belong
+    # to that cohort (should be easy????)
 
+    @page_title = 'Students'
+    # FIXME this is SO ugly.. wow...
+    @cohorts_groups = Cohort.all
     @cohorts = Cohort.all.collect(&:users)
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @cohorts }
@@ -36,13 +38,12 @@ class Admin::UsersController < Admin::ApplicationController
   def create
     @student = User.new(user_params)
 
+    binding.pry
     if @student.save
-      #binding.pry
       @student.cohort_ids = params["user"]["cohort_ids"]
       flash[:success] = "#{@student.name.capitalize} has been added"
       redirect_to admin_users_path
     else
-
       flash[:error] = 'Something went wrong'
       render 'new'
     end
