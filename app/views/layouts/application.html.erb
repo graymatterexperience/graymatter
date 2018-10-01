@@ -122,7 +122,7 @@
             </div>
         </main>
 
-        <% unless current_user.admin? %>
+        <% unless logged_in? && current_user.admin? %>
             <div class="view-graymatter-button">
                 <a href="http://www.graymatterexperience.com/" target="_blank" id="view-graymatter" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Gray Matter Experience</a>
             </div>
