@@ -71,19 +71,19 @@
                         <%= info.fields_for :social_media do |media| %>
                             <div class="input-field col s12 m3">
                                 <%= media.label :instagram %>
-                                <%= media.text_field :instagram, class: '', value: @student.user_information.try(:[], "social_media").try(:[], "instagram") %>
+                                <%= media.text_field :instagram, class: '', value: @student.user_information.try(:[], "social_media").try(:[], "instagram") || "https://" %>
                             </div>
                             <div class="input-field col s12 m3">
                                 <%= media.label :linkedin %>
-                                <%= media.text_field :linkedin, class: '', value: @student.user_information.try(:[], "social_media").try(:[], "linkedin") %>
+                                <%= media.text_field :linkedin, class: '', value: @student.user_information.try(:[], "social_media").try(:[], "linkedin") || "https://" %>
                             </div>
                             <div class="input-field col s12 m3">
                                 <%= media.label :twitter %>
-                                <%= media.text_field :twitter, class: '', value: @student.user_information.try(:[], "social_media").try(:[], "twitter") %>
+                                <%= media.text_field :twitter, class: '', value: @student.user_information.try(:[], "social_media").try(:[], "twitter") || "https://" %>
                             </div>
                             <div class="input-field col s12 m3">
                                 <%= media.label :facebook %>
-                                <%= media.text_field :facebook, class: '', value: @student.user_information.try(:[], "social_media").try(:[], "facebook") %>
+                                <%= media.text_field :facebook, class: '', value: @student.user_information.try(:[], "social_media").try(:[], "facebook") || "https://" %>
                             </div>
                         <% end %>
                     </div>

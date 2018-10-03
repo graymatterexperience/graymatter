@@ -31,41 +31,46 @@
         </thead>
         <tbody>
             <% cohort.each do |student| %>
-                <tr>
-                    <% if student.user_information.try(:[], 'avatar').present? %>
-                        <td><%= image_tag student.user_information['avatar'],
-                            class: 'avatar-small z-depth-1' %></td>
-                    <% else %>
-                        <td><%= image_tag 'user.jpg',
-                            class: 'avatar-small z-depth-1' %></td>
-                    <% end %>
-                    <td><%= student.name %></td>
-                    <td><a href="mailto:<%= student['email'] %>"><%= student["email"] %></td>
-                        <td>
-                            <div id="admin-social-media-container">
-                                <% if student.user_information.try(:[], 'social_media').present? %>
-                                    <% student.user_information["social_media"].each do |media| %>
-                                        <%= get_social_media(media) %>
+                <!-- FIXME this is so ugly.. fix this, this payload should already not
+                include archived users -->
+                <% if !student.archive %>
+                    <tr>
+                        <% if student.user_information.try(:[], 'avatar').present? %>
+                            <td><%= image_tag student.user_information['avatar'],
+                                class: 'avatar-small z-depth-1' %></td>
+                        <% else %>
+                            <td><%= image_tag 'user.jpg',
+                                class: 'avatar-small z-depth-1' %></td>
+                        <% end %>
+                        <td><%= student.name %></td>
+                        <td><a href="mailto:<%= student['email'] %>"><%= student["email"] %></td>
+                            <td>
+                                <div id="admin-social-media-container">
+                                    <% if student.user_information.try(:[], 'social_media').present? %>
+                                        <% student.user_information["social_media"].each do |media| %>
+                                            <%= get_social_media(media) %>
+                                        <% end %>
                                     <% end %>
-                                <% end %>
-                            </div>
-                        </td>
-                        <td>
+                                </div>
+                            </td>
+                            <td>
 
-                            <%= link_to edit_admin_user_path(student) do %>
-                                <i class="material-icons green z-depth-1 small-button">edit</i>
-                            <% end %>
-                            <%= link_to admin_archive_path(student),
-                                method: :student_archive,
-                                data: { confirm: "Are you sure about archive #{student.first_name}" } do %>
-                                <i class="material-icons red z-depth-1 small-button">delete_forever</i>
-                            <% end %>
-                            <i onclick="displayStudentInformation('<%= student.id %>');" class="material-icons blue z-depth-1 small-button">expand_more</i>
-                        </td>
-                    </tr>
-                    <tr id='<%= student.id %>'class='student-info'
-                        style='display: none'>
-                    </tr>
+                                <%= link_to edit_admin_user_path(student) do %>
+                                    <i class="material-icons green z-depth-1 small-button">edit</i>
+                                <% end %>
+                                <%= link_to admin_archive_path(student),
+                                    method: :student_archive,
+                                    data: { confirm: "Are you sure about archive #{student.first_name}" } do %>
+                                    <i class="material-icons red z-depth-1 small-button">delete_forever</i>
+                                <% end %>
+                                <i onclick="displayStudentInformation('<%= student.id %>');" class="material-icons blue z-depth-1 small-button">expand_more</i>
+                            </td>
+                        </tr>
+                        <tr id='<%= student.id %>'class='student-info'
+                            style='display: none'>
+                        </tr>
+
+                    <% end %>
                 <% end %>
             </tbody>
         </table>

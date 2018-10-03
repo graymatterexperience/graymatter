@@ -30,6 +30,8 @@ class Admin::UsersController < Admin::ApplicationController
     @page_title = 'Students'
     # FIXME this is SO ugly.. wow...
     @cohorts_groups = Cohort.all
+
+    # FIXME This need to pluck only the users that are not archived
     @cohorts = Cohort.all.collect(&:users)
 
     respond_to do |format|
