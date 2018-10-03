@@ -1,7 +1,6 @@
 <!-- Student Table -->
 <% @cohorts_groups.each do |cohort| %>
-    <div
-        class='chip z-depth-1'
+    <div class='chip z-depth-1'
         style='background-color: <%= cohort.settings["color"].downcase %>'>
         <%= cohort.name %>
         <i onclick="toggle_cohort_div('<%= cohort.name.split(' ').join('-') %>');" class="close material-icons">close</i>
@@ -26,7 +25,6 @@
                     cohort.first.cohorts[0].name %></th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Phone</th>
                 <th>Socail Media</th>
                 <th>Actions</th>
             </tr>
@@ -43,7 +41,6 @@
                     <% end %>
                     <td><%= student.name %></td>
                     <td><a href="mailto:<%= student['email'] %>"><%= student["email"] %></td>
-                        <td><%= student.user_information['phone'] %></td>
                         <td>
                             <div id="admin-social-media-container">
                                 <% if student.user_information.try(:[], 'social_media').present? %>
@@ -54,6 +51,7 @@
                             </div>
                         </td>
                         <td>
+
                             <%= link_to edit_admin_user_path(student) do %>
                                 <i class="material-icons green z-depth-1 small-button">edit</i>
                             <% end %>
@@ -62,7 +60,11 @@
                                 data: { confirm: "Are you sure about archive #{student.first_name}" } do %>
                                 <i class="material-icons red z-depth-1 small-button">delete_forever</i>
                             <% end %>
+                            <i onclick="displayStudentInformation('<%= student.id %>');" class="material-icons blue z-depth-1 small-button">expand_more</i>
                         </td>
+                    </tr>
+                    <tr id='<%= student.id %>'class='student-info'
+                        style='display: none'>
                     </tr>
                 <% end %>
             </tbody>
