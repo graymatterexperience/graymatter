@@ -3,6 +3,14 @@ class Admin::UsersController < Admin::ApplicationController
   before_action :admin_authorize,
                 :set_user
 
+  def show
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @student }
+    end
+
+  end
+
   def index
     # I need to change this table too has_many through. I think that will solve
     # my issues with group_by

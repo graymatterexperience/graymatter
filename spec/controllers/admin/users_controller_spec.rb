@@ -121,6 +121,26 @@ RSpec.describe Admin::UsersController, type: :controller do
     end
   end
 
+  describe "GET #show" do
+    before do
+      @user = create(:admin_user)
+      sign_in_user(@user)
+      @student = create(:user_two)
+    end
+
+    context 'as an authenticated amdin' do
+      it "responds with JSON formatted output" do
+
+        post :show, format: :json,
+             params: { id: @student.id }
+
+        result = JSON.parse(response.body)
+        expect(response.content_type).to eq('application/json')
+        expect(result["first_name"]).to eq(@student.first_name)
+      end
+    end
+  end
+
   describe "PATCH #archive_student" do
     before do
       @user = create(:admin_user)
