@@ -1,25 +1,28 @@
 <!-- Student Table -->
 <% @cohorts_groups.each do |cohort| %>
-    <div onclick="toggle_cohort_div('<%= cohort.name.split(' ').join('-') %>');"
+    <div
         class='chip z-depth-1'
         style='background-color: <%= cohort.settings["color"].downcase %>'>
         <%= cohort.name %>
-        <i class="close material-icons">close</i>
+        <i onclick="toggle_cohort_div('<%= cohort.name.split(' ').join('-') %>');" class="close material-icons">close</i>
     </div>
 <% end %>
+
+<div id="clear-filter-chip" onclick='clear_filter()' class='chip z-depth-1 clear-chip'>Clear Filter</div>
 
 <div class="mb-m"></div>
 
 <% @cohorts.each do |cohort| %>
-    <table id='<%= cohort.empty? ? 'empty' :
-        cohort.first.cohorts[0].name.split(' ').join('-') %>'
-                           class='highlight responsive-table divider-line'>
-        <thead>
-            <tr>
-                <!-- FIXME OMG I want to puke on the below line of code -->
-                <th style='color: <%= cohort.empty? ? '#ccc' :
-                    cohort.first.cohorts[0].settings["color"]
-                    .downcase %>'><%= cohort.empty? ? 'No students' :
+    <div class="card">
+        <table id='<%= cohort.empty? ? 'empty' :
+            cohort.first.cohorts[0].name.split(' ').join('-') %>'
+            class='highlight responsive-table'>
+            <thead>
+                <tr>
+                    <!-- FIXME OMG I want to puke on the below line of code -->
+                    <th style='color: <%= cohort.empty? ? '#ccc' :
+                        cohort.first.cohorts[0].settings["color"]
+                        .downcase %>'><%= cohort.empty? ? 'No students' :
                     cohort.first.cohorts[0].name %></th>
                 <th>Name</th>
                 <th>Email</th>
@@ -64,4 +67,5 @@
                 <% end %>
             </tbody>
         </table>
-    <% end %>
+    </div>
+<% end %>
