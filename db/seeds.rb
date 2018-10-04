@@ -88,6 +88,60 @@ user3 = User.create!({
 
 user2.cohort_ids = cohort2.id
 
+mentor1 = User.create!({
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  email: Faker::Internet.email,
+  password: 'password',
+  role: 'mentor',
+  user_information: {
+    avatar: Faker::Avatar.image("my-own-slug", "50x50"),
+    phone: Faker::PhoneNumber.phone_number,
+    company: Faker::Company.name,
+    specialty: Faker::Company.industry,
+    company_logo: Faker::Compnay.logo
+    social_media: {
+      instagram: 'https://www.instagram.com/graymatterexp/',
+    }
+  }
+})
+
+mentor2 = User.create!({
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  email: Faker::Internet.email,
+  password: 'password',
+  role: 'mentor',
+  user_information: {
+    avatar: 'User_Avatar_2.png',
+    phone: Faker::PhoneNumber.phone_number,
+    company: Faker::Company.name,
+    specialty: Faker::Company.industry,
+    company_logo: Faker::Compnay.logo
+    social_media: {
+      instagram: 'https://www.instagram.com/graymatterexp/',
+    }
+  }
+})
+
+mentor3 = User.create!({
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  email: Faker::Internet.email,
+  password: 'password',
+  role: 'mentor',
+  user_information: {
+    avatar: 'User_Avatar_2.png',
+    phone: Faker::PhoneNumber.phone_number,
+    company: Faker::Company.name,
+    specialty: Faker::Company.industry,
+    company_logo: Faker::Company.logo
+    social_media: {
+      instagram: 'https://www.instagram.com/graymatterexp/',
+    }
+  }
+})
+
 20.times do 
   event = Event.new
   event.title = Faker::Book.title

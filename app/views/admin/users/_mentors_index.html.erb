@@ -1,0 +1,63 @@
+<!-- Mentors Table -->
+<% if @mentors.empty? %>
+    <p>No mentors</p>
+<% else %>
+    <table class='highlight responsive-table'>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Company</th>
+                <th>Specialty</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>LinkedIn</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <% @mentors.each do |mentor| %>
+            <tbody>
+                <!-- FIXME this is so ugly.. fix this, this payload should already not
+                include archived users -->
+                <tr>
+                    <% if mentor.user_information.try(:[], 'avatar').present? %>
+                        <td><%= image_tag mentor.user_information['avatar'],
+                            class: 'avatar-small z-depth-1' %></td>
+                    <% else %>
+                        <td><%= image_tag 'user.jpg',
+                            class: 'avatar-small z-depth-1' %></td>
+                    <% end %>
+                    <td><%= mentor.name %></td>
+                    <td><%= mentor.user_information['company'] %></td>
+                    <td><%= mentor.user_information['specialty'] %></td>
+                    <td><a href="mailto:<%= mentor['email'] %>"><%= mentor["email"] %></td>
+                        <td><%= mentor.user_information['phone'] %></td>
+                        <td>
+                            <div id="admin-social-media-container">
+                                <% if mentor.user_information.try(:[], 'social_media').present? %>
+                                    <% mentor.user_information["social_media"].each do |media| %>
+                                        <%= get_social_media(media) %>
+                                    <% end %>
+                                <% end %>
+                            </div>
+                        </td>
+                        <td>
+
+                            <%= link_to edit_admin_user_path(mentor) do %>
+                                <i class="material-icons green z-depth-1 small-button">edit</i>
+                            <% end %>
+                            <%= link_to admin_archive_path(mentor),
+                                method: :student_archive,
+                                data: { confirm: "Are you sure about archive #{mentor.first_name}" } do %>
+                                <i class="material-icons red z-depth-1 small-button">delete_forever</i>
+                            <% end %>
+                            <i onclick="displayStudentInformation('<%= mentor.id %>');" class="material-icons blue z-depth-1 small-button">expand_more</i>
+                        </td>
+                    </tr>
+                    <tr id='<%= mentor.id %>'class='student-info'
+                        style='display: none'>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    <% end %>
