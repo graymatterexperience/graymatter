@@ -3,7 +3,7 @@
 class Admin::UsersController < Admin::ApplicationController
   include ApplicationHelper
   before_action :admin_authorize,
-                :set_user
+    :set_user
 
   def show
     respond_to do |format|
@@ -14,6 +14,10 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def index
+    redirect_to admin_cohorts_path,
+      notice: 'Must create a Cohort before you can add students' if
+    params['user'] == 'student' && 
+      !User.all.any?(&:student?)
     # I need to change this table too has_many through. I think that will solve
     # my issues with group_by
     # NOTES can I do all this modifications in serializor
@@ -22,7 +26,7 @@ class Admin::UsersController < Admin::ApplicationController
     # this is such HACK
     #students = User.all
     #@students = students.select { |student| student.student? &&
-                                  #!student.archived? }
+    #!student.archived? }
     #@cohorts = Cohort.all.map { |x| {x.name => x.users} }.flatten
     #Cohort.all.group_by { |x| x.collect(&:users) }
     #@cohorts = @cohorts_groups.group_by { |k| {k.name => k.users} }
@@ -73,11 +77,11 @@ class Admin::UsersController < Admin::ApplicationController
       @form = 'student_form'
     end
 
-    
+
     # NOTES I think it would be cool if I could figure out how to render from here
     # always get missing template _application
     #if params[:user] == 'mentor'
-      ##render :partial => 'mentor_form', :layout => 'application'
+    ##render :partial => 'mentor_form', :layout => 'application'
     #end
   end
 
