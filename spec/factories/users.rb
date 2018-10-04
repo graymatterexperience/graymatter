@@ -16,6 +16,17 @@
 #  user_information :jsonb            not null
 #
 
+mentor_information = {
+  avatar: 'User_Avatar_2.png',
+  phone: Faker::PhoneNumber.phone_number,
+  company: Faker::Company.name,
+  specialty: Faker::Company.industry,
+  company_logo: Faker::Company.logo,
+  social_media: {
+    instagram: 'https://www.instagram.com/graymatterexp/'
+  }
+}
+
 user_information = {
   'avatar' => 'fake_image.jpg',
   'phone' => Faker::PhoneNumber.phone_number,
@@ -37,6 +48,7 @@ FactoryGirl.define do
     password 'password'
   end
 
+  # TODO deprecated remove from tests DO NOT use
   factory :user_two, class: User do
     first_name 'kim'
     last_name 'penball'
@@ -53,12 +65,21 @@ FactoryGirl.define do
     role 'admin'
   end
 
-  factory :student_params, class: User do
+  factory :student_user, class: User do
     first_name Faker::Name.first_name
     last_name Faker::Name.last_name
     email Faker::Internet.email
     password 'password'
     role 'student'
     user_information user_information
+  end
+
+  factory :mentor_user, class: User do
+    first_name Faker::Name.first_name
+    last_name Faker::Name.last_name
+    email Faker::Internet.email
+    password 'password'
+    role 'student'
+    user_information mentor_information
   end
 end

@@ -1,0 +1,86 @@
+<div class="card">
+    <div class="card-content">
+        <% if @user.errors.any? %>
+            <ul class="Signup_Errors">
+                <% for message_error in @user.errors.full_messages %>
+                    <li class="alert alert-warning"><%= message_error %></li>
+                <% end %>
+            </ul>
+        <% end %>
+        <span class='card-title'><%= @page_title %></span>
+        <%= form_for [:admin, @user] do |f| %>
+            <div class="row">
+                <div class="input-field col s12 m6">
+                    <%= f.label :first_name %>
+                    <%= f.text_field :first_name, class: '' %>
+                </div>
+                <div class="input-field col s12 m6">
+                    <%= f.label :last_name %>
+                    <%= f.text_field :last_name, class: '' %>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m6">
+                    <%= f.label :password %>
+                    <%= f.password_field :password, class: '' %>
+                </div>
+                <div class="input-field col s12 m6">
+                    <%= f.label :password_confirmation, "Confirmation" %>
+                    <%= f.password_field :password_confirmation, class: '' %>
+                </div>
+                <div class="input-field col s12 m6">
+                    <%= f.label :email, "Email" %>
+                    <%= f.text_field :email, class: '' %>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="input-field col s12 m6">
+                    <div class="input-field col s12">
+                        <%= f.select :cohort_ids, Cohort.all.map { |p| [ p.name, p.id ] } %>
+                        <label>Cohort Seletcion</label>
+                    </div>
+                </div>
+                <div class="input-field col s12 m6">
+                    <%= f.label :role, "Role" %>
+                    <%= f.text_field :role, class: '', value: 'mentor' %>
+                </div>
+            </div>
+                <%= f.fields_for :user_information do |info| %>
+                    <div class="row">
+                        <div class="input-field col s12 m3">
+                            <%= info.label :avatar %>
+                            <%= info.text_field :avatar, class: '', placeholder: 'coming soon' %>
+                        </div>
+                        <div class="input-field col s12 m3">
+                            <%= info.label :phone %>
+                            <%= info.text_field :phone, class: '', value: @user.user_information["phone"] %>
+                        </div>
+                        <div class="input-field col s12 m3">
+                            <%= info.label :company %>
+                            <%= info.text_field :company, class: '', value: @user.user_information["company"] %>
+                        </div>
+                        <div class="input-field col s12 m3">
+                            <%= info.label :specialty %>
+                            <%= info.text_field :specialty, class: '', value: @user.user_information["specialty"] %>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <%= info.fields_for :social_media do |media| %>
+                            <div class="input-field col s12 m3">
+                                <%= media.label :linkedin %>
+                                <%= media.text_field :linkedin, class: '', value: @user.user_information.try(:[], "social_media").try(:[], "linkedin") || "https://" %>
+                            </div>
+                        <% end %>
+                    </div>
+                <% end %>
+
+            <div class="card-action">
+                <div class='right-align'>
+                    <%= f.submit 'Submit', class: 'btn light-green accent-4' %>
+                    <%= link_to "Cancel", admin_users_path, class: 'btn red' %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>

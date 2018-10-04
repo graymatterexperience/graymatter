@@ -50,14 +50,14 @@ RSpec.describe Admin::UsersController, type: :controller do
     end
     context 'as an authenticated admin' do
       it "adds a student" do
-        student_params = FactoryGirl.attributes_for(:student_params)
-        student_params['cohort_ids'] = @cohort.id
+        student_user = FactoryGirl.attributes_for(:student_user)
+        student_user['cohort_ids'] = @cohort.id
 
         expect {
-          post :create, params: { user: student_params }
+          post :create, params: { user: student_user }
         }.to change(User.all, :count).by(1)
 
-        student = User.find_by_first_name(student_params[:first_name])
+        student = User.find_by_first_name(student_user[:first_name])
         expect(subject.request.flash[:success])
           .to eq("#{student.name.capitalize} has been added")
         expect(@cohort.users).to include(student)
@@ -79,17 +79,17 @@ RSpec.describe Admin::UsersController, type: :controller do
 
     context 'as an authenticated amdin' do
       it "updated student" do
-        student_model = create(:student_params)
+        student_model = create(:student_user)
         student_model.cohort_ids = @cohort_one.id
 
-        student_params = attributes_for(:student_params)
-        student_params[:first_name] = 'Fake'
-        student_params[:last_name] = 'Name'
-        student_params[:user_information]['phone'] = '312-321-4321'
-        student_params[:user_information]['social_media']['twitter'] = 'www.google.com'
+        student_user = attributes_for(:student_user)
+        student_user[:first_name] = 'Fake'
+        student_user[:last_name] = 'Name'
+        student_user[:user_information]['phone'] = '312-321-4321'
+        student_user[:user_information]['social_media']['twitter'] = 'www.google.com'
 
-        patch :update, params: { id: student_model.id, user: student_params }
-        student = User.find_by_first_name(student_params[:first_name])
+        patch :update, params: { id: student_model.id, user: student_user }
+        student = User.find_by_first_name(student_user[:first_name])
         expect(@cohort_one.users).to include(student)
         expect(subject.request.flash[:success])
           .to eq("#{student.name.capitalize} has been updated")
@@ -103,15 +103,15 @@ RSpec.describe Admin::UsersController, type: :controller do
 
     context 'as an authenticated amdin' do
       it "changes a students cohort" do
-        student_model = create(:student_params)
+        student_model = create(:student_user)
         student_model.cohort_ids = @cohort_one.id
         expect(@cohort_one.users).to include(student_model)
 
-        student_params = attributes_for(:student_params)
-        student_params['cohort_ids'] = @cohort_two.id
+        student_user = attributes_for(:student_user)
+        student_user['cohort_ids'] = @cohort_two.id
 
-        patch :update, params: { id: student_model.id, user: student_params }
-        student = User.find_by_first_name(student_params[:first_name])
+        patch :update, params: { id: student_model.id, user: student_user }
+        student = User.find_by_first_name(student_user[:first_name])
         expect(@cohort_one.users).to_not include(student)
         expect(@cohort_two.users).to include(student)
         expect(subject.request.flash[:success])

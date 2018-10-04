@@ -1,3 +1,5 @@
+# NOTES: this controller handles the creation of both sutdent AND metnors
+
 class Admin::UsersController < Admin::ApplicationController
   include ApplicationHelper
   before_action :admin_authorize,
@@ -6,7 +8,7 @@ class Admin::UsersController < Admin::ApplicationController
   def show
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @student }
+      format.json { render json: @user }
     end
 
   end
@@ -27,12 +29,29 @@ class Admin::UsersController < Admin::ApplicationController
     # I want a key with cohort name with the value being the students that belong
     # to that cohort (should be easy????)
 
-    @page_title = 'Students'
-    # FIXME this is SO ugly.. wow...
-    @cohorts_groups = Cohort.all
+    if params[:user] == 'student'
+      @student = true
+      @page_title = 'Students'
+      @button_title = 'Add Student'
+      @form = 'students_index'
+      # FIXME this is SO ugly.. wow...
+      @cohorts_groups = Cohort.all
 
-    # FIXME This need to pluck only the users that are not archived
-    @cohorts = Cohort.all.collect(&:users)
+      # FIXME This need to pluck only the users that are not archived
+      @cohorts = Cohort.all.collect(&:users)
+    end
+
+    if params[:user] == 'mentor'
+      @mentor = true
+      @page_title = 'Mentors'
+      @button_title = 'Add Mentor'
+      @form = 'mentors_index'
+      # FIXME this is SO ugly.. wow...
+      @cohorts_groups = Cohort.all
+
+      # FIXME This need to pluck only the users that are not archived
+      @mentors = User.all.select(&:mentor?)
+    end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -41,17 +60,34 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def new
-    @page_title = 'Add a Student'
-    @student = User.new
+    @user = User.new
+    if params[:user] == 'mentor'
+      @page_title = 'Add a Mentor'
+      @mentor = User.new
+      @form = 'mentor_form'
+    end
+
+    if params[:user] == 'student'
+      @page_title = 'Add a Student'
+      @student = User.new
+      @form = 'student_form'
+    end
+
+    
+    # NOTES I think it would be cool if I could figure out how to render from here
+    # always get missing template _application
+    #if params[:user] == 'mentor'
+      ##render :partial => 'mentor_form', :layout => 'application'
+    #end
   end
 
   def create
-    @student = User.new(user_params)
+    @user = User.new(user_params)
 
-    if @student.save
-      @student.cohort_ids = params["user"]["cohort_ids"]
-      flash[:success] = "#{@student.name.capitalize} has been added"
-      redirect_to admin_users_path
+    if @user.save
+      @user.cohort_ids = params["user"]["cohort_ids"]
+      flash[:success] = "#{@user.name.capitalize} has been added"
+      redirect_to admin_users_path(user: @user.role)
     else
       flash[:error] = 'Something went wrong'
       render 'new'
@@ -59,16 +95,24 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def edit
-    @page_title = 'Edit a Student'
+    if @user.mentor?
+      @page_title = 'Edit a Mentor'
+      @form = 'mentor_form'
+    end
+
+    if @user.student?
+      @page_title = 'Edit a Student'
+      @form = 'student_form'
+    end
   end
 
   def update
     #NOTE Currently student can only belong to ONE cohort
-    remove_student_from_cohort(@student) if params["user"]["cohort_ids"].present?
+    remove_student_from_cohort(@user) if params["user"]["cohort_ids"].present?
 
-    if @student.update_attributes(user_params)
-      flash[:success] = "#{@student.name.capitalize} has been updated"
-      redirect_to admin_users_path
+    if @user.update_attributes(user_params)
+      flash[:success] = "#{@user.name.capitalize} has been updated"
+      redirect_to admin_users_path(user: @user.role)
     else
       flash[:error] = 'Something went wrong'
       render 'edit'
@@ -77,10 +121,11 @@ class Admin::UsersController < Admin::ApplicationController
 
   def destroy; end
 
+  # FIXME this should be archive_user
   def archive_student
-    @student.archive = true
-    if @student.save
-      flash[:success] = "#{@student.name.capitalize} has been Archived"
+    @user.archive = true
+    if @user.save
+      flash[:success] = "#{@user.name.capitalize} has been Archived"
       redirect_to admin_users_path
     else
       flash[:error] = 'Something went wrong'
@@ -103,6 +148,9 @@ class Admin::UsersController < Admin::ApplicationController
                                    :phone,
                                    :school,
                                    :grade,
+                                   :company,
+                                   :specialty,
+                                   :compnay_logo,
                                    social_media: [
                                      :instagram,
                                      :linkedin,
@@ -113,7 +161,7 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def set_user
-    @student = User.find_by_id(params[:id])
+    @user = User.find_by_id(params[:id])
   end
 
   def remove_student_from_cohort(student)

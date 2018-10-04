@@ -1,14 +1,14 @@
 <div class="card">
     <div class="card-content">
-        <% if @student.errors.any? %>
+        <% if @user.errors.any? %>
             <ul class="Signup_Errors">
-                <% for message_error in @student.errors.full_messages %>
+                <% for message_error in @user.errors.full_messages %>
                     <li class="alert alert-warning"><%= message_error %></li>
                 <% end %>
             </ul>
         <% end %>
         <span class='card-title'><%= @page_title %></span>
-        <%= form_for [:admin, @student] do |f| %>
+        <%= form_for [:admin, @user] do |f| %>
             <div class="row">
                 <div class="input-field col s12 m6">
                     <%= f.label :first_name %>
@@ -54,36 +54,36 @@
                         </div>
                         <div class="input-field col s12 m4">
                             <%= info.label :phone %>
-                            <%= info.text_field :phone, class: '', value: @student.user_information["phone"] %>
+                            <%= info.text_field :phone, class: '', value: @user.user_information["phone"] %>
                         </div>
                         <div class="input-field col s12 m4">
                             <%= info.label :school %>
-                            <%= info.text_field :school, class: '', value: @student.user_information["school"] %>
+                            <%= info.text_field :school, class: '', value: @user.user_information["school"] %>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12 m3">
                             <%= info.label :grade %>
-                            <%= info.text_field :grade, class: '', value: @student.user_information["grade"] %>
+                            <%= info.text_field :grade, class: '', value: @user.user_information["grade"] %>
                         </div>
                     </div>
                     <div class="row">
                         <%= info.fields_for :social_media do |media| %>
                             <div class="input-field col s12 m3">
                                 <%= media.label :instagram %>
-                                <%= media.text_field :instagram, class: '', value: @student.user_information.try(:[], "social_media").try(:[], "instagram") || "https://" %>
+                                <%= media.text_field :instagram, class: '', value: @user.user_information.try(:[], "social_media").try(:[], "instagram") || "https://" %>
                             </div>
                             <div class="input-field col s12 m3">
                                 <%= media.label :linkedin %>
-                                <%= media.text_field :linkedin, class: '', value: @student.user_information.try(:[], "social_media").try(:[], "linkedin") || "https://" %>
+                                <%= media.text_field :linkedin, class: '', value: @user.user_information.try(:[], "social_media").try(:[], "linkedin") || "https://" %>
                             </div>
                             <div class="input-field col s12 m3">
                                 <%= media.label :twitter %>
-                                <%= media.text_field :twitter, class: '', value: @student.user_information.try(:[], "social_media").try(:[], "twitter") || "https://" %>
+                                <%= media.text_field :twitter, class: '', value: @user.user_information.try(:[], "social_media").try(:[], "twitter") || "https://" %>
                             </div>
                             <div class="input-field col s12 m3">
                                 <%= media.label :facebook %>
-                                <%= media.text_field :facebook, class: '', value: @student.user_information.try(:[], "social_media").try(:[], "facebook") || "https://" %>
+                                <%= media.text_field :facebook, class: '', value: @user.user_information.try(:[], "social_media").try(:[], "facebook") || "https://" %>
                             </div>
                         <% end %>
                     </div>

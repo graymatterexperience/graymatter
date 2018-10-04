@@ -1,4 +1,32 @@
 Rails.application.routes.draw do
+  #namespace :admin do
+    #get 'mentors/index'
+  #end
+
+  #namespace :admin do
+    #get 'mentors/show'
+  #end
+
+  #namespace :admin do
+    #get 'mentors/new'
+  #end
+
+  #namespace :admin do
+    #get 'mentors/create'
+  #end
+
+  #namespace :admin do
+    #get 'mentors/edit'
+  #end
+
+  #namespace :admin do
+    #get 'mentors/update'
+  #end
+
+  #namespace :admin do
+    #get 'mentors/archive_mentor'
+  #end
+
   root to: 'pages#index'
 
   get 'helps/index'
