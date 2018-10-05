@@ -3,7 +3,7 @@
 class Admin::UsersController < Admin::ApplicationController
   include ApplicationHelper
   before_action :admin_authorize,
-    :set_user
+                :set_user, except: [:index, :new, :create]
 
   def show
     respond_to do |format|
@@ -87,6 +87,7 @@ class Admin::UsersController < Admin::ApplicationController
   def create
     @user = User.new(user_params)
 
+    binding.pry
     if @user.save
       @user.cohort_ids = params["user"]["cohort_ids"]
       flash[:success] = "#{@user.name.capitalize} has been added"
@@ -165,11 +166,13 @@ class Admin::UsersController < Admin::ApplicationController
 
   def set_user
     @user = User.find_by_id(params[:id])
+    cohorts = @user.cohorts.pluck(:name)
+    @user.user_information["cohorts"] = cohorts
   end
 
-  def remove_student_from_cohort(student)
-    student_cohort = student.cohorts
-    student.cohorts.delete(student_cohort) 
-    student.cohort_ids = params["user"]["cohort_ids"]
+  def remove_student_from_cohort(user)
+    user_cohort = user.cohorts
+    user.cohorts.delete(user_cohort) 
+    user.cohort_ids = params["user"]["cohort_ids"]
   end
 end
