@@ -1,28 +1,41 @@
-<div class="row">
-    <% @students.each do |student| %>
-    <div class="col s12 m4">
-        <div class="card">
-            <div class="card-image">
-                <%= image_tag student["information"]["avatar"], class: 'profile-img' %>
-                    <span class="card-title card-title-custom"><%= student["fullName"] %></span>
-                    <div class='row'>
-                        <% student["information"]["socialMedia"].each do |media| %>
-                            <span class='col student-card-social-media-container'>
-                                <%= get_social_media(media) %>
-                            </span>
-                        <% end %>
-                    </div>
-            </div>
-            <div class="card-content margin-top">
-                <ul>
-                    <li>Group: <%= student["information"]["group"] %></li>
-                    <li>School: <%= student["information"]["school"] %></li>
-                    <li>Grade: <%= student["information"]["grade"] %></li>
-                    <li>Email: <%= student["information"]["email"] %></li>
-                    <li>Phone: <%= student["information"]["phone"] %></li>
-                </ul>
-            </div>
+<% @students.each do |key, value| %>
+    <div class="row">
+        <div class="col s12">
+            <span class='chip z-depth-1'><%= key.upcase %></span>
         </div>
+        <% value.each do |student| %>
+            <div class="col s12 m4">
+                <div class="card student-profile-card-container">
+                    <div class="card-image">
+                        <% if student.user_information['avatar'].present? %>
+                            <%= image_tag student.user_information["avatar"], class: 'profile-img' %>
+                        <% else %>
+                            <td><%= image_tag "default-user-image.png", class: 'profile-img-default' %></td>
+                        <% end %>
+                        <span class="card-title card-title-custom"><%= student.name %></span>
+                        <div class='row'>
+                            <% if student.user_information["social_media"].present? %>
+                                <% student.user_information["social_media"].each do |media| %>
+                                    <span class='col student-card-social-media-container'>
+                                        <%= get_social_media(media) %>
+                                    </span>
+                                <% end %>
+                            <% end %>
+                        </div>
+                    </div>
+                    <div class="card-content margin-top">
+                        <ul>
+                            <li>Group: <%= student.user_information["group"] %></li>
+                            <li>School: <%= student.user_information["school"] %></li>
+                            <li>Grade: <%= student.user_information["grade"] %></li>
+                            <li>Email: 
+                                <a href="mailto:<%= student.email %>"><%= student.email %></a>
+                            </li>
+                            <li>Phone: <%= student.user_information["phone"] %></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        <% end %>
     </div>
-    <% end %>
-</div>
+<% end %>

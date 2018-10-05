@@ -16,8 +16,7 @@ class Admin::UsersController < Admin::ApplicationController
   def index
     redirect_to admin_cohorts_path,
       notice: 'Must create a Cohort before you can add students' if
-    params['user'] == 'student' && 
-      !User.all.any?(&:student?)
+    params['user'] == 'student' && Cohort.all.empty?
     # I need to change this table too has_many through. I think that will solve
     # my issues with group_by
     # NOTES can I do all this modifications in serializor
