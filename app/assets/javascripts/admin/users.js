@@ -16,7 +16,7 @@ function toggle_cohort_div(id) {
 
 function displayStudentInformation(user_id) {
   $.ajax({url: '/admin/users/' + user_id + '.json', success: function(result) {
-    var stringId = result.id.toString();
+    var stringId = result.id.toString(), cohortNames;
     var userInformationTag = document.getElementById(stringId);
     if (userInformationTag.style.display == 'none') {
       userInformationTag.style.display = 'table';
@@ -36,11 +36,17 @@ function displayStudentInformation(user_id) {
             </td>
            `
     } else if (result.role === 'mentor') {
+      if (result.user_information.cohorts.length != 0 ||
+          result.user_information.cohorts === undefined) {
+        cohortNames = result.user_information.cohorts;
+      } else {
+        cohortNames = 'All Cohorts';
+      };
       var td = `
             <td colspan='6'>
                 <ul>
                     <li>Role: ${ result.role || 'N/A' }</li>
-                    <li>Cohort: ALL</li>
+                    <li>Cohort: ${ cohortNames }</li>
                 </ul>
             </td>
            `

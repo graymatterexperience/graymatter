@@ -37,7 +37,9 @@
             <div class="row">
                 <div class="input-field col s12 m6">
                     <div class="input-field col s12">
-                        <%= f.select :cohort_ids, Cohort.all.map { |p| [ p.name, p.id ] } %>
+                    <%= collection_select(:user, :cohort_ids, Cohort.all, :id, :name, {}, { :multiple => true } )%>
+                        <%#= f.select :cohort_ids, Cohort.all.map { |p| [ p.name, p.id ] }, {:include_blank => true } %>
+                        <%#= options_for_select Cohort.all.map { |p| [ p.name, p.id ] } %>
                         <label>Cohort Seletcion</label>
                     </div>
                 </div>

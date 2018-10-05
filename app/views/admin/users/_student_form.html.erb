@@ -71,19 +71,19 @@
                         <%= info.fields_for :social_media do |media| %>
                             <div class="input-field col s12 m3">
                                 <%= media.label :instagram %>
-                                <%= media.text_field :instagram, class: '', value: @user.user_information.try(:[], "social_media").try(:[], "instagram") || "https://" %>
+                                <%= media.text_field :instagram, class: '', placeholder: 'https://www.instagram.com', value: @user.user_information.try(:[], "social_media").try(:[], "instagram") %>
                             </div>
                             <div class="input-field col s12 m3">
                                 <%= media.label :linkedin %>
-                                <%= media.text_field :linkedin, class: '', value: @user.user_information.try(:[], "social_media").try(:[], "linkedin") || "https://" %>
+                                <%= media.text_field :linkedin, class: '', placeholder: 'https://www.linkedin.com', value: @user.user_information.try(:[], "social_media").try(:[], "linkedin") %>
                             </div>
                             <div class="input-field col s12 m3">
                                 <%= media.label :twitter %>
-                                <%= media.text_field :twitter, class: '', value: @user.user_information.try(:[], "social_media").try(:[], "twitter") || "https://" %>
+                                <%= media.text_field :twitter, class: '', placeholder: 'https://www.twitter.com', value: @user.user_information.try(:[], "social_media").try(:[], "twitter") %>
                             </div>
                             <div class="input-field col s12 m3">
                                 <%= media.label :facebook %>
-                                <%= media.text_field :facebook, class: '', value: @user.user_information.try(:[], "social_media").try(:[], "facebook") || "https://" %>
+                                <%= media.text_field :facebook, class: '', placeholder: 'https://www.facebook.com', value: @user.user_information.try(:[], "social_media").try(:[], "facebook") %>
                             </div>
                         <% end %>
                     </div>
