@@ -86,8 +86,6 @@ class Admin::UsersController < Admin::ApplicationController
 
   def create
     @user = User.new(user_params)
-
-    binding.pry
     if @user.save
       @user.cohort_ids = params["user"]["cohort_ids"]
       flash[:success] = "#{@user.name.capitalize} has been added"
