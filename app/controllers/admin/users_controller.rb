@@ -3,8 +3,12 @@
 class Admin::UsersController < Admin::ApplicationController
   include ApplicationHelper
   before_action :admin_authorize
-  before_action :set_user, only: [:show, :archive_student, :edit, :update]
-  
+  before_action :set_user, only: %i(
+    show
+    archive_student
+    edit
+    update
+  )
 
   def show
     respond_to do |format|
