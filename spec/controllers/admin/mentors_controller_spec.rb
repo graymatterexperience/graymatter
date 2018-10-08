@@ -28,7 +28,7 @@ RSpec.describe Admin::UsersController, type: :controller do
         expect(mentor.user_information['company']).to eq(mentor_user[:user_information][:company])
         expect(mentor.user_information['social_media']['instagram'])
           .to eq('https://www.instagram.com/graymatterexp/')
-        expect(subject).to redirect_to(admin_users_path)
+        expect(subject).to redirect_to(admin_users_path(user: 'mentor'))
       end
 
       xit 'mentor can belong to many cohorts' do
@@ -69,7 +69,7 @@ RSpec.describe Admin::UsersController, type: :controller do
         expect(mentor.user_information['company']).to eq('new company name')
         expect(mentor.user_information['social_media']['instagram'])
           .to eq('www.google.com')
-        expect(subject).to redirect_to(admin_users_path)
+        expect(subject).to redirect_to(admin_users_path(user: 'mentor'))
       end
     end
 
@@ -88,7 +88,7 @@ RSpec.describe Admin::UsersController, type: :controller do
         expect(@cohort_two.users).to include(mentor)
         expect(subject.request.flash[:success])
           .to eq("#{mentor.name.capitalize} has been updated")
-        expect(subject).to redirect_to(admin_users_path)
+        expect(subject).to redirect_to(admin_users_path(user: 'mentor'))
       end
     end
   end
@@ -120,14 +120,14 @@ RSpec.describe Admin::UsersController, type: :controller do
     end
 
     context 'as an authenticated amdin' do
-      it "archive the student" do
-        student = create(:user_two)
+      it "archive the mentor" do
+        user = create(:user_two)
 
-        post :archive_student, params: { id: student.id }
-        student = User.last
-        expect(student.archived?).to be(true)
+        post :archive_student, params: { id: user.id }
+        user = User.last
+        expect(user.archived?).to be(true)
         expect(subject.request.flash[:success])
-          .to eq("#{student.name.capitalize} has been Archived")
+          .to eq("#{user.name.capitalize} has been Archived")
         expect(subject).to redirect_to(admin_users_path)
       end
     end

@@ -25,7 +25,7 @@ RSpec.describe Admin::UsersController, type: :controller do
   describe "Get #create" do
     context 'user not logged in' do
       it 'should be redirected to log in page' do
-        post :create, params: {}
+        post :create, params: { user: {} }
         expect(response).to redirect_to login_path
         expect(subject.request.flash[:alert]).to eq("You must be logged in")
       end
@@ -35,7 +35,7 @@ RSpec.describe Admin::UsersController, type: :controller do
       it 'not authorized to make this action' do
         student = create(:user_two)
         sign_in_user(student)
-        post :create, params: {}
+        post :create, params: { user: {} }
         expect(response).to redirect_to root_path
         expect(subject.request.flash[:alert]).to eq("This operation not allowed")
       end
@@ -64,7 +64,7 @@ RSpec.describe Admin::UsersController, type: :controller do
         expect(student.user_information['grade']).to eq('11')
         expect(student.user_information['social_media']['twitter'])
           .to eq('https://twitter.com/graymatterexp')
-        expect(subject).to redirect_to(admin_users_path)
+        expect(subject).to redirect_to(admin_users_path(user: 'student'))
       end
     end
   end
@@ -97,7 +97,7 @@ RSpec.describe Admin::UsersController, type: :controller do
         expect(student.last_name).to eq('Name')
         expect(student.user_information['social_media']['twitter'])
           .to eq('www.google.com')
-        expect(subject).to redirect_to(admin_users_path)
+        expect(subject).to redirect_to(admin_users_path(user: 'student'))
       end
     end
 
@@ -116,7 +116,7 @@ RSpec.describe Admin::UsersController, type: :controller do
         expect(@cohort_two.users).to include(student)
         expect(subject.request.flash[:success])
           .to eq("#{student.name.capitalize} has been updated")
-        expect(subject).to redirect_to(admin_users_path)
+        expect(subject).to redirect_to(admin_users_path(user: 'student'))
       end
     end
   end

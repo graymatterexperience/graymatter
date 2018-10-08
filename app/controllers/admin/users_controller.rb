@@ -2,8 +2,9 @@
 
 class Admin::UsersController < Admin::ApplicationController
   include ApplicationHelper
-  before_action :admin_authorize,
-                :set_user, except: [:index, :new, :create]
+  before_action :admin_authorize
+  before_action :set_user, only: [:show, :archive_student, :edit, :update]
+  
 
   def show
     respond_to do |format|
@@ -138,6 +139,7 @@ class Admin::UsersController < Admin::ApplicationController
   private
 
   def user_params
+    #FIXME I can set stor-attr
     params.require(:user).permit(:first_name,
                                  :last_name,
                                  :email,
@@ -165,7 +167,10 @@ class Admin::UsersController < Admin::ApplicationController
   def set_user
     @user = User.find_by_id(params[:id])
     cohorts = @user.cohorts.pluck(:name)
-    @user.user_information["cohorts"] = cohorts
+    # TODO I feel like there is somethin not right here. I dont think I should
+    # have to set user_information like this user_information = {}
+    cohorts.empty? ? @user.user_information = { cohorts: ['All Cohorts'] } :
+      @user.user_information["cohorts"] = cohorts
   end
 
   def remove_student_from_cohort(user)
