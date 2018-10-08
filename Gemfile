@@ -67,3 +67,5 @@ gem "font-awesome-rails"
 gem 'pry'
 gem "figaro"
 gem 'annotate'
+# installed mini_racer because heroku throw an error about node in my feature tests
+gem 'mini_racer'
