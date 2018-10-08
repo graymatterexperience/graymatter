@@ -79,7 +79,7 @@ user_information = {
     last_name Faker::Name.last_name
     email Faker::Internet.email
     password 'password'
-    role 'student'
+    role 'mentor'
     user_information mentor_information
   end
 end
