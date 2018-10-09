@@ -125,7 +125,7 @@ RSpec.describe Admin::UsersController, type: :controller do
     before do
       @user = create(:admin_user)
       sign_in_user(@user)
-      @student = create(:user_two)
+      @student = create(:student_user)
     end
 
     context 'as an authenticated amdin' do
@@ -149,14 +149,14 @@ RSpec.describe Admin::UsersController, type: :controller do
 
     context 'as an authenticated amdin' do
       it "archive the student" do
-        student = create(:user_two)
+        student = create(:student_user)
 
         post :archive_student, params: { id: student.id }
         student = User.last
         expect(student.archived?).to be(true)
         expect(subject.request.flash[:success])
           .to eq("#{student.name.capitalize} has been Archived")
-        expect(subject).to redirect_to(admin_users_path)
+        expect(subject).to redirect_to(admin_users_path(user: 'student'))
       end
     end
 
