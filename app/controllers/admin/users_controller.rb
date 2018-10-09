@@ -133,7 +133,7 @@ class Admin::UsersController < Admin::ApplicationController
     @user.archive = true
     if @user.save
       flash[:success] = "#{@user.name.capitalize} has been Archived"
-      redirect_to admin_users_path
+      redirect_to admin_users_path(user: @user.role)
     else
       flash[:error] = 'Something went wrong'
       render 'edit'

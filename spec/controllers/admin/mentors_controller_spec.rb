@@ -121,14 +121,14 @@ RSpec.describe Admin::UsersController, type: :controller do
 
     context 'as an authenticated amdin' do
       it "archive the mentor" do
-        user = create(:user_two)
+        user = create(:mentor_user)
 
         post :archive_student, params: { id: user.id }
         user = User.last
         expect(user.archived?).to be(true)
         expect(subject.request.flash[:success])
           .to eq("#{user.name.capitalize} has been Archived")
-        expect(subject).to redirect_to(admin_users_path)
+        expect(subject).to redirect_to(admin_users_path(user: 'mentor'))
       end
     end
 
