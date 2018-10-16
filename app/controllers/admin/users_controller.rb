@@ -93,6 +93,7 @@ class Admin::UsersController < Admin::ApplicationController
     @user = User.new(user_params)
     if @user.save
       @user.cohort_ids = params["user"]["cohort_ids"]
+      UserNotifierMailer.send_signup_email(@user).deliver
       flash[:success] = "#{@user.name.capitalize} has been added"
       redirect_to admin_users_path(user: @user.role)
     else
