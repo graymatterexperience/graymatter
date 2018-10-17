@@ -66,6 +66,18 @@ RSpec.describe Admin::UsersController, type: :controller do
           .to eq('https://twitter.com/graymatterexp')
         expect(subject).to redirect_to(admin_users_path(user: 'student'))
       end
+
+      it "negative result user exists" do
+        create(:student_user)
+        student_user = FactoryGirl.attributes_for(:student_user)
+        student_user['cohort_ids'] = @cohort.id
+
+        expect {
+          post :create, params: { user: student_user }
+        }.to change(User.all, :count).by(0)
+
+        expect(subject).to redirect_to(admin_users_path(user: 'student'))
+      end
     end
   end
 

@@ -50,7 +50,7 @@ class User < ApplicationRecord
   end
 
   def name
-    "#{first_name} #{last_name}"
+    "#{first_name.capitalize} #{last_name.capitalize}"
   end
 
   def archived?
