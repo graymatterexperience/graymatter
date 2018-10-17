@@ -2,6 +2,8 @@
 
 class Admin::UsersController < Admin::ApplicationController
   include ApplicationHelper
+  include UsersHelper
+
   before_action :admin_authorize
   before_action :set_user, only: %i(
     show
@@ -90,6 +92,9 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def create
+    user_password = generate_password
+    params[:user][:password] = user_password
+    params[:user][:password_confirmation] = user_password
     @user = User.new(user_params)
     if @user.save
       @user.cohort_ids = params["user"]["cohort_ids"]
@@ -126,8 +131,6 @@ class Admin::UsersController < Admin::ApplicationController
       render 'edit'
     end
   end
-
-  def destroy; end
 
   # FIXME this should be archive_user
   def archive_student
