@@ -1,0 +1,52 @@
+@import "foundation-emails";
+
+li {
+  list-style-type: none;
+}
+
+ul {
+  padding: 0;
+}
+
+.yellow {
+  color: #feb801;
+}
+
+.primary-background-color {
+  background-color: #252830;
+}
+
+.password-text {
+  color: #12bbc8;
+}
+
+.main-logo {
+  width: 75%;
+}
+
+.social-media-icon {
+  display: -webkit-inline-flex;
+  color: #ccc;
+  padding: 10px;
+  width: 25px;
+}
+
+.brain-icon {
+  display: -webkit-inline-flex;
+  background-color: #4c4c4c;
+  padding: 10px;
+  width: 25px;
+  border-radius: 50%;
+}
+.name-logo-icon {
+  border: 2px solid #feb801;
+  padding: 5px;
+  width: 150px;
+}
+
+.brain-icon {
+  display: -webkit-inline-flex;
+  color: #ccc;
+  padding: 10px;
+  width: 25px;
+}

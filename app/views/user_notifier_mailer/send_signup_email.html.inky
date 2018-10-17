@@ -1,0 +1,52 @@
+<container>
+  <row class="header">
+    <columns class='primary-background-color'>
+
+      <spacer size="16"></spacer>
+
+      <h1 class="text-center yellow">To Empower <span class='password-text'><b>YOU</b></span></h1>
+    </columns>
+  </row>
+  <row>
+    <columns class='primary-background-color'>
+
+      <spacer size="32"></spacer>
+      <center>
+        <%= image_tag attachments['main-logo.png'].url, class: 'main-logo' %>
+      </center>
+
+      <spacer size="16"></spacer>
+
+      <h2 class="text-center yellow">Reset Password <span class='password-text'><b>
+            <%= @user.name %></b></span></h2>
+      <h5 class="text-center yellow">Your temporary password is : <span class='password-text'>
+          <%= @generated_password %></span></h5>
+
+      <spacer size="16"></spacer>
+
+      <p class="text-center yellow">Click the link below to reset your password.</p>
+      <button class="large expand" href="<%= @url_path %>">Reset Password</button>
+      <hr />
+      <p class="text-center"><small>You're getting this email because you are part of the Gray Matter Experience.</small></p>
+    </columns>
+  </row>
+  <row>
+    <center>
+      <a href='https://www.facebook.com/GrayMatterExp/'>
+        <%= image_tag attachments['facebook3232.png'].url, class: 'social-media-icon' %>
+      </a>
+      <a href='https://twitter.com/graymatterexp'>
+        <%= image_tag attachments['twitter3232.png'].url, class: 'social-media-icon' %>
+      </a>
+      <a href='http://www.graymatterexperience.com/'>
+        <%= image_tag attachments['brain_logo.png'].url, class: 'brain-icon' %>
+      </a>
+      <a href='https://www.linkedin.com/company/the-gray-matter-experience/'>
+        <%= image_tag attachments['linkedin3232.png'].url, class: 'social-media-icon' %>
+      </a>
+      <a href='https://www.instagram.com/graymatterexp/'>
+        <%= image_tag attachments['instagram3232.png'].url, class: 'social-media-icon' %>
+      </a>
+    </center>
+  </row>
+</container>

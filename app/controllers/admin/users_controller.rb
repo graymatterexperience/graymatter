@@ -95,11 +95,11 @@ class Admin::UsersController < Admin::ApplicationController
       @user.cohort_ids = params["user"]["cohort_ids"]
       UserNotifierMailer.send_signup_email(@user).deliver
       flash[:success] = "#{@user.name.capitalize} has been added"
-      redirect_to admin_users_path(user: @user.role)
     else
-      flash[:error] = 'Something went wrong'
-      render 'new'
+      # TODO this is such a hack... fix this
+      flash[:error] = @user.errors.full_messages.to_sentence
     end
+    redirect_to admin_users_path(user: @user.role)
   end
 
   def edit

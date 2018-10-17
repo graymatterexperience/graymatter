@@ -69,3 +69,8 @@ gem "figaro"
 gem 'annotate'
 # installed mini_racer because heroku throw an error about node in my feature tests
 gem 'mini_racer'
+
+# Email templates
+gem 'inky-rb', require: 'inky'
+# Stylesheet inlining for email
+gem 'premailer-rails'
