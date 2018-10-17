@@ -50,7 +50,7 @@ RSpec.describe User, type: :model do
 
     describe 'display users full name' do
       it 'returns the user full name' do
-        expect(user.name).to eq('test name')
+        expect(user.name).to eq('Test Name')
       end
     end
 

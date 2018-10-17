@@ -34,7 +34,7 @@ class User < ApplicationRecord
   has_and_belongs_to_many :cohorts
 
   def user_tag
-    name.insert(0, '@')
+    name.downcase.insert(0, '@')
   end
 
   def student?
