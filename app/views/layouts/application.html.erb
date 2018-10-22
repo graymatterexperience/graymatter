@@ -131,6 +131,7 @@
             <% if logged_in? && @current_user.admin? %>
                 <%= render 'pages/admin_panel' %>
             <% end %>
+            <div id="modal-holder"></div>
             <%= yield %>
         </div>
     </main>

@@ -2,6 +2,10 @@
 <!-- TODO also for some reason the grid systems is not working I must have over written something -->
 
 <div class="container">
+    
+<h1>take this out</h1>
+<a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+
     <div class="row">
         <% @resources.each do |key| %>
             <div class="card col m3 s12 zero-padding">
@@ -30,3 +34,13 @@
         <% end %>
     </div>
 </div>
+
+<div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Modal Header</h4>
+      <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
