@@ -88,4 +88,10 @@ Rails.application.routes.draw do
   #workshop
   get 'workshops/index'
   get '/workshops/:id', to: 'workshops#show', as: 'workshop'
+
+  # reset password 
+  resources :password_resets, only: [ :new, :create]
+
+  get '/password_resets/edit' => 'password_resets#edit', as: :edit_password_reset
+  put '/password_resets/' => 'password_resets#update', as: :password_reset
 end
