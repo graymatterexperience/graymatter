@@ -1,18 +1,22 @@
-$(document).ready(function() {
+$(function() {
   console.log('modals.js at the beginning')
   const modal_holder_selector = '#modal-holder';
   const modal_selector = '.modal';
-
+  //$('.modal').modal({
+      //dismissible: true
+  //});
   $(document).on('click', 'a[data-modal]', function() {
+  //$('.modal-trigger').leanModal();
     const location = $(this).attr('href');
     // Load modal dialog from server
     console.log('location fucker', location)
 
+    //$('.modal').modal();
     console.log('modal_holder_selector', modal_holder_selector)
     console.log('modal_selector', modal_selector)
     $.get(
       location,
-      data => { $(modal_holder_selector).html(data).find(modal_selector).modal() }
+      data => { $(modal_holder_selector).html(data).find(modal_selector).modal('open') }
     );
     return false;
   });

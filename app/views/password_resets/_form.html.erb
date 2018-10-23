@@ -1,4 +1,4 @@
-
+<%= @user.first_name %>
 <%= simple_form_for(@user, remote: request.xhr?, html: { data: { modal: true } }) do |f| %>
   <div class="modal-content">
     <%= f.input :first_name %>
@@ -6,17 +6,14 @@
   </div>
 
   <div class="modal-footer">
-      where is this text
+      this is the actual form fucker
     <%= f.button :submit, class: 'btn-success' %>
   </div>
 <% end %>
 
-<%#= simple_form_for(@user, remote: request.xhr?, html: { data: { modal: true } }) %>
 
-<%= form_for new_password_reset_path, remote: request.xhr?, html: { data: { modal: true } } do |f| %>
-    <%= f.label :password %>
-    <%= f.text_field :password %>
-    <div class="modal-footer">
-        <%= f.button :submit, class: 'btn-success' %>
-    </div>
-<% end %>
+<script>
+    $(document).ready(function(){
+        $('.modal').modal();
+    });
+</script>
