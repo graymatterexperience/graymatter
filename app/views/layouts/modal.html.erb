@@ -1,15 +1,11 @@
 <div id="modal1" class="modal">
-    <div class="modal-content">
-        <h4>
-            <h1>RENDORED modal.html.erb</h1>
-            <%#= yield :title if content_for? :title %>&nbsp;
-        </h4>
-        <p>
-            <%#= yield %>
-        </p>
-    </div>
-    <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-    </div>
+    <%= yield %>
+    <p>layout/modals</p>
 </div>
 
+
+<script>
+    $(document).ready(function(){
+        $('.modal').modal();
+    });
+</script>
