@@ -39,3 +39,28 @@ $(function() {
     return false;
   });
 });
+
+
+function openResetPasswordModal () {
+  console.log('onpenResetPasswordModal beginning')
+  const modal_holder_selector = '#modal-holder';
+  const modal_selector = '.modal';
+
+    const location = '/password_resets/new';
+    // Load modal dialog from server
+    console.log('location fucker RESET', location)
+
+    $.get(
+      location,
+      data => { $(modal_holder_selector).html(data).find(modal_selector).modal('open') }
+    );
+    return false;
+}
+
+window.onload = openResetPasswordModal;
+//window.onload = $('.modalTwo').modal(); doesn't work
+//var elem = '.modalTwo';
+//var instance = M.Modal.getInstance(elem);
+
+
+

@@ -8,3 +8,11 @@
   //console.log('this needs to happen')
   //$('.modal').modal();
 //});
+//
+//
+// function below makes a alert box show as soon as the page has loaded
+//function codeAddress() {
+  //alert('ok');
+//};
+
+//window.onload = codeAddress;
