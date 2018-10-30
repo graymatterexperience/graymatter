@@ -22,9 +22,12 @@ $(function() {
   });
 
   $(document).on('ajax:success', 'form[data-modal]', function(event){
-    console.log('AM I HRE')
+    debugger
+    console.log('AM I HRE in AJAX')
+    console.log('fucker', event.detail)
     const [data, _status, xhr] = event.detail;
     const url = xhr.getResponseHeader('Location');
+    console.log('URL', url)
     if (url) {
       // Redirect to url
       window.location = url;
@@ -57,10 +60,9 @@ function openResetPasswordModal () {
     return false;
 }
 
+// TODO this code below can not go here. it opens a modal on every page
+// also, this is a conditional only when users logs on for the first time
 window.onload = openResetPasswordModal;
-//window.onload = $('.modalTwo').modal(); doesn't work
-//var elem = '.modalTwo';
-//var instance = M.Modal.getInstance(elem);
 
 
 
