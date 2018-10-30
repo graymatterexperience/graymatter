@@ -9,6 +9,13 @@
         <% end %>
         <span class='card-title'><%= @page_title %></span>
         <%= form_for [:admin, @user] do |f| %>
+            <div class="card-action">
+                <div class='right-align'>
+                    <%= f.submit 'Submit', class: 'btn light-green accent-4' %>
+                    <%= link_to "Cancel", admin_users_path(user: 'student'), class: 'btn red' %>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="input-field col s12 m6">
                     <%= f.label :first_name %>
@@ -89,12 +96,6 @@
                     </div>
                 <% end %>
 
-            <div class="card-action">
-                <div class='right-align'>
-                    <%= f.submit 'Submit', class: 'btn light-green accent-4' %>
-                    <%= link_to "Cancel", admin_users_path, class: 'btn red' %>
-                </div>
-            </div>
         <% end %>
     </div>
 </div>
