@@ -9,7 +9,6 @@ $(function() {
   //$('.modal-trigger').leanModal();
     const location = $(this).attr('href');
     // Load modal dialog from server
-    console.log('location fucker', location)
 
     //$('.modal').modal();
     console.log('modal_holder_selector', modal_holder_selector)
@@ -24,7 +23,6 @@ $(function() {
   $(document).on('ajax:success', 'form[data-modal]', function(event){
     debugger
     console.log('AM I HRE in AJAX')
-    console.log('fucker', event.detail)
     const [data, _status, xhr] = event.detail;
     const url = xhr.getResponseHeader('Location');
     console.log('URL', url)
@@ -51,7 +49,6 @@ function openResetPasswordModal () {
 
     const location = '/password_resets/new';
     // Load modal dialog from server
-    console.log('location fucker RESET', location)
 
     $.get(
       location,
