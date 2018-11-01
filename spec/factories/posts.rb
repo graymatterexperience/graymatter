@@ -11,7 +11,7 @@
 #  updated_at :datetime         not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :post do
     title "Test Post"
     body "This is the body to the test. @kim penball"
