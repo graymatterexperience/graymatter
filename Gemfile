@@ -34,7 +34,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  gem "factory_girl_rails"
+  gem "factory_bot_rails"
   gem "faker"
   gem "database_cleaner"
   gem "launchy"
