@@ -12,7 +12,7 @@
 #  updated_at  :datetime         not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :event do
     title "Event title"
     description "Event description"
