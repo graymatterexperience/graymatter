@@ -26,6 +26,11 @@ Rails.application.routes.draw do
   #namespace :admin do
     #get 'mentors/archive_mentor'
   #end
+  
+  # sessions 
+  get    '/login',   to: 'sessions#new'
+  post   '/login',   to: 'sessions#create'
+  delete '/logout',  to: 'sessions#destroy'
 
   root to: 'pages#index'
 
@@ -64,10 +69,6 @@ Rails.application.routes.draw do
   end
 
 
-  # sessions 
-  get    '/login',   to: 'sessions#new'
-  post   '/login',   to: 'sessions#create'
-  delete '/logout',  to: 'sessions#destroy'
   
   # mentors
   get '/mentors', to: 'mentors#index'
@@ -90,7 +91,7 @@ Rails.application.routes.draw do
   get '/workshops/:id', to: 'workshops#show', as: 'workshop'
 
   # reset password 
-  resources :password_resets, only: [ :new, :update]
+  resources :password_resets, only: [:new, :update]
 
   #get '/password_resets/edit' => 'password_resets#edit', as: :edit_password_reset
   #put '/password_resets/' => 'password_resets#update', as: :password_reset

@@ -39,79 +39,80 @@
     <body>
         <% if logged_in? %>
             <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-            <% else %>
+        <% else %>
                 <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
-                <% end %>
-                <% if logged_in? %>
-                    <header class="demo-header mdl-layout__header mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
-                        <div class="mdl-layout__header-row">
-                            <span class="mdl-layout-title">
-                                <%= link_to @page_title.upcase %>
-                            </span>
-                            <div class="mdl-layout-spacer center-align">
-                                <%= image_tag 'brain_logo.png', class: 'dashboard-logo' %>
-                            </div>
-                            <span class="mdl-layout-title right">
-                                <%= link_to "Log out", logout_path, method: :delete %>
-                            </span>
+        <% end %>
 
-                            <% if current_user.admin? %>
-                                <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
-                                    <i class="material-icons">more_vert</i>
-                                </button>
+        <% if logged_in? %>
+            <header class="demo-header mdl-layout__header mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+                <div class="mdl-layout__header-row">
+                    <span class="mdl-layout-title">
+                        <%= link_to @page_title.upcase %>
+                    </span>
+                    <div class="mdl-layout-spacer center-align">
+                        <%= image_tag 'brain_logo.png', class: 'dashboard-logo' %>
+                    </div>
+                    <span class="mdl-layout-title right">
+                        <%= link_to "Log out", logout_path, method: :delete %>
+                    </span>
 
-                                <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
-                                    <li class="mdl-menu__item">Admin Settings</li>
-                                </ul>
-                            <% end %>
-                        </div>
+                    <% if current_user.admin? %>
+                        <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
+                            <i class="material-icons">more_vert</i>
+                        </button>
+
+                        <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
+                            <li class="mdl-menu__item">Admin Settings</li>
+                        </ul>
+                    <% end %>
+                </div>
+            </header>
+
+            <div class=" mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+                <header class="demo-drawer-header">
+                    <%= image_tag 'name-logo.png', class: 'name-dashboard-logo' %>
+                    <%= image_tag 'user.jpg', class: 'demo-avatar' %>
+                    <div><%= current_user.name.split.map(&:capitalize)*' ' %></div>
+                    <div><%= current_user.role.capitalize %></div>
+                    <div class="demo-avatar-dropdown" style='margin-top: 10px'>
+                        <span>Cohort(s):</span>
+                        <div class="mdl-layout-spacer"></div>
+                        <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+                            <i class="material-icons" role="presentation">arrow_drop_down</i>
+                        </button>
+                        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
+                            <%= display_cohort_names(current_user) %>
+                        </ul>
+                    </div>
                     </header>
-
-                    <div class=" mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
-                        <header class="demo-drawer-header">
-                            <%= image_tag 'name-logo.png', class: 'name-dashboard-logo' %>
-                            <%= image_tag 'user.jpg', class: 'demo-avatar' %>
-                            <div><%= current_user.name.split.map(&:capitalize)*' ' %></div>
-                            <div><%= current_user.role.capitalize %></div>
-                            <div class="demo-avatar-dropdown" style='margin-top: 10px'>
-                                <span>Cohort(s):</span>
-                                <div class="mdl-layout-spacer"></div>
-                                <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-                                    <i class="material-icons" role="presentation">arrow_drop_down</i>
-                                </button>
-                                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
-                                    <%= display_cohort_names(current_user) %>
-                                </ul>
-                            </div>
-                            </header>
-                            <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-                                <%= link_to home_path, class: 'mdl-navigation__link' do %>
-                                    <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
-                            <% end %>
-                            <%= link_to students_path, class: 'mdl-navigation__link' do %>
-                                <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">face</i>Students</a>
+                    <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+                        <%= link_to home_path, class: 'mdl-navigation__link' do %>
+                            <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
+                        <% end %>
+                        <%= link_to students_path, class: 'mdl-navigation__link' do %>
+                            <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">face</i>Students</a>
                         <% end %>
                         <%= link_to mentors_path, class: 'mdl-navigation__link' do %>
                             <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">person</i>Mentors</a>
-                    <% end %>
-                    <%= link_to groups_index_path, class: 'mdl-navigation__link' do %>
-                        <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">group</i>Groups</a>
-                <% end %>
-                <%= link_to workshops_index_path, class: 'mdl-navigation__link' do %>
-                    <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">present_to_all</i>Workshop Presentations</a>
-                <% end %>
-                <%= link_to resources_index_path, class: 'mdl-navigation__link' do %>
-                    <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">book</i>Resources</a>
-                <% end %>
-                <%= link_to updates_index_path, class: 'mdl-navigation__link' do %>
-                    <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Calendar</a>
-                <% end %>
-                <%= link_to posts_path, class: 'mdl-navigation__link' do %>
-                    <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">message</i>Message Board</a>
-                <% end %>
-            </nav>
-        </div>
-    <% end %>
+                        <% end %>
+                        <%= link_to groups_index_path, class: 'mdl-navigation__link' do %>
+                            <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">group</i>Groups</a>
+                        <% end %>
+                        <%= link_to workshops_index_path, class: 'mdl-navigation__link' do %>
+                            <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">present_to_all</i>Workshop Presentations</a>
+                        <% end %>
+                        <%= link_to resources_index_path, class: 'mdl-navigation__link' do %>
+                            <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">book</i>Resources</a>
+                        <% end %>
+                        <%= link_to updates_index_path, class: 'mdl-navigation__link' do %>
+                            <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Updates</a>
+                        <% end %>
+                        <%= link_to posts_path, class: 'mdl-navigation__link' do %>
+                            <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">message</i>Message Board</a>
+                        <% end %>
+                    </nav>
+            </div>
+        <% end %>
 
     <main class="mdl-layout__content mdl-color--grey-100">
         <div class="page-container">
@@ -127,11 +128,11 @@
                         </div>
                     <% end %>
                 </div>
+                <% if @current_user.admin? %>
+                    <%= render 'pages/admin_panel' %>
+                <% end %>
+                <div id="modal-holder"></div>
             <% end %>
-            <% if logged_in? && @current_user.admin? %>
-                <%= render 'pages/admin_panel' %>
-            <% end %>
-            <div id="modal-holder"></div>
             <%= yield %>
         </div>
     </main>
