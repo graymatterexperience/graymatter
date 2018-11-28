@@ -134,3 +134,6 @@
     </div>
 
 </div>
+<% if logged_in? && @current_user.login_count.nil?  %>
+    <%= javascript_tag "openResetPasswordModal()" %>
+<% end %>

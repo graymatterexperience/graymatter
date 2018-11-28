@@ -59,6 +59,10 @@ class User < ApplicationRecord
     archive == true
   end
 
+  def login_count
+    user_information["sign_in_count"]
+  end
+
   # Returns a random token
   # def User.new_token
   #   SecureRandom.urlsafe_base64
