@@ -4,13 +4,13 @@ class PasswordResetsController < ApplicationController
   def new
     @page_title = 'Reset Password'
     @user = current_user
-    puts ' * controller 1' * 5
+    puts ' * password reset controller 2' * 3
     puts @user.inspect
     respond_modal_with @user
   end
 
   def update 
-    binding.pry
+    #binding.pry
     #if @user.update_attributes(user_params)
       #flash[:success] = "#{@user.name.capitalize} has been updated"
       #redirect_to admin_users_path(user: @user.role)

@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def new
+    puts ' * sessions controller 1' * 3
   end
 
   def create
