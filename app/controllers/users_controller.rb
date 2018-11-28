@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find_by_id(params[:id])
+    @user.user_information["sign_in_count"] = 0
     if @user.update_attributes(password_params)
       flash[:success] = "#{@user.name.capitalize} has been updated"
       respond_modal_with @user, location: root_path

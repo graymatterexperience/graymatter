@@ -17,7 +17,10 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    user = User.find_by_id(session["user_id"])
+    user.user_information["sign_in_count"] += 1
+    user.save
     session.delete(:user_id)
-    redirect_to login_path, alert: "Logged out!!!!"
+    redirect_to login_path, alert: "You have successfully logged out."
   end
 end
