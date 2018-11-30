@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180921162146) do
+ActiveRecord::Schema.define(version: 20181008135039) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cohorts", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.jsonb "settings"
+  end
+
+  create_table "cohorts_users", id: false, force: :cascade do |t|
+    t.bigint "cohort_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["cohort_id", "user_id"], name: "index_cohorts_users_on_cohort_id_and_user_id"
+    t.index ["user_id", "cohort_id"], name: "index_cohorts_users_on_user_id_and_cohort_id"
+  end
 
   create_table "events", force: :cascade do |t|
     t.string "title"
@@ -45,6 +59,8 @@ ActiveRecord::Schema.define(version: 20180921162146) do
     t.string "role"
     t.string "reset_digest"
     t.datetime "reset_sent_at"
+    t.boolean "archive", default: false
+    t.jsonb "user_information", default: {}, null: false
   end
 
 end

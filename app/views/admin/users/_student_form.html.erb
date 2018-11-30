@@ -1,0 +1,92 @@
+<div class="card">
+    <div class="card-content">
+        <% if @user.errors.any? %>
+            <ul class="Signup_Errors">
+                <% for message_error in @user.errors.full_messages %>
+                    <li class="alert alert-warning"><%= message_error %></li>
+                <% end %>
+            </ul>
+        <% end %>
+        <span class='card-title'><%= @page_title %></span>
+        <%= form_for [:admin, @user] do |f| %>
+            <div class="row">
+                <div class="input-field col s12 m6">
+                    <%= f.label :first_name %>
+                    <%= f.text_field :first_name, class: '' %>
+                </div>
+                <div class="input-field col s12 m6">
+                    <%= f.label :last_name %>
+                    <%= f.text_field :last_name, class: '' %>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m6">
+                    <%= f.label :email, "Email" %>
+                    <%= f.text_field :email, class: '' %>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="input-field col s12 m6">
+                    <div class="input-field col s12">
+                        <%= f.select :cohort_ids, Cohort.all.map { |p| [ p.name, p.id ] } %>
+                        <label>Cohort Seletcion</label>
+                    </div>
+                </div>
+                <div class="input-field col s12 m6">
+                    <%= f.label :role, "Role" %>
+                    <%= f.text_field :role, class: '', value: 'student' %>
+                </div>
+            </div>
+                <%= f.fields_for :user_information do |info| %>
+                    <div class="row">
+                        <div class="input-field col s12 m4">
+                            <%= info.label :avatar %>
+                            <%= info.text_field :avatar, class: '', placeholder: 'coming soon' %>
+                        </div>
+                        <div class="input-field col s12 m4">
+                            <%= info.label :phone %>
+                            <%= info.text_field :phone, class: '', value: @user.user_information["phone"] %>
+                        </div>
+                        <div class="input-field col s12 m4">
+                            <%= info.label :school %>
+                            <%= info.text_field :school, class: '', value: @user.user_information["school"] %>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 m3">
+                            <%= info.label :grade %>
+                            <%= info.text_field :grade, class: '', value: @user.user_information["grade"] %>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <%= info.fields_for :social_media do |media| %>
+                            <div class="input-field col s12 m3">
+                                <%= media.label :instagram %>
+                                <%= media.text_field :instagram, class: '', placeholder: 'https://www.instagram.com', value: @user.user_information.try(:[], "social_media").try(:[], "instagram") %>
+                            </div>
+                            <div class="input-field col s12 m3">
+                                <%= media.label :linkedin %>
+                                <%= media.text_field :linkedin, class: '', placeholder: 'https://www.linkedin.com', value: @user.user_information.try(:[], "social_media").try(:[], "linkedin") %>
+                            </div>
+                            <div class="input-field col s12 m3">
+                                <%= media.label :twitter %>
+                                <%= media.text_field :twitter, class: '', placeholder: 'https://www.twitter.com', value: @user.user_information.try(:[], "social_media").try(:[], "twitter") %>
+                            </div>
+                            <div class="input-field col s12 m3">
+                                <%= media.label :facebook %>
+                                <%= media.text_field :facebook, class: '', placeholder: 'https://www.facebook.com', value: @user.user_information.try(:[], "social_media").try(:[], "facebook") %>
+                            </div>
+                        <% end %>
+                    </div>
+                <% end %>
+
+            <div class="card-action">
+                <div class='right-align'>
+                    <%= f.submit 'Submit', class: 'btn light-green accent-4' %>
+                    <%= link_to "Cancel", admin_users_path(user: @user.role), class: 'btn red' %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>

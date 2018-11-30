@@ -1,38 +1,41 @@
 <!-- Mentor Table -->
 <table class='highlight responsive-table'>
-  <thead>
-    <tr>
-      <th></th>
-      <th>Name</th>
-      <th>Company</th>
-      <th>Specialty</th>
-      <th>Email</th>
-      <th>Phone</th>
-      <th>LinkedIn</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% if @mentors %>
-      <% @mentors.each do |mentor| %>
+    <thead>
         <tr>
-          <td><img src="<%= mentor['avatar'] %>" class="demo-avatar" ></td>
-          <td><%= mentor["name"] %></td>
-          <td><%= mentor["company"] %></td>
-          <td><%= mentor["specialty"] %></td>
-          <td><a href="mailto:<%= mentor['email'] %>"><%= mentor["email"] %></td>
-          <td><%= mentor["phone"] %></td>
-          <td>
-              <div id="linkedin">
-                  <%= link_to image_tag('linkedin.png', class: 'btn-floating waves-effect waves-light'), mentor["linkedin"], target: '_blank' %>
-              </div>
-          </td>
+            <th></th>
+            <th>Name</th>
+            <th>Company</th>
+            <th>Specialty</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>LinkedIn</th>
         </tr>
-      <% end %> 
-    <% end %> 
-  </tbody>
+    </thead>
+    <tbody>
+        <% if @mentors %>
+            <% @mentors.each do |mentor| %>
+                <tr>
+                    <% if mentor.user_information['avatar'].present? %>
+                        <td><%= image_tag mentor.user_information['avatar'],
+                            class: 'demo-avatar' %></td>
+                    <% else %>
+                        <td><%= image_tag "user_avatar_2.png", class: 'demo-avatar' %></td>
+                    <% end %>
+                    <td><%= mentor.name %></td>
+                    <td><%= mentor.user_information["company"] %></td>
+                    <td><%= mentor.user_information["specialty"] %></td>
+                    <td><a href="mailto:<%= mentor.email %>"> <%= mentor.email %> </td>
+                    <td><%= mentor.user_information["phone"] %></td>
+                    <td>
+                        <div id="linkedin">
+                            <%= link_to image_tag('linkedin.png',
+                                                  class: 'btn-floating waves-effect waves-light'),
+                                                  mentor.user_information["linkedin"],
+                                                  target: '_blank' %>
+                        </div>
+                    </td>
+                </tr>
+            <% end %>
+        <% end %>
+    </tbody>
 </table>
-
-
-
-      <%#tag.div(id: socialMedia[0], class: 'col m2 pl right') do%>
-        <%#content_tag(:a, image_tag(social_media_icons[socialMedia[0]], class: socialMedia[0]), href: socialMedia[1] || 'www.FIXTHIS.com', class: 'btn-floating sm-btn-fab waves-effect waves-light', target: '_blank')%>

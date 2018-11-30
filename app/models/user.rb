@@ -2,35 +2,65 @@
 #
 # Table name: users
 #
-#  id              :bigint(8)        not null, primary key
-#  first_name      :string
-#  last_name       :string
-#  email           :string
-#  password_digest :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  role            :string
-#  reset_digest    :string
-#  reset_sent_at   :datetime
+#  id               :bigint(8)        not null, primary key
+#  first_name       :string
+#  last_name        :string
+#  email            :string
+#  password_digest  :string
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  role             :string
+#  reset_digest     :string
+#  reset_sent_at    :datetime
+#  cohort_id        :integer
+#  user_information :jsonb            not null
 #
 
 class User < ApplicationRecord
-  attr_accessor :reset_token
-  before_save { self.email = email.downcase }
-
-  validates :first_name, presence: true, length: { maximum: 50 }
-  validates :last_name, presence: true, length: { maximum: 50 }
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
-  validates :email, presence: true, length: { maximum: 255 },
-            format: { with: VALID_EMAIL_REGEX },
-            uniqueness: { case_sensitive: false }
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
+  attr_accessor :reset_token
+  store_accessor :user_information, :avatar, :phone, :school, :grade
+  before_save { self.email = email.downcase }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+
+  validates :first_name, presence: true, length: {maximum: 50}
+  validates :last_name, presence: true, length: {maximum: 50}
+  validates :email, presence: true, length: {maximum: 255},
+                    format: {with: VALID_EMAIL_REGEX},
+                    uniqueness: {case_sensitive: false}
+# TODO the way I am creating passwords, I will need to validate this a different way
+# or figure out a work around for the archive_user
+  validates :password, presence: true, length: { minimum: 6 }, on: [ :create, :update ]
 
   has_many :posts, class_name: 'Post', foreign_key: :auther_id, primary_key: :id
+  has_and_belongs_to_many :cohorts
 
   def user_tag
-    "@#{self.first_name} #{self.last_name}"
+    name.downcase.insert(0, '@')
+  end
+
+  def student?
+    role == 'student'
+  end
+
+  def admin?
+    role == 'admin'
+  end
+
+  def mentor?
+    role == 'mentor'
+  end
+
+  def name
+    "#{first_name.capitalize} #{last_name.capitalize}"
+  end
+
+  def archived?
+    archive == true
+  end
+
+  def login_count
+    user_information["sign_in_count"]
   end
 
   # Returns a random token
@@ -55,5 +85,3 @@ class User < ApplicationRecord
   #   reset_sent_at < 2.hours.ago
   # end
 end
-
-

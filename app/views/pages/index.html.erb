@@ -3,10 +3,9 @@
     <div class="demo-logo mdl-color--black mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
         <%#= image_tag 'main-logo.png', class: 'dashboard-logo' %>
     </div>
+<a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
     -->
-
-    <div class='row'>
-
+<div class='row'>
         <div class="col s12 m4">
             <div class="card">
                 <div class="card-content lime">
@@ -120,10 +119,15 @@
         </div>
     </div>
 
-    <div class='row' style="margin-top: 30px">
+    <div class='row'>
         <% @pages_payload.each do |media| %>
-            <%= get_social_media(media) %>
-                <% end %>
+            <span>
+                <%= get_social_media(media) %>
+            </span>
+        <% end %>
     </div>
 
 </div>
+<%# if logged_in? && @current_user.login_count.nil?  %>
+    <%#= javascript_tag "openResetPasswordModal()" %>
+<%# end %>

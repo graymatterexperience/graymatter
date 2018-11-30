@@ -13,9 +13,9 @@
 
 FactoryBot.define do
   factory :post do
-    title "Test Post"
-    body "This is the body to the test. @kim penball"
-    auther_id 1
-    user_tags []
+    title { "Test Post" }
+    body { "This is the body to the test. @kim penball" }
+    auther_id { 1 }
+    user_tags { [] }
   end
 end

@@ -1,0 +1,65 @@
+<div class="cohort-form-container">
+    <%= form_for [:admin, @cohort] do |f| %>
+        <div class="row">
+            <div class="col m6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class='card-title'><%= @page_title %></span>
+                        <%= f.label :cohort_name %>
+                        <%= f.text_field :name, class: '' %>
+                        <%= f.label :color %><br>
+                        <%#= f.text_field :color, id: 'colorpicker'%>
+                    </div>
+                    <%= f.fields_for :settings do |p| %>
+                        <%= p.text_field :color, type: 'color', class: 'basic color-container' %>
+                    <% end %>
+                    <div class="card-action">
+                        <div class='right-align'>
+                            <%= f.submit 'Submit', class: 'btn light-green accent-4' %>
+                            <%= link_to "Cancel", admin_cohorts_path, class: 'btn red' %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>
+
+<!--
+<input type='color' class='basic' value='#f594d0' />
+<input id='colorpicker' />
+If I used options then I could not get the color to come through on
+params
+-->
+<script>
+    /*
+    $("#colorpicker").spectrum({
+        color: "red",
+        showPalette: true
+    });
+$('#picker').spectrum({
+    showPalette: true,
+})
+
+    $("#picker").spectrum({
+        color: 'red',
+        flat: bool,
+        showInput: bool,
+        showInitial: bool,
+        showAlpha: bool,
+        disabled: bool,
+        localStorageKey: string,
+        showPalette: true,
+        showPaletteOnly: bool,
+        showSelectionPalette: bool,
+        clickoutFiresChange: bool,
+        cancelText: string,
+        chooseText: string,
+        className: string,
+        preferredFormat: string,
+        maxSelectionSize: int,
+        palette: [[string]],
+        selectionPalette: [string]
+    });
+     */
+ </script>

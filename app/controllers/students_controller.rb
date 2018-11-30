@@ -1,59 +1,25 @@
 class StudentsController < ApplicationController
-  # TODO remove below when data base set
-  before_action :set_images
+  before_action :get_users
 
   def index
-    @page_title = 'Student Profiles for Group One'
-    @students = 8.times.map { |student| student_payload }
-  end
-
-  def create
-  end
-
-  def edit
-  end
-
-  def update
-  end
-
-  def delete
-  end
-
-  def show
+    @page_title = 'Student Profiles'
   end
 
   private
 
-  def student_payload
-      {
-        firstName: Faker::Name.first_name,
-        lastName: Faker::Name.last_name,
-        fullName: Faker::Name.name,
-        group_id: 123412,
-        information: {
-          group: 'Cool Group Name',
-          school: 'South Highschool',
-          grade: '11',
-          email: Faker::Internet.email,
-          phone: Faker::PhoneNumber.cell_phone,
-          socialMedia: {
-            facebook: "https://www.facebook.com/graymatterexp",
-            twitter: "https://twitter.com/graymatterexp",
-            linkedin: "https://www.linkedin.com/company/the-gray-matter-experience/",
-            instagram: "https://www.instagram.com/graymatterexp/"
-          },
-          avatar: get_image
-        }
-      }.as_json
-  end
+  def get_users
+    # FIXME so I think this is better but I bet there is a much better way. I still have
+    # lots of sql queries - the if statement.. this is a HACK... FIXME
+    #current_user.cohorts.collect(&:users)
+    #
+    grouped_students = User.all.select(&:student?)
+      .group_by { |student| student.cohorts[0].name }
+    @students = grouped_students.select { |key, value| value if current_user.cohorts.map(&:name).include?(key) }
 
-  def set_images
-  # TODO remove below when data base set
-    @@images = %w[man-4 lady-4 man-1 man-2 lady-2 lady-3  man-3 lady-1 ]
-  end
-
-  def get_image
-  # TODO remove below when data base set
-    @@images.pop
+    # FIXME this is stupid. all cohorts & students should belong to admin
+    if current_user.admin?
+      @students = User.all.select(&:student?)
+        .group_by { |student| student.cohorts[0].name }
+    end
   end
 end

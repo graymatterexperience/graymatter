@@ -1,0 +1,41 @@
+.student-card-social-media-container {
+  margin: -15px 0 0 15px;
+}
+
+#admin-social-media-container {
+
+}
+
+#social-media-container {
+  //position: relative;
+  //top: -15px;
+}
+
+#admin-social-media-container {
+  //position: absolute;
+  border-radius: 50% !important;
+}
+
+.facebook {
+  border-radius: 50% !important;
+  width: 2.5rem !important;
+  background-color: #4468B0;
+}
+
+.twitter {
+  border-radius: 50% !important;
+  width: 2.5rem !important;
+  background-color: #2AA3EF;
+}
+
+.linkedin {
+  border-radius: 50% !important;
+  width: 2.5rem !important;
+  background-color: #1178B3;
+}
+
+.instagram {
+  border-radius: 50% !important;
+  width: 2.5rem !important;
+  background-color: #262626;
+}

@@ -1,0 +1,32 @@
+#clear-filter-chip {
+  display: none;
+}
+
+.clear-chip {
+  background-color: transparent !important;
+  border: 1px solid green !important;
+  cursor: pointer;
+}
+
+.admin-container {
+  min-width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.divider-line {
+  border-bottom: 3px solid #ccc;
+  margin-bottom: 75px;
+}
+
+.mb-s {
+  margin-bottom: 10px;
+}
+
+.mb-m {
+  margin-bottom: 20px;
+}
+
+.mb-l {
+  margin-bottom: 30px;
+}

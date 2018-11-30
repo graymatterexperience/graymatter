@@ -35,6 +35,7 @@ gem 'bcrypt',     '3.1.11'
 
 group :development, :test do
   gem "factory_bot_rails"
+  gem "rubocop-rspec"
   gem "database_cleaner"
   gem "launchy"
   gem 'shoulda-matchers'
@@ -67,3 +68,15 @@ gem "font-awesome-rails"
 gem 'pry'
 gem "figaro"
 gem 'annotate'
+# installed mini_racer because heroku throw an error about node in my feature tests
+gem 'mini_racer'
+
+# Delete this
+gem 'simple_form'
+
+# for the modals
+gem 'responders'
+# Email templates
+gem 'inky-rb', require: 'inky'
+# Stylesheet inlining for email
+gem 'premailer-rails'

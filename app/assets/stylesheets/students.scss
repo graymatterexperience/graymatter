@@ -1,6 +1,17 @@
+.student-profile-card-container {
+  height: 570px;
+}
+.card-title-custom {
+  bottom: 25px !important;
+}
+
 .card .card-image .profile-img {
   object-fit: cover;
   height: 350px;
+}
+
+.profile-img-default {
+  background-color: #000
 }
 
 .sm-btn-fab {

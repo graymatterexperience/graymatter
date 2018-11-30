@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def new
+    puts ' * sessions controller 1' * 3
   end
 
   def create
@@ -16,8 +17,10 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    log_out if logged_in?
-    flash[:success] = "You have logged out"
-    redirect_to root_url
+    user = User.find_by_id(session["user_id"])
+    user.user_information["sign_in_count"] += 1 if user.user_information["sign_in_count"]
+    user.save(validate: false)
+    session.delete(:user_id)
+    redirect_to login_path, alert: "You have successfully logged out."
   end
 end
