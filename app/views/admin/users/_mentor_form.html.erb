@@ -8,6 +8,8 @@
             </ul>
         <% end %>
         <span class='card-title'><%= @page_title %></span>
+
+        <%#= form_for @user, url: password_reset_path(@user) do |f| %>
         <%= form_for [:admin, @user] do |f| %>
             <div class="row">
                 <div class="input-field col s12 m6">
@@ -20,14 +22,6 @@
                 </div>
             </div>
             <div class="row">
-                <div class="input-field col s12 m6">
-                    <%= f.label :password %>
-                    <%= f.password_field :password, class: '' %>
-                </div>
-                <div class="input-field col s12 m6">
-                    <%= f.label :password_confirmation, "Confirmation" %>
-                    <%= f.password_field :password_confirmation, class: '' %>
-                </div>
                 <div class="input-field col s12 m6">
                     <%= f.label :email, "Email" %>
                     <%= f.text_field :email, class: '' %>
@@ -80,7 +74,7 @@
             <div class="card-action">
                 <div class='right-align'>
                     <%= f.submit 'Submit', class: 'btn light-green accent-4' %>
-                    <%= link_to "Cancel", admin_users_path, class: 'btn red' %>
+                    <%= link_to "Cancel", admin_users_path(user: @user.role), class: 'btn red' %>
                 </div>
             </div>
         <% end %>

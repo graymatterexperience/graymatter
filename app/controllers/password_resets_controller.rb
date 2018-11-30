@@ -4,26 +4,26 @@ class PasswordResetsController < ApplicationController
   def new
     @page_title = 'Reset Password'
     @user = current_user
-    puts ' * password reset controller 2' * 3
-    puts @user.inspect
-    respond_modal_with @user
+    #respond_modal_with @user
   end
 
   def update 
-    #binding.pry
-    #if @user.update_attributes(user_params)
-      #flash[:success] = "#{@user.name.capitalize} has been updated"
-      #redirect_to admin_users_path(user: @user.role)
-    #else
-      #flash[:error] = 'Something went wrong'
-      #render 'edit'
-    #end
+    @page_title = 'Reset Password'
+    @user = current_user
+    @user.user_information["sign_in_count"] = 0
+    if @user.update_attributes(password_params)
+      flash[:success] = "#{@user.name.capitalize}, Your password has been updated"
+      redirect_to home_path
+    else
+      flash[:error] = @user.errors.full_messages.to_sentence
+      render 'new'
+    end
   end
 
   private
 
   def password_params
-    params.require(:password).permit(
+    params.require(:user).permit(
       :password,
       :password_confirmation
     )

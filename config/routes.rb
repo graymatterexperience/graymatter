@@ -93,6 +93,4 @@ Rails.application.routes.draw do
   # reset password 
   resources :password_resets, only: [:new, :update]
 
-  #get '/password_resets/edit' => 'password_resets#edit', as: :edit_password_reset
-  #put '/password_resets/' => 'password_resets#update', as: :password_reset
 end
