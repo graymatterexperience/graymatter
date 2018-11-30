@@ -14,7 +14,7 @@ RSpec.describe Admin::UsersController, type: :controller do
     end
     context 'as an authenticated admin' do
       it "adds a mentor" do
-        mentor_user = FactoryGirl.attributes_for(:mentor_user)
+        mentor_user = FactoryBot.attributes_for(:mentor_user)
         mentor_user['cohort_ids'] = @cohort.id
 
         expect {
@@ -49,7 +49,7 @@ RSpec.describe Admin::UsersController, type: :controller do
       it "updated mentor information" do
         mentor_model = create(:mentor_user)
         mentor_model.cohort_ids = @cohort_one.id
-        mentor_user = FactoryGirl.attributes_for(:mentor_user)
+        mentor_user = FactoryBot.attributes_for(:mentor_user)
         mentor_user['cohort_ids'] = @cohort_one.id
 
         mentor_user = attributes_for(:mentor_user)

@@ -16,7 +16,6 @@
 #  user_information :jsonb            not null
 #
 
-FactoryBot.define do
 mentor_information = {
   avatar: 'User_Avatar_2.png',
   phone: Faker::PhoneNumber.phone_number,
@@ -41,46 +40,47 @@ user_information = {
   }
 }
 
+FactoryBot.define do
   factory :user do
-    first_name 'test'
-    last_name 'name'
-    email 'test@email.com'
-    password 'password'
+    first_name { 'test' }
+    last_name { 'name' }
+    email { 'test@email.com' }
+    password { 'password' }
   end
 
   # TODO deprecated remove from tests DO NOT use
   factory :user_two, class: User do
-    first_name 'kim'
-    last_name 'penball'
-    email 'penball@email.com'
-    password 'password'
-    role 'student'
+    first_name { 'kim' }
+    last_name { 'penball' }
+    email { 'penball@email.com' }
+    password { 'password' }
+    role { 'student' }
   end
 
   factory :admin_user, class: User do
-    first_name 'jess'
-    last_name 'roller'
-    email 'jess@email.com'
-    password 'password'
-    role 'admin'
+    first_name { 'jess' }
+    last_name { 'roller' }
+    email { 'jess@email.com' }
+    password { 'password' }
+    role { 'admin' }
   end
 
   factory :student_user, class: User do
-    first_name Faker::Name.first_name
-    last_name Faker::Name.last_name
-    email Faker::Internet.email
-    password 'password'
-    role 'student'
-    user_information user_information
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
+    email { Faker::Internet.email }
+    password { 'password' }
+    role { 'student' }
+    user_information { user_information }
   end
 
   factory :mentor_user, class: User do
-    first_name Faker::Name.first_name
-    last_name Faker::Name.last_name
-    email Faker::Internet.email
-    password 'password'
-    role 'mentor'
-    user_information mentor_information
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
+    email { Faker::Internet.email }
+    password { 'password' }
+    role { 'mentor' }
+    user_information { mentor_information }
   end
 end
 

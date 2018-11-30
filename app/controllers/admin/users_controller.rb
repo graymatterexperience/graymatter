@@ -136,7 +136,7 @@ class Admin::UsersController < Admin::ApplicationController
   # FIXME this should be archive_user
   def archive_student
     @user.archive = true
-    if @user.save
+    if @user.save(validate: false)
       flash[:success] = "#{@user.name.capitalize} has been Archived"
       redirect_to admin_users_path(user: @user.role)
     else

@@ -15,10 +15,10 @@
 
 FactoryBot.define do
   factory :event do
-    title "Event title"
-    description "Event description"
-    start "2018-08-20 13:16:16"
+    title { "Event title" }
+    description { "Event description" }
+    start { "2018-08-20 13:16:16" }
     #end "2018-08-20 13:16:16"
-    all_day false
+    all_day { false }
   end
 end

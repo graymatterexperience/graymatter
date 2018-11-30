@@ -1,11 +1,11 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :cohort do
-    name 'Cohort One'
+    name { 'Cohort One' }
     settings {}
   end
 
   factory :cohort_two, class: Cohort do
-    name 'Cohort Two'
+    name { 'Cohort Two' }
     settings {}
   end
 end

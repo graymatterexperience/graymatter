@@ -35,6 +35,7 @@ gem 'bcrypt',     '3.1.11'
 
 group :development, :test do
   gem "factory_bot_rails"
+  gem "rubocop-rspec"
   gem "database_cleaner"
   gem "launchy"
   gem 'shoulda-matchers'
