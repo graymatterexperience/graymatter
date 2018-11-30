@@ -86,7 +86,7 @@ user3 = User.create!({
   }
 })
 
-user2.cohort_ids = cohort2.id
+user3.cohort_ids = cohort2.id
 
 mentor1 = User.create!({
   first_name: Faker::Name.first_name,
