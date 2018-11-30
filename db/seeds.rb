@@ -113,7 +113,7 @@ mentor2 = User.create!({
   password: 'password',
   role: 'mentor',
   user_information: {
-    avatar: 'User_Avatar_2.png',
+    avatar: 'user_avatar_2.png',
     phone: Faker::PhoneNumber.phone_number,
     company: Faker::Company.name,
     specialty: Faker::Company.industry,
@@ -131,7 +131,7 @@ mentor3 = User.create!({
   password: 'password',
   role: 'mentor',
   user_information: {
-    avatar: 'User_Avatar_2.png',
+    avatar: 'user_avatar_2.png',
     phone: Faker::PhoneNumber.phone_number,
     company: Faker::Company.name,
     specialty: Faker::Company.industry,
