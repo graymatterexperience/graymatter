@@ -71,9 +71,6 @@ gem 'annotate'
 # installed mini_racer because heroku throw an error about node in my feature tests
 gem 'mini_racer'
 
-# Delete this
-gem 'simple_form'
-
 # for the modals
 gem 'responders'
 # Email templates

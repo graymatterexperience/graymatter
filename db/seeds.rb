@@ -81,7 +81,7 @@ user3 = User.create!({
     school: 'West Highschool',
     grade: '11',
     social_media: {
-      instagram: 'https://www.instagram.com/graymatterexp/',
+      instagram: 'https://www.instagram.com/graymatterexp/'
     }
   }
 })
@@ -99,9 +99,9 @@ mentor1 = User.create!({
     phone: Faker::PhoneNumber.phone_number,
     company: Faker::Company.name,
     specialty: Faker::Company.industry,
-    company_logo: Faker::Compnay.logo
+    company_logo: Faker::Company.logo,
     social_media: {
-      instagram: 'https://www.instagram.com/graymatterexp/',
+      instagram: 'https://www.instagram.com/graymatterexp/'
     }
   }
 })
@@ -117,9 +117,9 @@ mentor2 = User.create!({
     phone: Faker::PhoneNumber.phone_number,
     company: Faker::Company.name,
     specialty: Faker::Company.industry,
-    company_logo: Faker::Compnay.logo
+    company_logo: Faker::Company.logo,
     social_media: {
-      instagram: 'https://www.instagram.com/graymatterexp/',
+      instagram: 'https://www.instagram.com/graymatterexp/'
     }
   }
 })
@@ -135,9 +135,9 @@ mentor3 = User.create!({
     phone: Faker::PhoneNumber.phone_number,
     company: Faker::Company.name,
     specialty: Faker::Company.industry,
-    company_logo: Faker::Company.logo
+    company_logo: Faker::Company.logo,
     social_media: {
-      instagram: 'https://www.instagram.com/graymatterexp/',
+      instagram: 'https://www.instagram.com/graymatterexp/'
     }
   }
 })
