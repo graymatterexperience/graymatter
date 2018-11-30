@@ -47,7 +47,7 @@ class Admin::UsersController < Admin::ApplicationController
       # FIXME this is SO ugly.. wow...
       @cohorts_groups = Cohort.all
 
-      # FIXME This need to pluck only the users that are not archived
+      # FIXME This need to select only the users that are not archived
       @cohorts = Cohort.all.collect(&:users)
     end
 
@@ -59,7 +59,7 @@ class Admin::UsersController < Admin::ApplicationController
       # FIXME this is SO ugly.. wow...
       @cohorts_groups = Cohort.all
 
-      # FIXME This need to pluck only the users that are not archived
+      # FIXME This need to select only the users that are not archived
       @mentors = User.all.select(&:mentor?)
     end
 
@@ -71,6 +71,7 @@ class Admin::UsersController < Admin::ApplicationController
 
   def new
     @user = User.new
+    @user.role = params[:user]
     if params[:user] == 'mentor'
       @page_title = 'Add a Mentor'
       @mentor = User.new

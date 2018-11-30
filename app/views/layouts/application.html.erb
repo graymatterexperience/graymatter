@@ -74,14 +74,16 @@
                     <%= image_tag 'user.jpg', class: 'demo-avatar' %>
                     <div><%= current_user.name.split.map(&:capitalize)*' ' %></div>
                     <div><%= current_user.role.capitalize %></div>
-                    <div class="demo-avatar-dropdown" style='margin-top: 10px'>
-                        <span>Cohort(s):</span>
+                    <div class="demo-avatar-dropdown" style='margin-top: 10px;'>
+                        <span>Settings:</span>
                         <div class="mdl-layout-spacer"></div>
                         <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
                             <i class="material-icons" role="presentation">arrow_drop_down</i>
                         </button>
-                        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
-                            <%= display_cohort_names(current_user) %>
+                        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" style='width: 150px !important; padding-left: 10px !important' for="accbtn">
+                            <li><%= display_cohort_names(current_user) %></li>
+                            <li><%= link_to 'Profile', '#', class: 'profile-link' %></li>
+                            <li><%= link_to 'Reset Password', new_password_reset_path, class: 'reset-password-link' %></li>
                         </ul>
                     </div>
                     </header>
@@ -131,8 +133,8 @@
                 <% if @current_user.admin? %>
                     <%= render 'pages/admin_panel' %>
                 <% end %>
-                <div id="modal-holder"></div>
             <% end %>
+             <div id="modal-holder"></div>
             <%= yield %>
         </div>
     </main>

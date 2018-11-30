@@ -5,12 +5,6 @@
     </div>
 <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
     -->
-    <%= link_to 'Reset Password',
-        new_password_reset_path,
-        data: { modal: true,
-                toggle: "modal",
-                target: "#modal1" },
-        class: 'btn btn-outline-success' %>
 <div class='row'>
         <div class="col s12 m4">
             <div class="card">
@@ -134,6 +128,6 @@
     </div>
 
 </div>
-<% if logged_in? && @current_user.login_count.nil?  %>
-    <%= javascript_tag "openResetPasswordModal()" %>
-<% end %>
+<%# if logged_in? && @current_user.login_count.nil?  %>
+    <%#= javascript_tag "openResetPasswordModal()" %>
+<%# end %>

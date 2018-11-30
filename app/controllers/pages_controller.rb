@@ -2,10 +2,11 @@ class PagesController < ApplicationController
   before_action :authorize
 
   def index
-      @show_buttons = true
-      @page_title = 'Home'
-      @pages_payload = pages_payload
-      @tasks = todos.as_json
+    redirect_to new_password_reset_path if current_user.user_information["sign_in_count"].nil?
+    @show_buttons = true
+    @page_title = 'Home'
+    @pages_payload = pages_payload
+    @tasks = todos.as_json
   end
 
   private

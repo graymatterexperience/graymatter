@@ -30,7 +30,7 @@ class User < ApplicationRecord
                     uniqueness: {case_sensitive: false}
 # TODO the way I am creating passwords, I will need to validate this a different way
 # or figure out a work around for the archive_user
-  # validates :password, presence: true, length: { minimum: 6 }, on: :update
+  validates :password, presence: true, length: { minimum: 6 }, on: [ :create, :update ]
 
   has_many :posts, class_name: 'Post', foreign_key: :auther_id, primary_key: :id
   has_and_belongs_to_many :cohorts

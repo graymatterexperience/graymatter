@@ -17,11 +17,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def respond_modal_with(*args, &blk)
-    options = args.extract_options!
-    options[:responder] = ModalResponder
-    puts ' * application controller 3' * 3
-    respond_with *args, options, &blk
-  end
+  #def respond_modal_with(*args, &blk)
+  # I could not get the validations to work
+    #options = args.extract_options!
+    #options[:responder] = ModalResponder
+    #puts ' * application controller 3' * 3
+    #respond_with *args, options, &blk
+  #end
 
 end
