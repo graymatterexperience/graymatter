@@ -1,0 +1,45 @@
+<!-- Group Table -->
+<table class='highlight responsive-table'>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Group Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @groups.present? %>
+      <% @groups.each do |group| %>
+    <tr>
+      <td>
+        <% if group.settings.try(:[], 'avatar') %>
+          <%= image_tag cohort.settings["avatar"], alt: 'Cohort Team Image' %>
+        <% else %>
+        <span>GROUP Image</span>
+        <%#= image_tag 'team2.jpg', alt: 'Cohort Team Image', class: 'cohort-image' %>
+        <% end %>
+      </td>
+      <td>
+        <h6>
+          <b>
+            <%= group.name %>
+          </b>
+        </h6>
+    </td>
+      <% end%>
+      <td>
+        <%= link_to edit_admin_group_path(group) do %>
+          <i class="material-icons green z-depth-1 small-button">edit</i>
+        <% end %>
+        <%= link_to admin_group_path(group),
+                            method: :delete,
+                            data: { confirm: "Are you sure about deleting #{group.name}" } do %>
+        <i class="material-icons red z-depth-1 small-button">delete_forever</i>
+        <% end %>
+      </td>
+    </tr>
+    <% else %>
+      <td colspan="4">No Groups have been added.</td>
+    <% end %>
+  </tbody>
+</table>

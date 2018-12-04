@@ -7,6 +7,10 @@
         admin_users_path(user: 'student'),
         class: 'waves-effect waves-spanght btn blue' %>
     </span>
+    <span><%= link_to 'Groups',
+        admin_groups_path,
+        class: 'waves-effect waves-spanght btn blue' %>
+    </span>
     <span><%= link_to 'Mentors',
         admin_users_path(user: 'mentor'),
         class: 'waves-effect waves-spanght btn blue' %>
@@ -26,6 +30,12 @@
     <% if current_page?(admin_users_path) && @mentor %>
         <span><%= link_to @button_title,
             new_admin_user_path(user: 'mentor'),
+            class: 'waves-effect waves-spanght btn light-green accent-4' %>
+        </span>
+    <% end %>
+    <% if current_page?(admin_groups_path) %>
+        <span><%= link_to 'Add Group',
+            new_admin_group_path,
             class: 'waves-effect waves-spanght btn light-green accent-4' %>
         </span>
     <% end %>

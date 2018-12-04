@@ -21,19 +21,21 @@ class User < ApplicationRecord
   attr_accessor :reset_token
   store_accessor :user_information, :avatar, :phone, :school, :grade
   before_save { self.email = email.downcase }
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i.freeze
 
-  validates :first_name, presence: true, length: {maximum: 50}
-  validates :last_name, presence: true, length: {maximum: 50}
-  validates :email, presence: true, length: {maximum: 255},
-                    format: {with: VALID_EMAIL_REGEX},
-                    uniqueness: {case_sensitive: false}
-# TODO the way I am creating passwords, I will need to validate this a different way
-# or figure out a work around for the archive_user
-  validates :password, presence: true, length: { minimum: 6 }, on: [ :create, :update ]
+  validates :first_name, presence: true, length: { maximum: 50 }
+  validates :last_name, presence: true, length: { maximum: 50 }
+  validates :email, presence: true, length: { maximum: 255 },
+                    format: { with: VALID_EMAIL_REGEX },
+                    uniqueness: { case_sensitive: false }
+  # TODO: the way I am creating passwords, I will need to validate this a different way
+  # or figure out a work around for the archive_user
+  validates :password, presence: true, length: { minimum: 6 }, on: %i[create update]
 
   has_many :posts, class_name: 'Post', foreign_key: :auther_id, primary_key: :id
   has_and_belongs_to_many :cohorts
+  # NOTES this could change to has_many
+  belongs_to :group
 
   def user_tag
     name.downcase.insert(0, '@')
@@ -60,7 +62,7 @@ class User < ApplicationRecord
   end
 
   def login_count
-    user_information["sign_in_count"]
+    user_information['sign_in_count']
   end
 
   # Returns a random token

@@ -1,0 +1,28 @@
+<div class="cohort-form-container">
+    <%= form_for [:admin, @group] do |f| %>
+        <div class="row">
+            <div class="col m6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class='card-title'><%= @page_title %></span>
+                        <%= f.label :group_name %>
+                        <%= f.text_field :name, class: '' %>
+
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <%= f.select :cohort_id, Cohort.all.map { |p| [ p.name, p.id ] } %>
+                                <label>Cohort Seletcion</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <div class='right-align'>
+                            <%= f.submit 'Submit', class: 'btn light-green accent-4' %>
+                            <%= link_to "Cancel", admin_groups_path, class: 'btn red' %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>

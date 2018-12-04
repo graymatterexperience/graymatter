@@ -17,7 +17,6 @@ class Admin::UsersController < Admin::ApplicationController
       format.html # show.html.erb
       format.json { render json: @user }
     end
-
   end
 
   def index
@@ -47,7 +46,6 @@ class Admin::UsersController < Admin::ApplicationController
       # FIXME this is SO ugly.. wow...
       @cohorts_groups = Cohort.all
 
-      # FIXME This need to select only the users that are not archived
       @cohorts = Cohort.all.collect(&:users)
     end
 
@@ -59,7 +57,6 @@ class Admin::UsersController < Admin::ApplicationController
       # FIXME this is SO ugly.. wow...
       @cohorts_groups = Cohort.all
 
-      # FIXME This need to select only the users that are not archived
       @mentors = User.all.select(&:mentor?)
     end
 
