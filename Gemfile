@@ -77,3 +77,7 @@ gem 'responders'
 gem 'inky-rb', require: 'inky'
 # Stylesheet inlining for email
 gem 'premailer-rails'
+
+# react on rails
+gem 'webpacker'
+gem 'react-rails'

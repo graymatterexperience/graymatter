@@ -6,6 +6,11 @@ class Admin::CohortsController < Admin::ApplicationController
   def index
     @page_title = 'Cohorts'
     @cohorts = Cohort.order(created_at: :desc)
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @cohorts }
+    end
   end
 
   def new

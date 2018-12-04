@@ -1,17 +1,17 @@
 class Admin::GroupsController < Admin::ApplicationController
   def index
-    @page_title = 'Cohort Group'
+    @page_title = 'Cohort Groups'
   end
 
   def create
     group = Group.new(group_params)
+    redirect_to home_path
   end
 
   def new
-    binding.pry
+    # binding.pry
     @page_title = 'New Group'
     @group = Group.new
-    redirect_to admin_users_path
   end
 
   def edit; end
