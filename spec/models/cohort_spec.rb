@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: cohorts
+#
+#  id         :bigint(8)        not null, primary key
+#  name       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  settings   :jsonb
+#
+
 require 'rails_helper'
 
 RSpec.describe Cohort, type: :model do

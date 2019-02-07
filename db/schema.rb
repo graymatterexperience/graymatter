@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181203171229) do
+ActiveRecord::Schema.define(version: 20190207030225) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20181203171229) do
     t.datetime "reset_sent_at"
     t.boolean "archive", default: false
     t.jsonb "user_information", default: {}, null: false
+    t.integer "group_id"
   end
 
   add_foreign_key "groups", "cohorts"

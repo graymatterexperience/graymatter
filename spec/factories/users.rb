@@ -12,8 +12,9 @@
 #  role             :string
 #  reset_digest     :string
 #  reset_sent_at    :datetime
-#  cohort_id        :integer
+#  archive          :boolean          default(FALSE)
 #  user_information :jsonb            not null
+#  group_id         :integer
 #
 
 mentor_information = {
