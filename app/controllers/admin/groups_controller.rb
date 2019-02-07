@@ -4,14 +4,34 @@ class Admin::GroupsController < Admin::ApplicationController
   end
 
   def create
+    req = JSON.parse(request.body.read)
+    params.merge!(req)
+
+    cohort = Cohort.find_by_name(req["group"]["cohort"])
+
+    params["group"]["cohort_id"] = cohort.id
+
     group = Group.new(group_params)
-    redirect_to home_path
+
+    if group.save
+      flash[:success] = 'Group has been created'
+      respond_to do |format|
+        msg = { :status => "ok", :message => "Success!" }
+        format.json { render :json => msg } # don't do msg.to_jsonVd
+      end
+    else
+      flash[:error] = 'invalid submission'
+      respond_to do |format|
+        msg = { :status => 400, :message => "Error" }
+        format.json { render :json => msg } # don't do msg.to_jsonVd
+      end
+    end
   end
 
   def new
-    # binding.pry
     @page_title = 'New Group'
     @group = Group.new
+    @cohorts = Cohort.all
   end
 
   def edit; end

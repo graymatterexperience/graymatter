@@ -10,16 +10,16 @@ class Groups extends React.Component {
     };
   }
 
-  componentDidMount() {
-    const url = '/admin/cohorts.json';
-    fetch(url)
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        this.setState({ cohorts: data });
-      });
-  }
+  // componentDidMount() {
+  //   const url = '/admin/cohorts.json';
+  //   fetch(url)
+  //     .then(response => {
+  //       return response.json();
+  //     })
+  //     .then(data => {
+  //       this.setState({ cohorts: data });
+  //     });
+  // }
 
   render() {
     const cohorts = this.state.cohorts;

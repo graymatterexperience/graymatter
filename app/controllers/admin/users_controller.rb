@@ -3,6 +3,7 @@
 class Admin::UsersController < Admin::ApplicationController
   include ApplicationHelper
   include UsersHelper
+  respond_to :html, :json
 
   before_action :admin_authorize
   before_action :set_user, only: %i(
@@ -20,6 +21,8 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def index
+    # binding.pry
+
     redirect_to admin_cohorts_path,
       notice: 'Must create a Cohort before you can add students' if
     params['user'] == 'student' && Cohort.all.empty?
@@ -37,6 +40,13 @@ class Admin::UsersController < Admin::ApplicationController
     #@cohorts = @cohorts_groups.group_by { |k| {k.name => k.users} }
     # I want a key with cohort name with the value being the students that belong
     # to that cohort (should be easy????)
+    if params[:cohortName]
+      @students = Cohort.find_by_name(params[:cohortName].downcase).users
+      # TODO: do NOT want to send password along
+      p @students
+      return render json: @students
+    end
+
 
     if params[:user] == 'student'
       @student = true

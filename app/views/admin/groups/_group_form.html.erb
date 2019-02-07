@@ -5,18 +5,22 @@
                 <div class="card">
                     <div class="card-content">
                         <span class='card-title'><%= @page_title %></span>
-                        <%= f.label :group_name %>
-                        <%= f.text_field :name, class: '' %>
+                        <%#= f.label :group_name %>
+                        <%#= f.text_field :name, class: '' %>
+
 
                         <div class="row">
+                        <%= react_component("Cohorts", {cohorts: @cohorts}, { prerender: false }) %>
+                        <!--  I tried to use react but ran into road blocks
                             <div class="input-field col s12">
-                                <%= f.select :cohort_id, Cohort.all.map { |p| [ p.name, p.id ] } %>
+                                <%#= f.select :cohort_id, Cohort.all.map { |p| [ p.name, p.id ] } %>
                                 <label>Cohort Seletcion</label>
                             </div>
+                        -->
                         </div>
                     </div>
 
-                    <%= react_component("Groups", { cohortName: "cohort name" }) %>
+                    <%#= react_component("Groups", { cohortName: "cohort name" }, prerender: false) %>
                     <div class="card-action">
                         <div class='right-align'>
                             <%= f.submit 'Submit', class: 'btn light-green accent-4' %>

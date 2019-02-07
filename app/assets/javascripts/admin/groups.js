@@ -14,10 +14,6 @@ function toggle_cohort_div(id) {
 
 }
 
-function getStudentsByCohort(cohort) {
-  console.log('fucker', cohort)
-};
-
 function displayStudentInformation(user_id) {
   $.ajax({url: '/admin/users/' + user_id + '.json', success: function(result) {
     var stringId = result.id.toString(), cohortNames;

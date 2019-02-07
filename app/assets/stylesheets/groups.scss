@@ -1,5 +1,5 @@
 .group-custom-row {
-    display: flex;
+  display: flex;
 }
 
 .group-custom-col {
@@ -17,11 +17,13 @@
   height: 256px;
   //background: url('group.jpg') center / cover;
 }
-.demo-card-image > .mdl-card__actions {
+
+.demo-card-image>.mdl-card__actions {
   height: 52px;
   padding: 16px;
   background: rgba(0, 0, 0, 0.2);
 }
+
 .demo-card-image__filename {
   color: #fff;
   font-size: 14px;
@@ -44,6 +46,10 @@
 }
 
 .task-title {
-    font-size: 16px;
-    font-weight: 500;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.student-select-box {
+  height: auto;
 }
