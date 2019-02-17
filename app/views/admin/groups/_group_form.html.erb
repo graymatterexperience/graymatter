@@ -7,10 +7,20 @@
                         <span class='card-title'><%= @page_title %></span>
                         <%#= f.label :group_name %>
                         <%#= f.text_field :name, class: '' %>
-
+                        <% if @group.errors.any? %>
+                            <ul>
+                                <% @group.errors.full_messages.each do |msg| %>
+                                    <li><%= msg %></li>
+                                <% end %>
+                            </ul>
+                        <% end %>
 
                         <div class="row">
-                        <%= react_component("Cohorts", {cohorts: @cohorts}, { prerender: false }) %>
+                            <% if action_name === 'edit' %>
+                              <%= react_component("Cohorts", {group: @cohort_group, action: 'edit'}, { prerender: false }) %>
+                            <% else %>
+                              <%= react_component("Cohorts", {cohorts: @cohorts}, { prerender: false }) %>
+                            <% end %>
                         <!--  I tried to use react but ran into road blocks
                             <div class="input-field col s12">
                                 <%#= f.select :cohort_id, Cohort.all.map { |p| [ p.name, p.id ] } %>
@@ -21,12 +31,14 @@
                     </div>
 
                     <%#= react_component("Groups", { cohortName: "cohort name" }, prerender: false) %>
+                    <!-- 
                     <div class="card-action">
                         <div class='right-align'>
                             <%= f.submit 'Submit', class: 'btn light-green accent-4' %>
                             <%= link_to "Cancel", admin_groups_path, class: 'btn red' %>
                         </div>
                     </div>
+                    -->
                 </div>
             </div>
         </div>

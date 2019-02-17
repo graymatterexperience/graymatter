@@ -14,18 +14,58 @@ function toggle_cohort_div(id) {
 
 }
 
-function displayStudentInformation(user_id) {
-  $.ajax({url: '/admin/users/' + user_id + '.json', success: function(result) {
-    var stringId = result.id.toString(), cohortNames;
-    var userInformationTag = document.getElementById(stringId);
-    if (userInformationTag.style.display == 'none') {
-      userInformationTag.style.display = 'table';
-    } else {
-      userInformationTag.style.display = 'none';
-    }
+// function getStudentsByGroup(group_id) {
+//   $.getJSON({
+//     url: `/admin/groups/`,
+//     data: {
+//       group_id: group_id
+//     },
+//     success: function(result) {
+//       let td;
+//       var userInformationTag = document.getElementById('studentsComponent');
+//       if (userInformationTag.style.display == 'none') {
+//         userInformationTag.style.display = 'table';
+//       } else {
+//         userInformationTag.style.display = 'none';
+//       }
 
-    if (result.role === 'student') {
-      var td = `
+//       if (result.length > 0) {
+//         td = `
+//               <td colspan='6'>
+//                   <ul>
+//                       <li>Phone: ${ result.user_information.phone || 'N/A' }</li>
+//                       <li>School: ${ result.user_information.school || 'N/A' }</li>
+//                       <li>Grade: ${ result.user_information.grade || 'N/A' }</li>
+//                       <li>Role: ${ result.role || 'N/A' }</li>
+//                   </ul>
+//               </td>
+//             `
+
+//       } else {
+//         console.log('HERE I AM')
+//         td = `<p>No Students assigned to this group</p>`
+//       }
+
+//       document.getElementById('studentsComponent').innerHTML = td
+//     }
+//   })
+// }
+
+function displayStudentInformation(user_id) {
+  $.ajax({
+    url: '/admin/users/' + user_id + '.json',
+    success: function(result) {
+      var stringId = result.id.toString(),
+        cohortNames;
+      var userInformationTag = document.getElementById(stringId);
+      if (userInformationTag.style.display == 'none') {
+        userInformationTag.style.display = 'table';
+      } else {
+        userInformationTag.style.display = 'none';
+      }
+
+      if (result.role === 'student') {
+        var td = `
             <td colspan='6'>
                 <ul>
                     <li>Phone: ${ result.user_information.phone || 'N/A' }</li>
@@ -35,14 +75,14 @@ function displayStudentInformation(user_id) {
                 </ul>
             </td>
            `
-    } else if (result.role === 'mentor') {
-      if (result.user_information.cohorts.length != 0 ||
+      } else if (result.role === 'mentor') {
+        if (result.user_information.cohorts.length != 0 ||
           result.user_information.cohorts === undefined) {
-        cohortNames = result.user_information.cohorts;
-      } else {
-        cohortNames = 'All Cohorts';
-      };
-      var td = `
+          cohortNames = result.user_information.cohorts;
+        } else {
+          cohortNames = 'All Cohorts';
+        };
+        var td = `
             <td colspan='6'>
                 <ul>
                     <li>Role: ${ result.role || 'N/A' }</li>
@@ -50,12 +90,32 @@ function displayStudentInformation(user_id) {
                 </ul>
             </td>
            `
-    }
+      }
 
-    document.getElementById(stringId).innerHTML = td
-  }})
+      document.getElementById(stringId).innerHTML = td
+    }
+  })
 }
 
-$(document).ready(function(){
-  $('.collapsible').collapsible();
-})
+// $(document).ready(function() {
+//   $('.collapsible').collapsible();
+// })
+
+function expandAll() {
+  $(".collapsible-header").addClass("active");
+  $(".collapsible").collapsible({
+    accordion: false
+  });
+}
+
+function collapseAll() {
+  $(".collapsible-header").removeClass(function() {
+    return "active";
+  });
+  $(".collapsible").collapsible({
+    accordion: true
+  });
+  $(".collapsible").collapsible({
+    accordion: false
+  });
+}

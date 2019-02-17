@@ -31,12 +31,13 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   # TODO: the way I am creating passwords, I will need to validate this a different way
   # or figure out a work around for the archive_user
-  validates :password, presence: true, length: { minimum: 6 }, on: %i[create update]
+  validates :password, presence: true, length: { minimum: 6 }, on: %i[create]
+  # validates :password, presence: true, length: { minimum: 6 }, on: %i[create update]
 
   has_many :posts, class_name: 'Post', foreign_key: :auther_id, primary_key: :id
   has_and_belongs_to_many :cohorts
   # NOTES this could change to has_many
-  belongs_to :group
+  belongs_to :group, optional: true
 
   def user_tag
     name.downcase.insert(0, '@')
@@ -64,6 +65,10 @@ class User < ApplicationRecord
 
   def login_count
     user_information['sign_in_count']
+  end
+
+  def remove_from_group
+    group_id = nil
   end
 
   # Returns a random token

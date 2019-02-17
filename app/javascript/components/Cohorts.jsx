@@ -12,16 +12,30 @@ class Cohorts extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      cohorts: this.props.cohorts,
-      cohortSelected: false,
-      students: [],
-      newGroup: {
-        name: '',
-        cohort: '',
-        students: []
-      }
-    };
+    if (this.props.action === 'edit') {
+      this.getStudents(this.props.group.cohort.name);
+      this.state = {
+        cohorts: [this.props.group.cohort],
+        cohortSelected: true,
+        students: [],
+        newGroup: {
+          name: this.props.group.group.name,
+          cohort: this.props.group.cohort.name,
+          students: []
+        }
+      };
+    } else {
+      this.state = {
+        cohorts: this.props.cohorts,
+        cohortSelected: false,
+        students: [],
+        newGroup: {
+          name: '',
+          cohort: '',
+          students: []
+        }
+      };
+    }
 
     // this.state = {
     //   group: '',
@@ -98,21 +112,31 @@ class Cohorts extends React.Component {
   //   'Content-Type': 'application/json'
   // }
   handleFormSubmit(event) {
-    const url = '/admin/groups';
-    event.preventDefault();
-    const groupData = {
-      group: this.state.newGroup
-    };
+    let options, url;
+    if (this.props.action === 'edit') {
+      options = {
+        method: 'PATCH',
+        body: JSON.stringify(this.state.newGroup),
+        headers: new Headers()
+      };
+      url = `/admin/groups/${this.props.group.group.id}`;
+    } else {
+      url = '/admin/groups';
+      event.preventDefault();
+      const groupData = {
+        group: this.state.newGroup
+      };
+      options = {
+        method: 'POST',
+        body: JSON.stringify(groupData),
+        headers: new Headers()
+      };
+    }
 
-    fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(groupData),
-      headers: new Headers()
-    }).then(response => {
+    fetch(url, options).then(response => {
       response.json().then(data => {
-        // have to deal with the error
+        // TODO: have to deal with the error
         window.location.href = 'http://localhost:3000/admin/groups';
-        console.log('Successful' + data);
       });
     });
   }
