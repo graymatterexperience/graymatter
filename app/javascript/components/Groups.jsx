@@ -23,7 +23,6 @@ class Groups extends React.Component {
 
   render() {
     const cohorts = this.state.cohorts;
-    console.log('fuckerFACE', cohorts);
     return (
       <React.Fragment>
         Cohort Name: {this.props.cohortName}

@@ -78,7 +78,6 @@ class Admin::GroupsController < Admin::ApplicationController
       end
       # redirect_to admin_users_path(group: @group)
     else
-      puts 'ERRORO EROROR fuicker'
       flash[:error] = 'Something went wrong'
       render 'edit'
     end
@@ -89,6 +88,15 @@ class Admin::GroupsController < Admin::ApplicationController
     group.destroy
     flash[:success] = 'Group removed'
     redirect_to admin_groups_path
+  end
+
+  def students_by_group
+    students = Group.find_by_id(params[:id]).users
+
+    respond_to do |format|
+      msg = { status: 'ok', message: 'Success!', data: students }
+      format.json { render json: msg }
+    end
   end
 
   private

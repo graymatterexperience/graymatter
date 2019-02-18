@@ -5,6 +5,7 @@ import Input from './Input';
 import Select from './Select';
 import SelectStudent from './SelectStudent';
 import Button from './Button';
+import CheckBox from './CheckBox';
 
 const _ = require('lodash');
 
@@ -13,15 +14,16 @@ class Cohorts extends React.Component {
     super(props);
 
     if (this.props.action === 'edit') {
-      this.getStudents(this.props.group.cohort.name);
+      const students = this.getStudentsByGroup(props.group.group.id);
       this.state = {
         cohorts: [this.props.group.cohort],
         cohortSelected: true,
         students: [],
+        newSelectionArray: [],
         newGroup: {
           name: this.props.group.group.name,
           cohort: this.props.group.cohort.name,
-          students: []
+          students: students
         }
       };
     } else {
@@ -29,6 +31,7 @@ class Cohorts extends React.Component {
         cohorts: this.props.cohorts,
         cohortSelected: false,
         students: [],
+        newSelectionArray: [],
         newGroup: {
           name: '',
           cohort: '',
@@ -48,6 +51,8 @@ class Cohorts extends React.Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleClearForm = this.handleClearForm.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.handleCheckBox = this.handleCheckBox.bind(this);
+
     // this.handleGroupName = this.handleGroupName.bind(this);
   }
 
@@ -72,6 +77,61 @@ class Cohorts extends React.Component {
       .catch(error => {
         console.log('student ERROR', error);
       });
+  }
+
+  getStudentsByGroup(group_id) {
+    const url = `/admin/getStudentsByGroup/${group_id}`;
+    let fetchData = {
+      method: 'GET',
+      headers: new Headers()
+    };
+    fetch(url, fetchData)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        console.log('IDS', data.data);
+        this.setState(
+          prevState => ({
+            newGroup: {
+              ...prevState.newGroup,
+              students: data.data
+            }
+          }),
+          () => console.log('check box', this.state.newGroup.students)
+        );
+      })
+      .catch(error => {
+        console.log('student ERROR', error);
+      });
+  }
+
+  handleCheckBox(event) {
+    const newSelection = event.target.value;
+    // let newSelectionArray;
+
+    this.setState(
+      (newSelectionArray = this.state.newGroup.students.filter(
+        s => s !== newSelection
+      ))
+    );
+    if (this.state.newGroup.students.indexOf(newSelection) > -1) {
+      newSelectionArray = this.state.newGroup.students.filter(
+        s => s !== newSelection
+      );
+    } else {
+      newSelectionArray = [...this.state.newGroup.students, newSelection];
+    }
+
+    this.setState(
+      prevState => ({
+        newGroup: {
+          ...prevState.newGroup,
+          students: newSelectionArray
+        }
+      }),
+      () => console.log('check box', this.state.newGroup.students)
+    );
   }
 
   handleInput(event) {
@@ -177,8 +237,18 @@ class Cohorts extends React.Component {
 
   renderStudents() {
     if (this.state.cohortSelected) {
+      console.log('STUDENTs', this.state.students);
       return (
         <div>
+          <CheckBox
+            title={'Student'}
+            name={'student'}
+            options={this.state.students}
+            selectedOptions={this.state.newGroup.students}
+            handleChange={this.handleCheckBox}
+          />{' '}
+          {/* Skill */}
+          {/*
           <SelectStudent
             title={'Student'}
             name={'student'}
@@ -187,7 +257,7 @@ class Cohorts extends React.Component {
             placeholder={'Select Students'}
             handleChange={this.handleInput}
           />{' '}
-          {/* Add studants to the group */}
+           Add studants to the group */}
         </div>
       );
     } else {
