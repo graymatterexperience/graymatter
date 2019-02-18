@@ -86,6 +86,11 @@ class Admin::GroupsController < Admin::ApplicationController
 
   def destroy
     group = Group.find_by_id(params[:id])
+    group.users.each do |student|
+      student.remove_from_group
+      student.save!
+    end
+
     group.destroy
     flash[:success] = 'Group removed'
     redirect_to admin_groups_path
