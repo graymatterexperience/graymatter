@@ -47,7 +47,8 @@ class Admin::GroupsController < Admin::ApplicationController
     @group = Group.find_by_id(params[:id])
     @cohort_group = {
       group: @group,
-      cohort: @group.cohort
+      cohort: @group.cohort,
+      selected_students: @group.users
     }
   end
 

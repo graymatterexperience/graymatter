@@ -8,6 +8,19 @@ const CheckBox = props => {
       </label>
       <div className="">
         {props.options.map(option => {
+          console.log('option', option);
+          console.log('selectedOptions', props.selectedOptions);
+          const ids = option.id;
+          const stringId = ids.toString();
+          console.log('option.id', stringId);
+          console.log(
+            'should be true',
+            props.selectedOptions.map(e => e.id).indexOf(option.id) > -1
+          );
+          console.log(
+            'OLD way should be true',
+            props.selectedOptions.indexOf(stringId) > -1
+          );
           return (
             <label key={option.id} id={option.id}>
               <input
@@ -15,7 +28,7 @@ const CheckBox = props => {
                 name={props.name}
                 onChange={props.handleChange}
                 value={option.id}
-                // checked={props.selectedOptions.indexOf(option) > -1}
+                checked={props.selectedOptions.indexOf(stringId) > -1}
                 type="checkbox"
               />
               <span>

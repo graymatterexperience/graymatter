@@ -14,16 +14,19 @@ class Cohorts extends React.Component {
     super(props);
 
     if (this.props.action === 'edit') {
-      const students = this.getStudentsByGroup(props.group.group.id);
+      const selectedStudents = this.getStudentsByGroup(props.group.group.id);
+      this.getStudents(props.group.cohort.name);
+
       this.state = {
         cohorts: [this.props.group.cohort],
         cohortSelected: true,
         students: [],
         newSelectionArray: [],
+        checked: true,
         newGroup: {
           name: this.props.group.group.name,
           cohort: this.props.group.cohort.name,
-          students: students
+          students: selectedStudents
         }
       };
     } else {
@@ -90,12 +93,14 @@ class Cohorts extends React.Component {
         return response.json();
       })
       .then(data => {
+        const studentId = data.data.map(e => e.id.toString());
         console.log('IDS', data.data);
+        console.log('IDS', studentId);
         this.setState(
           prevState => ({
             newGroup: {
               ...prevState.newGroup,
-              students: data.data
+              students: studentId
             }
           }),
           () => console.log('check box', this.state.newGroup.students)
@@ -106,32 +111,49 @@ class Cohorts extends React.Component {
       });
   }
 
-  handleCheckBox(event) {
-    const newSelection = event.target.value;
-    // let newSelectionArray;
+  handleCheckBox(e) {
+    const newSelection = e.target.value;
+    let newSelectionArray;
+    console.log('VALUE', e.target.value);
 
-    this.setState(
-      (newSelectionArray = this.state.newGroup.students.filter(
-        s => s !== newSelection
-      ))
-    );
+    // if (this.state.newGroup.students.map(e => e.id).indexOf(option.id) > -1) {
     if (this.state.newGroup.students.indexOf(newSelection) > -1) {
+      console.log('in the if');
       newSelectionArray = this.state.newGroup.students.filter(
         s => s !== newSelection
       );
     } else {
+      console.log('in the else');
       newSelectionArray = [...this.state.newGroup.students, newSelection];
     }
 
-    this.setState(
-      prevState => ({
-        newGroup: {
-          ...prevState.newGroup,
-          students: newSelectionArray
-        }
-      }),
-      () => console.log('check box', this.state.newGroup.students)
-    );
+    console.log('what is in here', newSelectionArray);
+    this.setState(prevState => ({
+      newGroup: { ...prevState.newGroup, students: newSelectionArray }
+    }));
+    // const newSelection = event.target.value;
+    // let newSelectionArray;
+    // this.setState(
+    //   (newSelectionArray = this.state.newGroup.students.filter(
+    //     s => s !== newSelection
+    //   ))
+    // );
+    // if (this.state.newGroup.students.indexOf(newSelection) > -1) {
+    //   newSelectionArray = this.state.newGroup.students.filter(
+    //     s => s !== newSelection
+    //   );
+    // } else {
+    //   newSelectionArray = [...this.state.newGroup.students, newSelection];
+    // }
+    // this.setState(
+    //   prevState => ({
+    //     newGroup: {
+    //       ...prevState.newGroup,
+    //       students: newSelectionArray
+    //     }
+    //   }),
+    //   () => console.log('check box', this.state)
+    // );
   }
 
   handleInput(event) {
@@ -237,7 +259,6 @@ class Cohorts extends React.Component {
 
   renderStudents() {
     if (this.state.cohortSelected) {
-      console.log('STUDENTs', this.state.students);
       return (
         <div>
           <CheckBox
