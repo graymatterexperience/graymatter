@@ -68,7 +68,7 @@ class User < ApplicationRecord
   end
 
   def remove_from_group
-    group_id = nil
+    self.group_id = nil
   end
 
   # Returns a random token

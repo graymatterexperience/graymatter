@@ -33,8 +33,8 @@ class Cohorts extends React.Component {
       this.state = {
         cohorts: this.props.cohorts,
         cohortSelected: false,
+        studentsSelected: [],
         students: [],
-        newSelectionArray: [],
         newGroup: {
           name: '',
           cohort: '',
@@ -43,14 +43,6 @@ class Cohorts extends React.Component {
       };
     }
 
-    // this.state = {
-    //   group: '',
-    //   cohorts: [],
-    //   students: [],
-    //   value: '',
-    //   svalue: '',
-    //   student: ''
-    // };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleClearForm = this.handleClearForm.bind(this);
     this.handleInput = this.handleInput.bind(this);
@@ -114,21 +106,19 @@ class Cohorts extends React.Component {
   handleCheckBox(e) {
     const newSelection = e.target.value;
     let newSelectionArray;
-    console.log('VALUE', e.target.value);
 
     // if (this.state.newGroup.students.map(e => e.id).indexOf(option.id) > -1) {
     if (this.state.newGroup.students.indexOf(newSelection) > -1) {
-      console.log('in the if');
       newSelectionArray = this.state.newGroup.students.filter(
         s => s !== newSelection
       );
     } else {
-      console.log('in the else');
       newSelectionArray = [...this.state.newGroup.students, newSelection];
     }
 
     console.log('what is in here', newSelectionArray);
     this.setState(prevState => ({
+      newSelectionArray: newSelectionArray,
       newGroup: { ...prevState.newGroup, students: newSelectionArray }
     }));
     // const newSelection = event.target.value;
@@ -167,7 +157,6 @@ class Cohorts extends React.Component {
 
     if (name === 'student') {
       const studentIncluded = _.includes(this.state.newGroup.students, value);
-      console.log('BOOL', studentIncluded);
       if (!studentIncluded) {
         this.state.newGroup.students.push(value);
       } else {
@@ -259,26 +248,18 @@ class Cohorts extends React.Component {
 
   renderStudents() {
     if (this.state.cohortSelected) {
+      // this.getStudents(this.state.newGroup.cohort);
+      const students = _.filter(this.state.students, ['group_id', null]);
       return (
         <div>
           <CheckBox
             title={'Student'}
             name={'student'}
-            options={this.state.students}
+            options={students}
             selectedOptions={this.state.newGroup.students}
             handleChange={this.handleCheckBox}
           />{' '}
           {/* Skill */}
-          {/*
-          <SelectStudent
-            title={'Student'}
-            name={'student'}
-            options={this.state.students}
-            value={this.state.newGroup.students}
-            placeholder={'Select Students'}
-            handleChange={this.handleInput}
-          />{' '}
-           Add studants to the group */}
         </div>
       );
     } else {
