@@ -1,9 +1,7 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import PropTypes from 'prop-types';
 import Input from './Input';
 import Select from './Select';
-import SelectStudent from './SelectStudent';
 import Button from './Button';
 import CheckBox from './CheckBox';
 
@@ -14,14 +12,6 @@ class Cohorts extends React.Component {
     super(props);
 
     if (this.props.action === 'edit') {
-      const selectedStudents = this.getStudentsByGroup(props.group.group.id);
-      // if (selectedStudents) {
-      //   const selectedStudentsIds = selectedStudents.map(student => student.id);
-      // }
-      // this.getStudents(props.group.cohort.name);
-      console.log('SELECED ID', selectedStudents);
-      // debugger;
-
       this.state = {
         cohorts: [this.props.group.cohort],
         cohortSelected: true,
@@ -52,8 +42,6 @@ class Cohorts extends React.Component {
     this.handleClearForm = this.handleClearForm.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.handleCheckBox = this.handleCheckBox.bind(this);
-
-    // this.handleGroupName = this.handleGroupName.bind(this);
   }
 
   getStudents(cohort) {
@@ -75,7 +63,7 @@ class Cohorts extends React.Component {
         );
       })
       .catch(error => {
-        console.log('student ERROR', error);
+        console.log('GET student ERROR', error);
       });
   }
 
@@ -91,10 +79,6 @@ class Cohorts extends React.Component {
       })
       .then(data => {
         const studentId = data.data.map(e => e.id.toString());
-        const selectedStudents = data.data;
-        console.log('SelectedSTudents', selectedStudents);
-        console.log('IDS', data.data);
-        console.log('IDS', studentId);
         this.setState(
           prevState => ({
             newGroup: {
@@ -106,16 +90,14 @@ class Cohorts extends React.Component {
         );
       })
       .catch(error => {
-        console.log('student ERROR', error);
+        console.log('GET student by group ERROR', error);
       });
   }
 
   handleCheckBox(e) {
     const newSelection = e.target.value;
-    console.log('HEREHEHREREH', e.target.value);
     let newSelectionArray;
 
-    // if (this.state.newGroup.students.map(e => e.id).indexOf(option.id) > -1) {
     if (this.state.newGroup.students.indexOf(newSelection) > -1) {
       newSelectionArray = this.state.newGroup.students.filter(
         s => s !== newSelection
@@ -124,34 +106,10 @@ class Cohorts extends React.Component {
       newSelectionArray = [...this.state.newGroup.students, newSelection];
     }
 
-    console.log('what is in here', newSelectionArray);
     this.setState(prevState => ({
       newSelectionArray: newSelectionArray,
       newGroup: { ...prevState.newGroup, students: newSelectionArray }
     }));
-    // const newSelection = event.target.value;
-    // let newSelectionArray;
-    // this.setState(
-    //   (newSelectionArray = this.state.newGroup.students.filter(
-    //     s => s !== newSelection
-    //   ))
-    // );
-    // if (this.state.newGroup.students.indexOf(newSelection) > -1) {
-    //   newSelectionArray = this.state.newGroup.students.filter(
-    //     s => s !== newSelection
-    //   );
-    // } else {
-    //   newSelectionArray = [...this.state.newGroup.students, newSelection];
-    // }
-    // this.setState(
-    //   prevState => ({
-    //     newGroup: {
-    //       ...prevState.newGroup,
-    //       students: newSelectionArray
-    //     }
-    //   }),
-    //   () => console.log('check box', this.state)
-    // );
   }
 
   handleInput(event) {
@@ -186,10 +144,6 @@ class Cohorts extends React.Component {
     );
   }
 
-  // headers: {
-  //   Accept: 'application/json',
-  //   'Content-Type': 'application/json'
-  // }
   handleFormSubmit(event) {
     let options, url;
     if (this.props.action === 'edit') {
@@ -222,42 +176,27 @@ class Cohorts extends React.Component {
 
   handleClearForm(event) {
     event.preventDefault();
-    this.setState({
+    this.state = {
       cohorts: this.props.cohorts,
       cohortSelected: false,
+      studentsSelected: [],
       students: [],
       newGroup: {
         name: '',
         cohort: '',
         students: []
       }
-    });
-    // alert(this.state.group);
+    };
+    window.location.href = 'http://localhost:3000/admin/groups';
   }
-  // refreshStudentList = () => {
-  //   debugger;
-  // };
 
   componentDidMount() {
     $('select').formSelect();
-    // $(element).ready(function() {});
-    // $(document).ready(function() {
-    // });
-
-    // const url = '/admin/cohorts.json';
-    // fetch(url)
-    //   .then(response => {
-    //     return response.json();
-    //   })
-    //   .then(data => {
-    //     this.setState({ cohorts: data });
-    //   });
   }
 
   renderStudents() {
     if (this.state.cohortSelected) {
       let students;
-      // const fake = this.getStudents(this.state.newGroup.cohort);
       if (this.props.action === 'new') {
         students = _.filter(this.state.students, ['group_id', null]);
       } else {
@@ -265,10 +204,6 @@ class Cohorts extends React.Component {
       }
 
       const checkedStudents = this.state.newGroup.students;
-      // const students = this.state.students;
-      console.log('ALL STUDENTS', students);
-      console.log('CHECKEDSTUDENTS', checkedStudents);
-      // console.log('FAKE', fake);
       return (
         <div>
           <CheckBox
@@ -278,7 +213,7 @@ class Cohorts extends React.Component {
             selectedOptions={this.state.newGroup.students}
             handleChange={this.handleCheckBox}
           />{' '}
-          {/* Skill */}
+          {/* students to add to a group */}
         </div>
       );
     } else {
@@ -287,31 +222,6 @@ class Cohorts extends React.Component {
   }
 
   render() {
-    // const cohorts = this.props.cohorts;
-    // const students = this.state.students;
-    // const studentOptionItems = [];
-
-    // const optionItems = cohorts.map(cohort => (
-    //   <option key={cohort.name}>{cohort.name}</option>
-    // ));
-
-    // const optionItemsStudent = students.map(cohort => (
-    //   <option key={cohort.first_name}>{cohort.first_name}</option>
-    // ));
-
-    // if (students.length > 0) {
-    //   const studentOptionItems = students.map(student => (
-    //     <option key={student.id}>{student.first_name}</option>
-    //   ));
-    //   console.log('here', studentOptionItems);
-    // }
-
-    //if (studentOptionItems.length > 0) {
-    //// debugger;
-    //}
-
-    // console.log('here before HTML students', optionItemsStudent);
-
     return (
       <React.Fragment>
         <div className="input-field col s12">
@@ -347,7 +257,7 @@ class Cohorts extends React.Component {
                 <Button
                   action={this.handleClearForm}
                   type={'secondary'}
-                  title={'Clear'}
+                  title={'Cancel'}
                   style={buttonStyle}
                 />{' '}
                 {/* Clear the form */}
@@ -359,10 +269,6 @@ class Cohorts extends React.Component {
     );
   }
 }
-
-// Cohorts.propTypes = {
-//   cohortName: PropTypes.string
-// };
 
 const buttonStyle = {
   margin: '10px 10px 10px 10px'

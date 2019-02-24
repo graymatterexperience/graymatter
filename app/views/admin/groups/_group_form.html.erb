@@ -5,8 +5,6 @@
                 <div class="card">
                     <div class="card-content">
                         <span class='card-title'><%= @page_title %></span>
-                        <%#= f.label :group_name %>
-                        <%#= f.text_field :name, class: '' %>
                         <% if @group.errors.any? %>
                             <ul>
                                 <% @group.errors.full_messages.each do |msg| %>
@@ -21,24 +19,8 @@
                                 <% else %>
                                     <%= react_component("Cohorts", {cohorts: @cohorts, action: 'new'}, { prerender: false }) %>
                                 <% end %>
-                        <!--  I tried to use react but ran into road blocks
-                            <div class="input-field col s12">
-                                <%#= f.select :cohort_id, Cohort.all.map { |p| [ p.name, p.id ] } %>
-                                <label>Cohort Seletcion</label>
-                            </div>
-                        -->
                         </div>
                     </div>
-
-                    <%#= react_component("Groups", { cohortName: "cohort name" }, prerender: false) %>
-                    <!-- 
-                    <div class="card-action">
-                        <div class='right-align'>
-                            <%= f.submit 'Submit', class: 'btn light-green accent-4' %>
-                            <%= link_to "Cancel", admin_groups_path, class: 'btn red' %>
-                        </div>
-                    </div>
-                    -->
                 </div>
             </div>
         </div>

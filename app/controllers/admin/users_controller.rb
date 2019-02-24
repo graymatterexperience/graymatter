@@ -43,7 +43,6 @@ class Admin::UsersController < Admin::ApplicationController
     if params[:cohortName]
       @students = Cohort.find_by_name(params[:cohortName].downcase).users
       # TODO: do NOT want to send password along
-      p @students
       return render json: @students
     end
 

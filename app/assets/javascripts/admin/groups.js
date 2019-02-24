@@ -1,3 +1,4 @@
+// TODO I do Not think this file is being used
 function clear_filter() {
   document.getElementById('clear-filter-chip').style.display = 'none';
   location.reload();
@@ -13,43 +14,6 @@ function toggle_cohort_div(id) {
   }
 
 }
-
-// function getStudentsByGroup(group_id) {
-//   $.getJSON({
-//     url: `/admin/groups/`,
-//     data: {
-//       group_id: group_id
-//     },
-//     success: function(result) {
-//       let td;
-//       var userInformationTag = document.getElementById('studentsComponent');
-//       if (userInformationTag.style.display == 'none') {
-//         userInformationTag.style.display = 'table';
-//       } else {
-//         userInformationTag.style.display = 'none';
-//       }
-
-//       if (result.length > 0) {
-//         td = `
-//               <td colspan='6'>
-//                   <ul>
-//                       <li>Phone: ${ result.user_information.phone || 'N/A' }</li>
-//                       <li>School: ${ result.user_information.school || 'N/A' }</li>
-//                       <li>Grade: ${ result.user_information.grade || 'N/A' }</li>
-//                       <li>Role: ${ result.role || 'N/A' }</li>
-//                   </ul>
-//               </td>
-//             `
-
-//       } else {
-//         console.log('HERE I AM')
-//         td = `<p>No Students assigned to this group</p>`
-//       }
-
-//       document.getElementById('studentsComponent').innerHTML = td
-//     }
-//   })
-// }
 
 function displayStudentInformation(user_id) {
   $.ajax({

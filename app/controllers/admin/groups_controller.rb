@@ -1,7 +1,6 @@
 class Admin::GroupsController < Admin::ApplicationController
   def index
     @page_title = 'Cohort Groups'
-    # @groups = Group.all
     @cohorts = Cohort.all
     params['group_id'] && group = Group.find_by_id(params['group_id'])
     respond_to do |format|
@@ -65,7 +64,6 @@ class Admin::GroupsController < Admin::ApplicationController
       student.group_id = nil
       student.save!
     end
-    # @group.users { |student| student.remove_from_group && student.save! }
     
     if @group.update_attributes(group_params)
       User.where(id: params["group"]["students"])
@@ -80,7 +78,6 @@ class Admin::GroupsController < Admin::ApplicationController
         msg = { :status => "ok", :message => "Success!" }
         format.json { render :json => msg } # don't do msg.to_jsonVd
       end
-      # redirect_to admin_users_path(group: @group)
     else
       flash[:error] = 'Something went wrong'
       render 'edit'
@@ -112,8 +109,5 @@ class Admin::GroupsController < Admin::ApplicationController
 
   def group_params
     params.require(:group).permit(:name, :cohort_id, :user_id)
-  end
-
-  def add_student_to_group(student)
   end
 end

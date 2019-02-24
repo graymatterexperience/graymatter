@@ -18,4 +18,11 @@ class Cohort < ApplicationRecord
   # This brakes things
   # has_many :users, through: :groups
   store_accessor :settings, :color, :avatar
+  before_save :downcase_name
+
+  private
+
+  def downcase_name
+    self.name = name.downcase
+  end
 end
