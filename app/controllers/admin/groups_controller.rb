@@ -45,10 +45,12 @@ class Admin::GroupsController < Admin::ApplicationController
   def edit
     @page_title = 'Edit Group'
     @group = Group.find_by_id(params[:id])
+    @cohort_students = @group.cohort.users
     @cohort_group = {
       group: @group,
       cohort: @group.cohort,
-      selected_students: @group.users
+      selected_students: @group.users,
+      all_cohort_students: @cohort_students
     }
   end
 

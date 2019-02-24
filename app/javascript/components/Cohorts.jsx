@@ -15,18 +15,23 @@ class Cohorts extends React.Component {
 
     if (this.props.action === 'edit') {
       const selectedStudents = this.getStudentsByGroup(props.group.group.id);
-      this.getStudents(props.group.cohort.name);
+      // if (selectedStudents) {
+      //   const selectedStudentsIds = selectedStudents.map(student => student.id);
+      // }
+      // this.getStudents(props.group.cohort.name);
+      console.log('SELECED ID', selectedStudents);
+      // debugger;
 
       this.state = {
         cohorts: [this.props.group.cohort],
         cohortSelected: true,
-        students: [],
+        students: props.group.all_cohort_students,
         newSelectionArray: [],
         checked: true,
         newGroup: {
           name: this.props.group.group.name,
           cohort: this.props.group.cohort.name,
-          students: selectedStudents
+          students: props.group.selected_students
         }
       };
     } else {
@@ -86,6 +91,8 @@ class Cohorts extends React.Component {
       })
       .then(data => {
         const studentId = data.data.map(e => e.id.toString());
+        const selectedStudents = data.data;
+        console.log('SelectedSTudents', selectedStudents);
         console.log('IDS', data.data);
         console.log('IDS', studentId);
         this.setState(
@@ -105,6 +112,7 @@ class Cohorts extends React.Component {
 
   handleCheckBox(e) {
     const newSelection = e.target.value;
+    console.log('HEREHEHREREH', e.target.value);
     let newSelectionArray;
 
     // if (this.state.newGroup.students.map(e => e.id).indexOf(option.id) > -1) {
@@ -248,8 +256,19 @@ class Cohorts extends React.Component {
 
   renderStudents() {
     if (this.state.cohortSelected) {
-      // this.getStudents(this.state.newGroup.cohort);
-      const students = _.filter(this.state.students, ['group_id', null]);
+      let students;
+      // const fake = this.getStudents(this.state.newGroup.cohort);
+      if (this.props.action === 'new') {
+        students = _.filter(this.state.students, ['group_id', null]);
+      } else {
+        students = this.state.students;
+      }
+
+      const checkedStudents = this.state.newGroup.students;
+      // const students = this.state.students;
+      console.log('ALL STUDENTS', students);
+      console.log('CHECKEDSTUDENTS', checkedStudents);
+      // console.log('FAKE', fake);
       return (
         <div>
           <CheckBox
