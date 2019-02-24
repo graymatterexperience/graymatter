@@ -16,11 +16,11 @@
                         <% end %>
 
                         <div class="row">
-                            <% if action_name === 'edit' %>
-                              <%= react_component("Cohorts", {group: @cohort_group, action: 'edit'}, { prerender: false }) %>
-                            <% else %>
-                              <%= react_component("Cohorts", {cohorts: @cohorts, action: 'new'}, { prerender: false }) %>
-                            <% end %>
+                                <% if action_name === 'edit' %>
+                                    <%= react_component("Cohorts", {group: @cohort_group, action: 'edit'}, { prerender: false }) %>
+                                <% else %>
+                                    <%= react_component("Cohorts", {cohorts: @cohorts, action: 'new'}, { prerender: false }) %>
+                                <% end %>
                         <!--  I tried to use react but ran into road blocks
                             <div class="input-field col s12">
                                 <%#= f.select :cohort_id, Cohort.all.map { |p| [ p.name, p.id ] } %>

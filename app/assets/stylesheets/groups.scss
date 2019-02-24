@@ -62,7 +62,14 @@ ul .li-action-icons {
   position: relative;
 }
 
+.number-of-students-badge {
+  position: absolute;
+  right: 5rem;
+  top: 1rem;
+}
+
 .expand-icons-custom {
+  margin-top: -3px;
   right: 0;
   position: absolute;
 }

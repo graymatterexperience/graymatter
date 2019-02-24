@@ -1,7 +1,8 @@
 class Admin::GroupsController < Admin::ApplicationController
   def index
     @page_title = 'Cohort Groups'
-    @groups = Group.all
+    # @groups = Group.all
+    @cohorts = Cohort.all
     params['group_id'] && group = Group.find_by_id(params['group_id'])
     respond_to do |format|
       format.html # show.html.erb
