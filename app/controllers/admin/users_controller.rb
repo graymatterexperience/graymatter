@@ -21,8 +21,6 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def index
-    # binding.pry
-
     redirect_to admin_cohorts_path,
       notice: 'Must create a Cohort before you can add students' if
     params['user'] == 'student' && Cohort.all.empty?

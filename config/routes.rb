@@ -1,12 +1,4 @@
 Rails.application.routes.draw do
-  # get 'groups_controller/index'
-
-  # get 'groups_controller/create'
-
-  # get 'groups_controller/new'
-
-  # get 'groups_controller/edit'
-
   #namespace :admin do
     #get 'mentors/index'
   #end
