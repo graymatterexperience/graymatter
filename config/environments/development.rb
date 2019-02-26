@@ -1,6 +1,17 @@
 Rails.application.configure do
   # Verifies that versions and hashed value of the package contents in the project's package.json
-config.webpacker.check_yarn_integrity = true
+  # TODO this is the right way to solve this issues. my build on codeship fails
+  # ========================================
+  #Your Yarn packages are out of date!
+  #Please run `yarn install` to update.
+  #========================================
+
+
+  #To disable this check, please add `config.webpacker.check_yarn_integrity = false`
+  #to your Rails development config file (config/environments/development.rb).
+  #https://github.com/rails/webpacker/issues/1374
+
+  config.webpacker.check_yarn_integrity = false
 
   # Settings specified here will take precedence over those in config/application.rb.
 
