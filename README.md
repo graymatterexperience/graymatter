@@ -37,6 +37,7 @@ Things you may want to cover:
   (How to Work with Forms, Inputs and Events in React)[https://medium.com/capital-one-tech/how-to-work-with-forms-inputs-and-events-in-react-c337171b923b]
 
 ### NPM pacakges
+these are mostly for the react app
 
 (Lodash)[https://lodash.com/docs/4.17.11]
 
