@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181008135039) do
+ActiveRecord::Schema.define(version: 20190207030225) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,16 @@ ActiveRecord::Schema.define(version: 20181008135039) do
     t.string "color"
   end
 
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id"
+    t.bigint "cohort_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cohort_id"], name: "index_groups_on_cohort_id"
+    t.index ["user_id"], name: "index_groups_on_user_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -61,6 +71,9 @@ ActiveRecord::Schema.define(version: 20181008135039) do
     t.datetime "reset_sent_at"
     t.boolean "archive", default: false
     t.jsonb "user_information", default: {}, null: false
+    t.integer "group_id"
   end
 
+  add_foreign_key "groups", "cohorts"
+  add_foreign_key "groups", "users"
 end

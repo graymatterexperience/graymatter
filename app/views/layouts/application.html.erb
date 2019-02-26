@@ -7,6 +7,9 @@
         <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
         <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
+        <!-- application.html.erb in Head tag below turbolinks -->
+        <%= javascript_pack_tag 'application' %>
+
         <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
         <!--
         <link rel="canonical" href="http://www.example.com/">

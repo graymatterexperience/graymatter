@@ -3,6 +3,7 @@
 class Admin::UsersController < Admin::ApplicationController
   include ApplicationHelper
   include UsersHelper
+  respond_to :html, :json
 
   before_action :admin_authorize
   before_action :set_user, only: %i(
@@ -17,7 +18,6 @@ class Admin::UsersController < Admin::ApplicationController
       format.html # show.html.erb
       format.json { render json: @user }
     end
-
   end
 
   def index
@@ -38,6 +38,12 @@ class Admin::UsersController < Admin::ApplicationController
     #@cohorts = @cohorts_groups.group_by { |k| {k.name => k.users} }
     # I want a key with cohort name with the value being the students that belong
     # to that cohort (should be easy????)
+    if params[:cohortName]
+      @students = Cohort.find_by_name(params[:cohortName].downcase).users
+      # TODO: do NOT want to send password along
+      return render json: @students
+    end
+
 
     if params[:user] == 'student'
       @student = true
@@ -47,7 +53,6 @@ class Admin::UsersController < Admin::ApplicationController
       # FIXME this is SO ugly.. wow...
       @cohorts_groups = Cohort.all
 
-      # FIXME This need to select only the users that are not archived
       @cohorts = Cohort.all.collect(&:users)
     end
 
@@ -59,7 +64,6 @@ class Admin::UsersController < Admin::ApplicationController
       # FIXME this is SO ugly.. wow...
       @cohorts_groups = Cohort.all
 
-      # FIXME This need to select only the users that are not archived
       @mentors = User.all.select(&:mentor?)
     end
 

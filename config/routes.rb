@@ -60,12 +60,11 @@ Rails.application.routes.draw do
   resources :cohorts, :users
 
   namespace :admin do
-    resources :cohorts
-  end
-
-  namespace :admin do
     resources :users
+    resources :cohorts
+    resources :groups
     post '/archive/:id', to: 'users#archive_student', as: 'archive'
+    get '/getStudentsByGroup/:id', to: 'groups#students_by_group'
   end
 
 

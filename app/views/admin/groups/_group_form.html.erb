@@ -1,0 +1,28 @@
+<div class="cohort-form-container">
+    <%= form_for [:admin, @group] do |f| %>
+        <div class="row">
+            <div class="col m6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class='card-title'><%= @page_title %></span>
+                        <% if @group.errors.any? %>
+                            <ul>
+                                <% @group.errors.full_messages.each do |msg| %>
+                                    <li><%= msg %></li>
+                                <% end %>
+                            </ul>
+                        <% end %>
+
+                        <div class="row">
+                                <% if action_name === 'edit' %>
+                                    <%= react_component("Cohorts", {group: @cohort_group, action: 'edit'}, { prerender: false }) %>
+                                <% else %>
+                                    <%= react_component("Cohorts", {cohorts: @cohorts, action: 'new'}, { prerender: false }) %>
+                                <% end %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>

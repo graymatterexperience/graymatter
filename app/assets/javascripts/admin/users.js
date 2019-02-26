@@ -15,17 +15,20 @@ function toggle_cohort_div(id) {
 }
 
 function displayStudentInformation(user_id) {
-  $.ajax({url: '/admin/users/' + user_id + '.json', success: function(result) {
-    var stringId = result.id.toString(), cohortNames;
-    var userInformationTag = document.getElementById(stringId);
-    if (userInformationTag.style.display == 'none') {
-      userInformationTag.style.display = 'table';
-    } else {
-      userInformationTag.style.display = 'none';
-    }
+  $.ajax({
+    url: '/admin/users/' + user_id + '.json',
+    success: function(result) {
+      var stringId = result.id.toString(),
+        cohortNames;
+      var userInformationTag = document.getElementById(stringId);
+      if (userInformationTag.style.display == 'none') {
+        userInformationTag.style.display = 'table';
+      } else {
+        userInformationTag.style.display = 'none';
+      }
 
-    if (result.role === 'student') {
-      var td = `
+      if (result.role === 'student') {
+        var td = `
             <td colspan='6'>
                 <ul>
                     <li>Phone: ${ result.user_information.phone || 'N/A' }</li>
@@ -35,14 +38,14 @@ function displayStudentInformation(user_id) {
                 </ul>
             </td>
            `
-    } else if (result.role === 'mentor') {
-      if (result.user_information.cohorts.length != 0 ||
+      } else if (result.role === 'mentor') {
+        if (result.user_information.cohorts.length != 0 ||
           result.user_information.cohorts === undefined) {
-        cohortNames = result.user_information.cohorts;
-      } else {
-        cohortNames = 'All Cohorts';
-      };
-      var td = `
+          cohortNames = result.user_information.cohorts;
+        } else {
+          cohortNames = 'All Cohorts';
+        };
+        var td = `
             <td colspan='6'>
                 <ul>
                     <li>Role: ${ result.role || 'N/A' }</li>
@@ -50,12 +53,13 @@ function displayStudentInformation(user_id) {
                 </ul>
             </td>
            `
-    }
+      }
 
-    document.getElementById(stringId).innerHTML = td
-  }})
+      document.getElementById(stringId).innerHTML = td
+    }
+  })
 }
 
-$(document).ready(function(){
+$(document).ready(function() {
   $('.collapsible').collapsible();
 })
