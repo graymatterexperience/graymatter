@@ -1,5 +1,6 @@
 # README
 
+This is where this application is deployed
 (heroku staging)[https://staging-graymatter.herokuapp.com/login]
 
 Things you may want to cover:
