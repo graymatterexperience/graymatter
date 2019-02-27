@@ -169,7 +169,8 @@ class Cohorts extends React.Component {
     fetch(url, options).then(response => {
       response.json().then(data => {
         // TODO: have to deal with the error
-        window.location.href = 'http://localhost:3000/admin/groups';
+        // TODO this is SO wrong...
+        window.location.href = "http://staging-graymatter.herokuapp.com/admin/groups";
       });
     });
   }
@@ -187,7 +188,8 @@ class Cohorts extends React.Component {
         students: []
       }
     };
-    window.location.href = 'http://localhost:3000/admin/groups';
+    // TODO this is so wrong
+    window.location.href = 'http://staging-graymatter.herokuapp.com/admin/groups';
   }
 
   componentDidMount() {

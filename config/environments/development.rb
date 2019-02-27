@@ -1,5 +1,6 @@
 Rails.application.configure do
   # Verifies that versions and hashed value of the package contents in the project's package.json
+
   # TODO this is the right way to solve this issues. my build on codeship fails
   # ========================================
   #Your Yarn packages are out of date!
