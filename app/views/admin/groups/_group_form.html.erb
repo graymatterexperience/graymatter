@@ -15,9 +15,9 @@
 
                         <div class="row">
                                 <% if action_name === 'edit' %>
-                                    <%= react_component("Cohorts", {group: @cohort_group, action: 'edit'}, { prerender: true }) %>
+                                    <%= react_component("Cohorts", {group: @cohort_group, action: 'edit'}, { prerender: false }) %>
                                 <% else %>
-                                    <%= react_component("Cohorts", {cohorts: @cohorts, action: 'new'}, { prerender: true }) %>
+                                    <%= react_component("Cohorts", {cohorts: @cohorts, action: 'new'}, { prerender: false }) %>
                                 <% end %>
                         </div>
                     </div>
