@@ -145,6 +145,7 @@ class Cohorts extends React.Component {
   }
 
   handleFormSubmit(event) {
+    console.log('this is working', event);
     let options, url;
     if (this.props.action === 'edit') {
       options = {
@@ -168,11 +169,15 @@ class Cohorts extends React.Component {
 
     fetch(url, options).then(response => {
       response.json().then(data => {
-        // TODO: have to deal with the error
+        console.log('data', data);
+        // TODO: have to deal with the error action
         // TODO this is SO wrong...
-        window.location.href = "http://staging-graymatter.herokuapp.com/admin/groups";
+        // window.location.href =
+        //   'http://staging-graymatter.herokuapp.com/admin/groups';
       });
     });
+    console.log('did I make it here');
+    window.location.href = 'localhost:3000/admin/groups';
   }
 
   handleClearForm(event) {
@@ -189,7 +194,9 @@ class Cohorts extends React.Component {
       }
     };
     // TODO this is so wrong
-    window.location.href = 'http://staging-graymatter.herokuapp.com/admin/groups';
+    window.location.href = 'localhost:3000/admin/groups';
+    // window.location.href =
+    //   'http://staging-graymatter.herokuapp.com/admin/groups';
   }
 
   componentDidMount() {
