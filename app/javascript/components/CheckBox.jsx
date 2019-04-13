@@ -8,8 +8,19 @@ const CheckBox = props => {
       </label>
       <div className="">
         {props.options.map(option => {
-          const ids = option.id;
-          const stringId = ids.toString();
+          // NOTES: this here seems to be working do not touch
+          // console.log('props.selectedOptions', props.selectedOptions);
+          console.log('option', option);
+          console.log('props selectedOptions', props.selectedOptions);
+          // const selectedStudentIds = props.selectedOptions.map(obj => {
+          //   return obj.id;
+          // });
+
+          // // does not work
+          // console.log('selected students', selectedStudentIds);
+          // NOTES: id's need to be strings bc the componat retruns a string id
+
+          const stringId = option.id.toString();
           return (
             <label key={option.id} id={option.id}>
               <input
@@ -17,7 +28,7 @@ const CheckBox = props => {
                 name={props.name}
                 onChange={props.handleChange}
                 value={option.id}
-                checked={props.selectedOptions.indexOf(stringId) > -1}
+                checked={props.selectedOptions.indexOf(option.id) > -1}
                 type="checkbox"
               />
               <span>

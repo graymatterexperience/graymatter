@@ -12,6 +12,8 @@ class Cohorts extends React.Component {
     super(props);
 
     if (this.props.action === 'edit') {
+      // TODO do not need 'this'
+      console.log('here in the set state', this.props.group.selected_students);
       this.state = {
         cohorts: [this.props.group.cohort],
         cohortSelected: true,
@@ -21,7 +23,7 @@ class Cohorts extends React.Component {
         newGroup: {
           name: this.props.group.group.name,
           cohort: this.props.group.cohort.name,
-          students: props.group.selected_students
+          students: _.map(this.props.group.selected_students, 'id')
         }
       };
     } else {
@@ -68,6 +70,7 @@ class Cohorts extends React.Component {
   }
 
   getStudentsByGroup(group_id) {
+    console.log('here in getStudents');
     const url = `/admin/getStudentsByGroup/${group_id}`;
     let fetchData = {
       method: 'GET',
@@ -95,16 +98,41 @@ class Cohorts extends React.Component {
   }
 
   handleCheckBox(e) {
-    const newSelection = e.target.value;
+    console.log('HERE I AM', e.target.value);
+    // const newSelection = e.target.value.toInteger();
+
+    const newSelection = parseInt(e.target.value);
+    // I need to collect id's
+    // const newSelection = e.target.value;
     let newSelectionArray;
 
+    // const newSelection = this.state.students.find(
+    //   student => student.id.toString() === e.target.value
+    // );
+
+    console.log('this is the newSelction needs to be ID', newSelection);
+    console.log('this.state.newGroup.students', this.state.newGroup.students);
+
+    // const studentsHere = _.map(this.state.newGroup.students, 'id');
+    // console.log('studentsHere array of ids', studentsHere);
+
+    // if (this.state.newGroup.students.indexOf(newSelection) > -1) {
+    // console.log('the compairson', studentsHere.indexOf(newSelection) > -1);
+    // console.log('the compairson studentsHere', studentsHere);
+    console.log('the compairson newSelection', newSelection);
+
     if (this.state.newGroup.students.indexOf(newSelection) > -1) {
+      // newSelectionArray = this.state.newGroup.students.filter(
+      console.log('fucker face inside');
       newSelectionArray = this.state.newGroup.students.filter(
         s => s !== newSelection
       );
     } else {
+      // newSelectionArray = [...this.state.newGroup.students, newSelection];
       newSelectionArray = [...this.state.newGroup.students, newSelection];
     }
+
+    console.log('after checkbox logic should be IDS', newSelectionArray);
 
     this.setState(prevState => ({
       newSelectionArray: newSelectionArray,
@@ -215,14 +243,17 @@ class Cohorts extends React.Component {
       }
 
       const checkedStudents = this.state.newGroup.students;
-      console.log('checkedStudents', this.state.newGroup.students);
+      console.log(
+        'checkedStudents should be array',
+        this.state.newGroup.students
+      );
       return (
         <div>
           <CheckBox
             title={'Student'}
             name={'student'}
             options={students}
-            selectedOptions={this.state.newGroup.students}
+            selectedOptions={checkedStudents}
             handleChange={this.handleCheckBox}
           />{' '}
           {/* students to add to a group */}
