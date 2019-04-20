@@ -6,6 +6,7 @@ import Button from './Button';
 import CheckBox from './CheckBox';
 
 const _ = require('lodash');
+// import Group from '../utility/group'; can't get this to work
 
 class Cohorts extends React.Component {
   constructor(props) {
@@ -131,12 +132,17 @@ class Cohorts extends React.Component {
       // newSelectionArray = [...this.state.newGroup.students, newSelection];
       newSelectionArray = [...this.state.newGroup.students, newSelection];
     }
+    // const shit = Group.getGroup(3);
+    // console.log('SHIT', shit);
 
     console.log('after checkbox logic should be IDS', newSelectionArray);
 
     this.setState(prevState => ({
       newSelectionArray: newSelectionArray,
-      newGroup: { ...prevState.newGroup, students: newSelectionArray }
+      newGroup: {
+        ...prevState.newGroup,
+        students: newSelectionArray
+      }
     }));
   }
 
@@ -242,11 +248,14 @@ class Cohorts extends React.Component {
         students = this.state.students;
       }
 
+      // const groupsStudents = this.getStudentsByGroup(2);
+      // console.log('GROUPSSTUDENTS', groupsStudents);
+
+      // console.log('groups', Group.getGroup(3));
+
       const checkedStudents = this.state.newGroup.students;
-      console.log(
-        'checkedStudents should be array',
-        this.state.newGroup.students
-      );
+      console.log('student', this.state);
+
       return (
         <div>
           <CheckBox

@@ -9,29 +9,38 @@ class Admin::GroupsController < Admin::ApplicationController
     end
   end
 
+  def show
+    @group = Group.find_by_id(params[:id])
+    put "this is the group #{@gorup}"
+    respond_to do |format|
+      msg = { status: 'ok', message: 'Success!', data: @group }
+      format.json { render json: msg }
+    end
+  end
+
   def create
     req = JSON.parse(request.body.read)
     params.merge!(req)
-    cohort = Cohort.find_by_name(req["group"]["cohort"])
-    params["group"]["cohort_id"] = cohort.id
+    cohort = Cohort.find_by_name(req['group']['cohort'])
+    params['group']['cohort_id'] = cohort.id
     group = Group.new(group_params)
 
     if group.save
-      User.where(id: params["group"]["students"])
+      User.where(id: params['group']['students'])
           .each do |student|
             student.group_id = group.id
             student.save!
           end
       flash[:success] = 'Group has been created'
       respond_to do |format|
-        msg = { :status => "ok", :message => "Success!" }
-        format.json { render :json => msg } # don't do msg.to_jsonVd
+        msg = { status: 'ok', message: 'Success!' }
+        format.json { render json: msg } # don't do msg.to_jsonVd
       end
     else
       flash[:error] = 'invalid submission'
       respond_to do |format|
-        msg = { :status => 400, :message => "Error" }
-        format.json { render :json => msg } # don't do msg.to_jsonVd
+        msg = { status: 400, message: 'Error' }
+        format.json { render json: msg } # don't do msg.to_jsonVd
       end
     end
   end
@@ -50,23 +59,23 @@ class Admin::GroupsController < Admin::ApplicationController
       group: @group,
       cohort: @group.cohort,
       selected_students: @group.users,
-      all_cohort_students: @cohort_students
+      all_cohort_students: @cohort_students.each { |student| student.user_information['group_name'] = student.group.name if student.group_id }
     }
   end
 
   def update
     req = JSON.parse(request.body.read)
     @group = Group.find_by_id(params[:id])
-    params["group"] = req
+    params['group'] = req
 
     @group.users.each do |student|
-      student = student 
+      student = student
       student.group_id = nil
       student.save!
     end
-    
+
     if @group.update_attributes(group_params)
-      User.where(id: params["group"]["students"])
+      User.where(id: params['group']['students'])
           .each do |student|
             puts 'created a new user babay'
             student.group_id = @group.id
@@ -75,8 +84,8 @@ class Admin::GroupsController < Admin::ApplicationController
 
       flash[:success] = "#{@group.name.capitalize} has been updated"
       respond_to do |format|
-        msg = { :status => "ok", :message => "Success!" }
-        format.json { render :json => msg } # don't do msg.to_jsonVd
+        msg = { status: 'ok', message: 'Success!' }
+        format.json { render json: msg } # don't do msg.to_jsonVd
       end
     else
       flash[:error] = 'Something went wrong'
@@ -97,6 +106,7 @@ class Admin::GroupsController < Admin::ApplicationController
   end
 
   def students_by_group
+    puts params
     students = Group.find_by_id(params[:id]).users
 
     respond_to do |format|
