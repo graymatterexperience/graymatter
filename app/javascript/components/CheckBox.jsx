@@ -8,21 +8,9 @@ const CheckBox = props => {
       </label>
       <div className="">
         {props.options.map(option => {
-          // NOTES: this here seems to be working do not touch
-          // console.log('props.selectedOptions', props.selectedOptions);
           console.log('there are PROPS', props);
           console.log('option', option);
           console.log('props selectedOptions', props.selectedOptions);
-          // groupNames = Group.getGroup(3);
-          // TODO not working but I know I hit the API
-          // console.log('group', groupNames);
-          // const selectedStudentIds = props.selectedOptions.map(obj => {
-          //   return obj.id;
-          // });
-
-          // // does not work
-          // console.log('selected students', selectedStudentIds);
-          // NOTES: id's need to be strings bc the componat retruns a string id
           console.log('PROPS', props);
 
           const stringId = option.id.toString();
