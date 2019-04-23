@@ -6,12 +6,15 @@ import Button from './Button';
 import CheckBox from './CheckBox';
 
 const _ = require('lodash');
+// import Group from '../utility/group'; can't get this to work
 
 class Cohorts extends React.Component {
   constructor(props) {
     super(props);
 
     if (this.props.action === 'edit') {
+      // TODO do not need 'this'
+      console.log('here in the set state', this.props.group.selected_students);
       this.state = {
         cohorts: [this.props.group.cohort],
         cohortSelected: true,
@@ -21,7 +24,7 @@ class Cohorts extends React.Component {
         newGroup: {
           name: this.props.group.group.name,
           cohort: this.props.group.cohort.name,
-          students: props.group.selected_students
+          students: _.map(this.props.group.selected_students, 'id')
         }
       };
     } else {
@@ -68,6 +71,7 @@ class Cohorts extends React.Component {
   }
 
   getStudentsByGroup(group_id) {
+    console.log('here in getStudents');
     const url = `/admin/getStudentsByGroup/${group_id}`;
     let fetchData = {
       method: 'GET',
@@ -95,20 +99,50 @@ class Cohorts extends React.Component {
   }
 
   handleCheckBox(e) {
-    const newSelection = e.target.value;
+    console.log('HERE I AM', e.target.value);
+    // const newSelection = e.target.value.toInteger();
+
+    const newSelection = parseInt(e.target.value);
+    // I need to collect id's
+    // const newSelection = e.target.value;
     let newSelectionArray;
 
+    // const newSelection = this.state.students.find(
+    //   student => student.id.toString() === e.target.value
+    // );
+
+    console.log('this is the newSelction needs to be ID', newSelection);
+    console.log('this.state.newGroup.students', this.state.newGroup.students);
+
+    // const studentsHere = _.map(this.state.newGroup.students, 'id');
+    // console.log('studentsHere array of ids', studentsHere);
+
+    // if (this.state.newGroup.students.indexOf(newSelection) > -1) {
+    // console.log('the compairson', studentsHere.indexOf(newSelection) > -1);
+    // console.log('the compairson studentsHere', studentsHere);
+    console.log('the compairson newSelection', newSelection);
+
     if (this.state.newGroup.students.indexOf(newSelection) > -1) {
+      // newSelectionArray = this.state.newGroup.students.filter(
+      console.log('fucker face inside');
       newSelectionArray = this.state.newGroup.students.filter(
         s => s !== newSelection
       );
     } else {
+      // newSelectionArray = [...this.state.newGroup.students, newSelection];
       newSelectionArray = [...this.state.newGroup.students, newSelection];
     }
+    // const shit = Group.getGroup(3);
+    // console.log('SHIT', shit);
+
+    console.log('after checkbox logic should be IDS', newSelectionArray);
 
     this.setState(prevState => ({
       newSelectionArray: newSelectionArray,
-      newGroup: { ...prevState.newGroup, students: newSelectionArray }
+      newGroup: {
+        ...prevState.newGroup,
+        students: newSelectionArray
+      }
     }));
   }
 
@@ -145,8 +179,10 @@ class Cohorts extends React.Component {
   }
 
   handleFormSubmit(event) {
+    console.log('this is working', event);
     let options, url;
     if (this.props.action === 'edit') {
+      console.log('handle submit edit button');
       options = {
         method: 'PATCH',
         body: JSON.stringify(this.state.newGroup),
@@ -168,11 +204,15 @@ class Cohorts extends React.Component {
 
     fetch(url, options).then(response => {
       response.json().then(data => {
-        // TODO: have to deal with the error
+        console.log('data fucker', data);
+        // TODO: have to deal with the error action
+        window.location.href = 'http://localhost:3000/admin/groups';
         // TODO this is SO wrong...
-        window.location.href = "http://staging-graymatter.herokuapp.com/admin/groups";
+        // window.location.href =
+        //   'http://staging-graymatter.herokuapp.com/admin/groups';
       });
     });
+    console.log('did I make it here');
   }
 
   handleClearForm(event) {
@@ -189,7 +229,10 @@ class Cohorts extends React.Component {
       }
     };
     // TODO this is so wrong
-    window.location.href = 'http://staging-graymatter.herokuapp.com/admin/groups';
+    console.log('handle clear form');
+    window.location.href = 'http://localhost:3000/admin/groups';
+    // window.location.href =
+    //   'http://staging-graymatter.herokuapp.com/admin/groups';
   }
 
   componentDidMount() {
@@ -205,14 +248,21 @@ class Cohorts extends React.Component {
         students = this.state.students;
       }
 
+      // const groupsStudents = this.getStudentsByGroup(2);
+      // console.log('GROUPSSTUDENTS', groupsStudents);
+
+      // console.log('groups', Group.getGroup(3));
+
       const checkedStudents = this.state.newGroup.students;
+      console.log('student', this.state);
+
       return (
         <div>
           <CheckBox
             title={'Student'}
             name={'student'}
             options={students}
-            selectedOptions={this.state.newGroup.students}
+            selectedOptions={checkedStudents}
             handleChange={this.handleCheckBox}
           />{' '}
           {/* students to add to a group */}

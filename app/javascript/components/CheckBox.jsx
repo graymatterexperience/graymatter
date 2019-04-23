@@ -8,8 +8,24 @@ const CheckBox = props => {
       </label>
       <div className="">
         {props.options.map(option => {
-          const ids = option.id;
-          const stringId = ids.toString();
+          // NOTES: this here seems to be working do not touch
+          // console.log('props.selectedOptions', props.selectedOptions);
+          console.log('there are PROPS', props);
+          console.log('option', option);
+          console.log('props selectedOptions', props.selectedOptions);
+          // groupNames = Group.getGroup(3);
+          // TODO not working but I know I hit the API
+          // console.log('group', groupNames);
+          // const selectedStudentIds = props.selectedOptions.map(obj => {
+          //   return obj.id;
+          // });
+
+          // // does not work
+          // console.log('selected students', selectedStudentIds);
+          // NOTES: id's need to be strings bc the componat retruns a string id
+          console.log('PROPS', props);
+
+          const stringId = option.id.toString();
           return (
             <label key={option.id} id={option.id}>
               <input
@@ -17,11 +33,17 @@ const CheckBox = props => {
                 name={props.name}
                 onChange={props.handleChange}
                 value={option.id}
-                checked={props.selectedOptions.indexOf(stringId) > -1}
+                checked={props.selectedOptions.indexOf(option.id) > -1}
                 type="checkbox"
               />
               <span>
-                {option.first_name} {option.last_name}
+                <b>
+                  {option.first_name} {option.last_name}{' '}
+                </b>
+                |{' '}
+                {option.user_information.group_name || (
+                  <span className="blue_text">Not assigned a group</span>
+                )}
               </span>
               <br />
             </label>
