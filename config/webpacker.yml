@@ -15,6 +15,7 @@ default: &default
 
   extensions:
     - .js
+    - .jsx
     - .sass
     - .scss
     - .css
@@ -29,7 +30,7 @@ default: &default
 
 development:
   <<: *default
-  compile: false
+  compile: true
 
   # Reference: https://webpack.js.org/configuration/dev-server/
   dev_server:
@@ -38,13 +39,15 @@ development:
     port: 3035
     public: localhost:3035
     hmr: false
-    # Inline should be set to true if using HMR
-    inline: true
-    overlay: true
-    compress: true
-    disable_host_check: true
-    use_local_ip: false
-    quiet: false
+    ## Inline should be set to true if using HMR
+    # comment out the below and now I get some cool errors
+    # inline: false
+    # overlay: true
+    # compress: true
+    # disable_host_check: true
+    # use_local_ip: false
+    # quiet: false
+    # comment out the above and now I get some cool errors
     headers:
       'Access-Control-Allow-Origin': '*'
     watch_options:
