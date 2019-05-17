@@ -257,16 +257,16 @@ class Cohorts extends React.Component {
       console.log('student', this.state);
 
       return (
-        <div>
+        <React.Fragment>
           <CheckBox
             title={'Student'}
             name={'student'}
             options={students}
             selectedOptions={checkedStudents}
             handleChange={this.handleCheckBox}
-          />{' '}
+          />
           {/* students to add to a group */}
-        </div>
+        </React.Fragment>
       );
     } else {
       return null;
