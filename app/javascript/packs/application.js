@@ -9,13 +9,10 @@
 
 console.log('Hello World from Webpacker')
 console.log('what env am I: ', process.env.NODE_ENV)
-
-if (process.env.NODE_ENV !== 'production') {
+if (!process.env.BASE_URL) {
   process.env.BASE_URL = "http://localhost:3000/";
-} else {
-  process.env.BASE_URL = "https://staging-graymatter.herokuapp.com/"
-  //   process.env.BASE_URL = "https://prod-graymatter.herokuapp.com/"
 }
+console.log('BASE_URL: ', process.env.BASE_URL)
 
 // Support component names relative to this directory:
 var componentRequireContext = require.context("components", true)
