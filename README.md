@@ -18,7 +18,10 @@ Things you may want to cover:
 - React
   If webpacker.yml file updated need to run:
 
-  `bundle exec rails webpacker:install`
+  - do not just run this below.. I am not sure you need to run this
+    `bundle exec rails webpacker:install`
+    this the example app that I copied or followed
+    [react-rails demo](https://github.com/BookOfGreg/react-rails-example-app)
 
 - Configuration
 

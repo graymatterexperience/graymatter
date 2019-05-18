@@ -204,9 +204,9 @@ class Cohorts extends React.Component {
 
     fetch(url, options).then(response => {
       response.json().then(data => {
-        console.log('data fucker', data);
-        // TODO: have to deal with the error action
-        window.location.href = 'http://localhost:3000/admin/groups';
+        console.log('data', data);
+        window.location.href = `${process.env.BASE_URL}admin/groups`;
+        // window.location.href = 'http://localhost:3000/admin/groups';
         // TODO this is SO wrong...
         // window.location.href =
         //   'http://staging-graymatter.herokuapp.com/admin/groups';
@@ -230,7 +230,9 @@ class Cohorts extends React.Component {
     };
     // TODO this is so wrong
     console.log('handle clear form');
-    window.location.href = 'http://localhost:3000/admin/groups';
+
+    window.location.href = `${process.env.BASE_URL}admin/groups`;
+    // window.location.href = 'http://localhost:3000/admin/groups';
     // window.location.href =
     //   'http://staging-graymatter.herokuapp.com/admin/groups';
   }

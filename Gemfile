@@ -80,3 +80,6 @@ gem 'premailer-rails'
 
 # react on rails
 gem 'react-rails'
+
+# env vars
+gem 'dotenv-rails', groups: %i[development test]
