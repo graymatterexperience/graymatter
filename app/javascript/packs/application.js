@@ -15,6 +15,7 @@ console.log('lang: ', process.env.LANG)
 if (!process.env.BASE_URL) {
   process.env.BASE_URL = "http://localhost:3000/";
 }
+
 console.log('BASE_URL: ', process.env.BASE_URL)
 
 // Support component names relative to this directory:
