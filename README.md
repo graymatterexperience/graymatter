@@ -5,14 +5,17 @@
 - [Graymatter project borad](https://github.com/GrayMatterDashboard/graymatter/projects/1)
 
 This is where this application is deployed
-[heroku staging](https://staging-graymatter.herokuapp.com/login)
-[heroku production](https://prod-graymatter.herokuapp.com/login)
+
+- [staging](https://staging-graymatter.herokuapp.com/login)
+
+- [production](https://prod-graymatter.herokuapp.com/login)
 
 - Ruby version
 
-- System dependencies
-  using [Foundation for emails 2](https://foundation.zurb.com/emails.html) for the email template engine
-  [templates](https://foundation.zurb.com/templates.html)
+### System dependencies
+
+using [Foundation for emails 2](https://foundation.zurb.com/emails.html) for the email template engine
+[templates](https://foundation.zurb.com/templates.html)
 
 ### UI design
 
@@ -51,8 +54,10 @@ This is what I based the Architecture for react on
 
 ### NPM pacakges
 
-these are mostly for the react app
+- [Lodash](https://lodash.com/docs/4.17.11)
 
-[Lodash](https://lodash.com/docs/4.17.11)
+### Gemfile
+
+- [React-Rails](https://github.com/reactjs/react-rails)
 
 ...
