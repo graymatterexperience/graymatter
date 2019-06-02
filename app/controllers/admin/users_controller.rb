@@ -6,12 +6,12 @@ class Admin::UsersController < Admin::ApplicationController
   respond_to :html, :json
 
   before_action :admin_authorize
-  before_action :set_user, only: %i(
+  before_action :set_user, only: %i[
     show
     archive_student
     edit
     update
-  )
+  ]
 
   def show
     respond_to do |format|
@@ -21,21 +21,22 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def index
-    redirect_to admin_cohorts_path,
-      notice: 'Must create a Cohort before you can add students' if
-    params['user'] == 'student' && Cohort.all.empty?
+    if params['user'] == 'student' && Cohort.all.empty?
+      redirect_to admin_cohorts_path,
+                  notice: 'Must create a Cohort before you can add students'
+    end
     # I need to change this table too has_many through. I think that will solve
     # my issues with group_by
     # NOTES can I do all this modifications in serializor
     # t.name.split(' ').join('_').to_sym
-    #FIXME OMG I want to puke on the below line of code
+    # FIXME OMG I want to puke on the below line of code
     # this is such HACK
-    #students = User.all
-    #@students = students.select { |student| student.student? &&
-    #!student.archived? }
-    #@cohorts = Cohort.all.map { |x| {x.name => x.users} }.flatten
-    #Cohort.all.group_by { |x| x.collect(&:users) }
-    #@cohorts = @cohorts_groups.group_by { |k| {k.name => k.users} }
+    # students = User.all
+    # @students = students.select { |student| student.student? &&
+    # !student.archived? }
+    # @cohorts = Cohort.all.map { |x| {x.name => x.users} }.flatten
+    # Cohort.all.group_by { |x| x.collect(&:users) }
+    # @cohorts = @cohorts_groups.group_by { |k| {k.name => k.users} }
     # I want a key with cohort name with the value being the students that belong
     # to that cohort (should be easy????)
     if params[:cohortName]
@@ -44,13 +45,12 @@ class Admin::UsersController < Admin::ApplicationController
       return render json: @students
     end
 
-
     if params[:user] == 'student'
       @student = true
       @page_title = 'Students'
       @button_title = 'Add Student'
       @form = 'students_index'
-      # FIXME this is SO ugly.. wow...
+      # FIXME: this is SO ugly.. wow...
       @cohorts_groups = Cohort.all
 
       @cohorts = Cohort.all.collect(&:users)
@@ -61,7 +61,7 @@ class Admin::UsersController < Admin::ApplicationController
       @page_title = 'Mentors'
       @button_title = 'Add Mentor'
       @form = 'mentors_index'
-      # FIXME this is SO ugly.. wow...
+      # FIXME: this is SO ugly.. wow...
       @cohorts_groups = Cohort.all
 
       @mentors = User.all.select(&:mentor?)
@@ -88,12 +88,11 @@ class Admin::UsersController < Admin::ApplicationController
       @form = 'student_form'
     end
 
-
     # NOTES I think it would be cool if I could figure out how to render from here
     # always get missing template _application
-    #if params[:user] == 'mentor'
-    ##render :partial => 'mentor_form', :layout => 'application'
-    #end
+    # if params[:user] == 'mentor'
+    # #render :partial => 'mentor_form', :layout => 'application'
+    # end
   end
 
   def create
@@ -102,11 +101,11 @@ class Admin::UsersController < Admin::ApplicationController
     params[:user][:password_confirmation] = user_password
     @user = User.new(user_params)
     if @user.save
-      @user.cohort_ids = params["user"]["cohort_ids"]
+      @user.cohort_ids = params['user']['cohort_ids']
       UserNotifierMailer.send_signup_email(@user).deliver
       flash[:success] = "#{@user.name.capitalize} has been added"
     else
-      # TODO this is such a hack... fix this
+      # TODO: this is such a hack... fix this
       flash[:error] = @user.errors.full_messages.to_sentence
     end
     redirect_to admin_users_path(user: @user.role)
@@ -125,8 +124,8 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def update
-    #NOTE Currently student can only belong to ONE cohort
-    remove_student_from_cohort(@user) if params["user"]["cohort_ids"].present?
+    # NOTE Currently student can only belong to ONE cohort
+    remove_student_from_cohort(@user) if params['user']['cohort_ids'].present?
 
     if @user.update_attributes(user_params)
       flash[:success] = "#{@user.name.capitalize} has been updated"
@@ -137,7 +136,7 @@ class Admin::UsersController < Admin::ApplicationController
     end
   end
 
-  # FIXME this should be archive_user
+  # FIXME: this should be archive_user
   def archive_student
     @user.archive = true
     if @user.save(validate: false)
@@ -152,7 +151,7 @@ class Admin::UsersController < Admin::ApplicationController
   private
 
   def user_params
-    #FIXME I can set stor-attr
+    # FIXME: I can set stor-attr
     params.require(:user).permit(:first_name,
                                  :last_name,
                                  :email,
@@ -168,11 +167,11 @@ class Admin::UsersController < Admin::ApplicationController
                                    :company,
                                    :specialty,
                                    :compnay_logo,
-                                   social_media: [
-                                     :instagram,
-                                     :linkedin,
-                                     :twitter,
-                                     :facebook
+                                   social_media: %i[
+                                     instagram
+                                     linkedin
+                                     twitter
+                                     facebook
                                    ]
                                  ])
   end
@@ -180,15 +179,15 @@ class Admin::UsersController < Admin::ApplicationController
   def set_user
     @user = User.find_by_id(params[:id])
     cohorts = @user.cohorts.pluck(:name)
-    # TODO I feel like there is somethin not right here. I dont think I should
+    # TODO: I feel like there is somethin not right here. I dont think I should
     # have to set user_information like this user_information = {}
     cohorts.empty? ? @user.user_information = { cohorts: ['All Cohorts'] } :
-      @user.user_information["cohorts"] = cohorts
+      @user.user_information['cohorts'] = cohorts
   end
 
   def remove_student_from_cohort(user)
     user_cohort = user.cohorts
-    user.cohorts.delete(user_cohort) 
-    user.cohort_ids = params["user"]["cohort_ids"]
+    user.cohorts.delete(user_cohort)
+    user.cohort_ids = params['user']['cohort_ids']
   end
 end

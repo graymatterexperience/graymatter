@@ -42,7 +42,6 @@ Rails.application.routes.draw do
 
   get 'resources/index'
 
-
   get '/mentors', to: 'mentors#index'
 
   get 'students/index'
@@ -76,7 +75,7 @@ Rails.application.routes.draw do
   resource :calendar, only: [:show], controller: :calendar
   get 'calendar/show'
 
-  #groups
+  # groups
   get 'groups/index'
   get 'groups/show/:id', to: 'groups#show'
 

@@ -6,11 +6,6 @@ class Groups extends React.Component {
   constructor(props) {
     super(props);
     console.log('props', this.props);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick(event) {
-    console.log('this is working', event);
   }
 
   render() {

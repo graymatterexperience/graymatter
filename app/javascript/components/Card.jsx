@@ -8,9 +8,6 @@ const Card = props => {
     <React.Fragment>
       <div className="row">
         {props.options.group.map((cohort, idx) => {
-          //   notes there is where i left off trying to get the value from the key
-          console.log('cohort', cohort);
-
           return (
             <div key={idx}>
               <div className="col s12">
@@ -19,6 +16,9 @@ const Card = props => {
                 </span>
               </div>
               {Object.values(cohort)[0].map(group => {
+                const belong_to_group =
+                  group.name === props.options.current_user.group_name;
+
                 return (
                   <div key={group.name}>
                     <div className="col s4 m4">
@@ -28,8 +28,15 @@ const Card = props => {
                             <img src={office} />
                           </a>
                         </div>
-                        <div className="card-content">
-                          <span className="card-title activator grey-text">
+                        <div
+                          className={
+                            'card-content ' +
+                            (belong_to_group
+                              ? 'belongs_to_group'
+                              : 'does_not_belong_to_group')
+                          }
+                        >
+                          <span className="card-title activator">
                             {group.name}
                           </span>
                         </div>

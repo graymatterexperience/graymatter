@@ -43,6 +43,11 @@ class User < ApplicationRecord
     name.downcase.insert(0, '@')
   end
 
+  def role?
+    # TODO: not sure this is the best right now
+    role
+  end
+
   def student?
     role == 'student'
   end
@@ -57,6 +62,10 @@ class User < ApplicationRecord
 
   def name
     "#{first_name.capitalize} #{last_name.capitalize}"
+  end
+
+  def group_name
+    group && group.name
   end
 
   def archived?
