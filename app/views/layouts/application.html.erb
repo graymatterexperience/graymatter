@@ -71,12 +71,14 @@
                 </div>
             </header>
 
+            <%# This is the side nav bar %>
             <div class=" mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
                 <header class="demo-drawer-header">
                     <%= image_tag 'name-logo.png', class: 'name-dashboard-logo' %>
                     <%= image_tag 'user.jpg', class: 'demo-avatar' %>
                     <div><%= current_user.name.split.map(&:capitalize)*' ' %></div>
                     <div><%= current_user.role.capitalize %></div>
+                    <div><%= current_user.student? && current_user.group_name || "Not assigned a Group" %></div>
                     <div class="demo-avatar-dropdown" style='margin-top: 10px;'>
                         <span>Settings:</span>
                         <div class="mdl-layout-spacer"></div>

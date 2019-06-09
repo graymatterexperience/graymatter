@@ -67,14 +67,14 @@
     </div>
     <div class="col s4 group-custom-col">
         <h5 style="border-bottom: 1px solid #000">Members</h5>
+        <%# todo need to deal with the user not having an avatar %>
         <% @group_payload.each do |student| %>
             <ul class="collection">
                 <li class="collection-item avatar">
-                    <%= image_tag student["information"]["avatar"], class: 'circle' %>
-                    <span class="title"><%= "#{student['firstName']} #{student['lastName']}" %></span>
+                    <%= image_tag student["user_information"]["avatar"] || "user_avatar_2.png", class: 'circle' %>
+                    <span class="title"><%= "#{student['first_name']} #{student['last_name']}" %></span>
                     <p>
-                        laslkfja
-                        <%= student["information"]["email"] %>
+                        <%= student["user_information"]["email"] %>
                     </p>
                     <a href="#!" class="secondary-content"><i class="material-icons">person</i></a>
                 </li>

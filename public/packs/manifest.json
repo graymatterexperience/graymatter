@@ -1,8 +1,9 @@
 {
-  "application.js": "/packs/application-192895a27009dd33a230.js",
-  "application.js.map": "/packs/application-192895a27009dd33a230.js.map",
-  "hello_react.js": "/packs/hello_react-e2357b557a9318617a96.js",
-  "hello_react.js.map": "/packs/hello_react-e2357b557a9318617a96.js.map",
-  "server_rendering.js": "/packs/server_rendering-db14d438f45ba6e53d71.js",
-  "server_rendering.js.map": "/packs/server_rendering-db14d438f45ba6e53d71.js.map"
+  "_/assets/images/office.jpg": "/packs/_/assets/images/office-f642206b67707e549bd18159506c4ad5.jpg",
+  "application.js": "/packs/application-07f56a7469ce8eee19cb.js",
+  "application.js.map": "/packs/application-07f56a7469ce8eee19cb.js.map",
+  "hello_react.js": "/packs/hello_react-cdc67782f2bdb0a177a1.js",
+  "hello_react.js.map": "/packs/hello_react-cdc67782f2bdb0a177a1.js.map",
+  "server_rendering.js": "/packs/server_rendering-71b561466d7248536fb4.js",
+  "server_rendering.js.map": "/packs/server_rendering-71b561466d7248536fb4.js.map"
 }

@@ -8,10 +8,7 @@
 // layout file, like app/views/layouts/application.html.erb
 
 console.log('Hello World from Webpacker')
-console.log('what env am I: ', process.env.NODE_ENV)
-console.log('BASE_URL before: ', process.env.BASE_URL)
 
-console.log('lang: ', process.env.LANG)
 if (!process.env.BASE_URL) {
   process.env.BASE_URL = "http://localhost:3000/";
 }
